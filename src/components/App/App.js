@@ -1,5 +1,15 @@
 import logo from '../../logo.svg';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
 import './App.css';
+
+import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
   return (
