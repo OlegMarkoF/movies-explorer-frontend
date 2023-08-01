@@ -1,0 +1,58 @@
+.promo {
+  margin: 0 auto;
+  padding: 75px 70px;
+  max-width: 1280px;
+  box-sizing: border-box;
+  background-color: rgba(70, 93, 255, 1);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.promo__main {
+  max-width: 640px;
+}
+
+.promo__title {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 116%;
+}
+
+.promo__text {
+  margin-top: 36px;
+  max-width: 310px;
+  color:rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+
+}
+
+.promo__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.promo__button {
+  margin-top: 146px;
+  border: 1px solid white;
+  width: 129px;
+  height: 36px;
+  border-radius: 3px;
+  background-color: rgba(70, 93, 255, 1);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  color: #fff;
+}
+
+.promo__earth {
+  width: 310px;
+  height: 304px;
+}

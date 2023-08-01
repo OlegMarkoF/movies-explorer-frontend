@@ -1,0 +1,41 @@
+.header {
+  margin: 0 auto;
+  padding: 18px 70px;
+  max-width: 1280px;
+  box-sizing: border-box;
+  background-color: rgba(70, 93, 255, 1);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.header__link {
+  text-decoration: none;
+  color: #fff;
+  text-align: right;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.header__signin {
+  width: 76px;
+  height: 32px;
+  margin-left: 30px;
+  background-color: rgba(43, 224, 128, 1);
+  border: 0;
+  border-radius: 3px;
+  color: #000;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}

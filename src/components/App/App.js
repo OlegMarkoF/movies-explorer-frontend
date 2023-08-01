@@ -1,33 +1,28 @@
-import logo from '../../logo.svg';
-import { useCallback, useEffect, useState, useRef } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-
 import './App.css';
 
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
-import SavedMovies from "../SavedMovies/SavedMovies";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import Preloader from "../Preloader/Preloader";
+// import SavedMovies from "../SavedMovies/SavedMovies";
+// import Login from "../Login/Login";
+// import Register from "../Register/Register";
+// import Profile from "../Profile/Profile";
+// import NotFound from "../NotFound/NotFound";
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="page">
+      <div className="page__content">
+        <Routes>
+          {/* <Route path='/signin' element={<Login/>}/> */}
+          {/* <Route path='/signup' element={<Register/>}/> */}
+          <Route path='/movies' element={<Movies isMovies={true}/>}/>
+          {/* <Route path='/saved-movies' element={<SavedMovies isMovies={false}/>}/> */}
+          {/* <Route path='/profile' element={<Profile/>}/> */}
+          {/* <Route path='/notfound' element={<NotFound/>}/> */}
+          <Route path='/' element={<Main/>}/>
+        </Routes>
+      </div>
     </div>
   );
 }

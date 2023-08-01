@@ -1,0 +1,16 @@
+.project {
+  margin: 0 auto;
+  padding: 110px 70px;
+  box-sizing: border-box;
+  max-width: 1280px;
+}
+
+.project__title {
+  margin: 0;
+  border-bottom: 1px solid #000;
+  padding-bottom: 23px;
+  color: #000;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+}
