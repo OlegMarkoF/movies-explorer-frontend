@@ -46,7 +46,7 @@ function Login({ handleLogin }) {
             maxLength="40"
             required
           />
-          <span id="password-error" className="popup__field-error"></span>
+          <span id="password-error" className="login__span"></span>
           <div className="login__button-container">
             <button type="submit" onSubmit={handleSubmit} className="login__link">Войти</button>
           </div>

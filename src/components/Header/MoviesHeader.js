@@ -11,7 +11,7 @@ function MoviesHeader() {
             <Link to="/movies" >
                 <img className="header__logo" src={logo} alt="смайлик" />
             </Link>
-            <Navigation/>
+            {/* <Navigation/> */}
             <AccountLink>
                 <img className="movies-header__logo" src={icon} alt="значёк аккаунта" />
             </AccountLink>

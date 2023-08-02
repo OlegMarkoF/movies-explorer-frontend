@@ -21,7 +21,7 @@ function Register({ handleRegister }) {
 
   return (
     <div className="register">
-      <p className="register__welcome">Добро пожаловать!</p>
+      <h2 className="register__welcome">Добро пожаловать!</h2>
       <form onSubmit={handleSubmit} className="register__form">
       <label className="register__label" htmlFor="name">Имя</label>
         <input
@@ -32,7 +32,7 @@ function Register({ handleRegister }) {
           onChange={handleChangeEmail}
           required
         />
-        <span id="name-error" className="popup__field-error"></span>
+        <span id="name-error" className="register__span"></span>
         <label className="register__label" htmlFor="email">E-mail</label>
         <input
           className="register__input register__input_email"
@@ -42,7 +42,7 @@ function Register({ handleRegister }) {
           onChange={handleChangeEmail}
           required
         />
-        <span id="email-error" className="popup__field-error"></span>
+        <span id="email-error" className="register__span"></span>
         <label className="register__label" htmlFor="password">Пароль</label>
         <input
           className="register__input register__input_password"
@@ -52,7 +52,7 @@ function Register({ handleRegister }) {
           onChange={handleChangePassword}
           required
         />
-        <span id="password-error" className="popup__field-error"></span>
+        <span id="password-error" className="register__span"></span>
         <div className="register__button-container">
           <button
             type="submit"
