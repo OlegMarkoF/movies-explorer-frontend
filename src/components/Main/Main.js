@@ -5,7 +5,7 @@ import AboutMe from "../AboutMe/AboutMe";
 import Promo from "../Promo/Promo";
 import Techs from "../Techs/Techs";
 import Footer from "../Footer/Footer";
-// import Portfolio from "../Portfolio/Portfolio";
+import Portfolio from "../Portfolio/Portfolio";
 
 function Main() {
   return (
@@ -16,7 +16,7 @@ function Main() {
           <AboutProject/>
           <Techs/>
           <AboutMe/>
-          {/* <Portfolio/> */}
+          <Portfolio/>
       </main>
       <Footer/>
     </div>
