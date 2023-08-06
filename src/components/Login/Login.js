@@ -1,6 +1,7 @@
 import "./Login.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../images/logo.svg";
 
 function Login({ handleLogin }) {
   const [email, setEmail] = useState("");
@@ -21,8 +22,9 @@ function Login({ handleLogin }) {
   
     return (
       <div className="login">
-        <p className="login__welcome">Рады видеть!</p>
         <form onSubmit={handleSubmit} className="login__form">
+          <img className="login__logo" src={logo} alt="лого"/>
+          <p className="login__welcome">Рады видеть!</p>
           <label className="login__label" htmlFor="email">E-mail</label>
           <input 
             className="login__input"

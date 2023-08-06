@@ -1,0 +1,81 @@
+.hamburger {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  /* visibility: hidden; */
+  transition: visibility 0.5s, opacity 0.3s linear;
+  background-color: rgba(0, 0, 0, 0.3);
+  justify-content: flex-end;
+}
+
+.hamburger__box {
+  width: 520px;
+  margin-top: 159px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hamburger__main {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.hamburger__link {
+  color: #000;
+  text-decoration: none;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.hamburger__account {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: 100px;
+  height: 30px;
+  background: #fff;
+  flex-shrink: 0;
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 114.286%;
+}
+
+.hamburger__icon {
+  margin: 0;
+  padding: 0;
+  margin-left: 24.25px;
+  width: 11.5px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.hamburger__close-button {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 22.44px;
+  right: 22.44px;
+  border: none;
+  background: #fff;
+}
+
+.hamburger__close {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
