@@ -1,14 +1,14 @@
 .filter {
   display: flex;
   justify-content: center;
+  gap: 12px;
+  margin: 29px auto 118px;
 }
 
 .filter__checkbox {
-  margin: 29px auto 118px;
   display: inline-flex;
   align-items: center;
   position: relative;
-  gap: 12px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;
@@ -18,8 +18,7 @@
 .filter__checkbox-input {
   position: absolute;
   opacity: 0;
-  width: 100%;
-  height: 100%;
+  width: max-content;
 }
 
 .filter__span {
@@ -43,7 +42,6 @@
   border-radius: 50%;
   box-sizing: border-box;
   position: absolute;
-  z-index: 1;
   top: 50%;
   right: 6px;
   transform: translate(0, -50%);

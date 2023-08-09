@@ -1,6 +1,6 @@
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ onFilterChange, filterOn, isSeaching }) {
+function FilterCheckbox() {
   return (
     <div className="filter">
       <span className="filter__span"></span>
@@ -10,9 +10,6 @@ function FilterCheckbox({ onFilterChange, filterOn, isSeaching }) {
           className="filter__checkbox-input"
           type="checkbox"
           name="toggle"
-          checked={filterOn}
-          disabled={isSeaching ? true : false}
-          onChange={(evt) => onFilterChange(evt.target.checked)}
         />
       </label>
     </div>

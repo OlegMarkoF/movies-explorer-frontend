@@ -3,7 +3,7 @@ import find from "../../images/find.svg";
 import glass from "../../images/magnifying_glass.svg";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({onFilterChange, filterOn, isSeaching}) {
+function SearchForm() {
   return (
     <section className="search">
       <div className="search__box">
@@ -14,11 +14,7 @@ function SearchForm({onFilterChange, filterOn, isSeaching}) {
             <img className="search__img" src={find} alt="кнопка поиска" />
           </button>
         </form>
-        <FilterCheckbox 
-          onFilterChange={onFilterChange}
-          filterOn={filterOn}
-          isSeaching={isSeaching}
-        />
+        <FilterCheckbox/>
       </div>
     </section>
   );
