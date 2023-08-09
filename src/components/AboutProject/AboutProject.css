@@ -74,3 +74,9 @@
   font-size: 14px;
   font-weight: 400;
 }
+
+@media screen and (max-width: 800px) {
+  .project {
+    padding: 90px 50px;
+  }
+}

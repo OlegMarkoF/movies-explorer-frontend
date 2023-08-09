@@ -16,7 +16,7 @@ function AboutMe() {
                 В 2019 году ушел в "свободное плавание" и занялся фрилансом, 
                 одним из направлений которого стала Веб-разработка.
               </p>
-              <a className="about-me__link" href="https://github.com/OlegMarkoF">GitHub</a>
+              <a className="about-me__link" href="https://github.com/OlegMarkoF">Github</a>
             </article>
             <img className="about-me__img" src={avatar} alt="фото студента"/>
           </div>

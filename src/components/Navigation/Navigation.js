@@ -2,10 +2,11 @@ import "./Navigation.css";
 import { useState } from "react";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import icon from "../../images/icon-account.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const openHamburger = () => {
     setIsOpen(!isOpen);
   };
@@ -24,14 +25,21 @@ function Navigation() {
           </Link>
         </li>
       </ul>
-      <button className="navigation__menu">
+      <button className="navigation__menu" onClick={() => navigate("/profile")}>
         Аккаунт
         <img className="navigation__icon" src={icon} alt="значек аккаунта" />
       </button>
-      <HamburgerMenu
-        isOpen={openHamburger}
-        onClose={openHamburger}
-      ></HamburgerMenu>
+      {isOpen ? (
+        <HamburgerMenu
+          isOpen={openHamburger}
+          onClose={openHamburger}
+        ></HamburgerMenu>
+      ) : (
+        <button
+          className="navigation__burger"
+          onClick={openHamburger}
+        ></button>
+      )}
     </nav>
   );
 }

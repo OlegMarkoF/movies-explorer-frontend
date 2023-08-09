@@ -1,9 +1,12 @@
 .register {
   padding: 0;
-  margin: 60px auto 80px;
   display: flex;
   flex-direction: column;
-  max-width: 396px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
 }
@@ -15,9 +18,11 @@
   flex-direction: column;
   max-width: 396px;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
+
 .register__link {
+  margin-top: 71px;
   width: 396px;
   height: 45px;
   border: none;
@@ -33,13 +38,18 @@
 }
 
 .register__input {
-  margin: 0;
-  padding: 0;
+  margin: 10px 0 20px;
+  padding: 15px;
   width: 396px;
-  height: 46px;
   border: none;
   border-radius: 8px;
   background: #f9f9f9;
+  color: #000;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .register__login-link {
@@ -83,15 +93,21 @@
 
 .register__welcome {
   padding: 0;
-  margin: 0;
-  font-family: "Inter";
+  margin: 40px 0;
+  font-family: Inter;
   font-style: normal;
-  font-weight: 900;
   font-size: 24px;
-  line-height: 29px;
+  font-weight: 500;
+  line-height: normal;
   text-align: center;
+  color: #000;
 }
 
-.register__span {
-  
+.register__label {
+  color: #a0a0a0;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

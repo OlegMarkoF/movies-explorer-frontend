@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../images/logo.svg";
 import "./Register.css";
 
 function Register({ handleRegister }) {
@@ -21,8 +22,9 @@ function Register({ handleRegister }) {
 
   return (
     <div className="register">
-      <h2 className="register__welcome">Добро пожаловать!</h2>
       <form onSubmit={handleSubmit} className="register__form">
+      <img className="register__logo" src={logo} alt="лого"/>
+      <h2 className="register__welcome">Добро пожаловать!</h2>
       <label className="register__label" htmlFor="name">Имя</label>
         <input
           className="register__input register__input_name"

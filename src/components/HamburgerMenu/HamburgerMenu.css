@@ -6,19 +6,25 @@
   left: 0;
   top: 0;
   opacity: 0;
-  /* visibility: hidden; */
+  visibility: hidden;
   transition: visibility 0.5s, opacity 0.3s linear;
   background-color: rgba(0, 0, 0, 0.3);
   justify-content: flex-end;
 }
 
+.hamburger_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
 .hamburger__box {
   width: 520px;
-  margin-top: 159px;
+  padding-top: 159px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  background: #fff;
 }
 
 .hamburger__main {
@@ -50,9 +56,9 @@
   color: #000;
   font-family: Inter;
   font-size: 14px;
-  font-style: normal;
   font-weight: 500;
   line-height: 114.286%;
+  cursor: pointer;
 }
 
 .hamburger__icon {
@@ -72,6 +78,7 @@
   right: 22.44px;
   border: none;
   background: #fff;
+  cursor: pointer;
 }
 
 .hamburger__close {

@@ -1,8 +1,10 @@
 import "./Promo.css";
 
 import landing from "../../images/landing-logo.svg";
+import { useNavigate } from "react-router-dom";
 
 function Promo() {
+  const navigate = useNavigate();
   return (
     <section className="promo">
       <div className="promo__main">
@@ -12,7 +14,7 @@ function Promo() {
         <p className="promo__text">
           Листайте ниже, чтобы узнать больше про этот проект и его создателя.
         </p>
-        <button className="promo__button" type="button">
+        <button className="promo__button" type="button" onClick={() => navigate("#about-me")}>
           Узнать больше
         </button>
       </div>
