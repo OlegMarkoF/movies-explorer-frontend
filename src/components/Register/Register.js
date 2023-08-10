@@ -6,10 +6,15 @@ import "./Register.css";
 function Register({ handleRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   }
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+  };
 
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
@@ -17,7 +22,7 @@ function Register({ handleRegister }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegister(email, password);
+    handleRegister(email, password, name);
   };
 
   return (
@@ -31,7 +36,7 @@ function Register({ handleRegister }) {
           id="name"
           name="name"
           type="name"
-          onChange={handleChangeEmail}
+          onChange={handleChangeName}
           required
         />
         <span id="name-error" className="register__span"></span>

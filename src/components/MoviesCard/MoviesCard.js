@@ -1,5 +1,6 @@
 import "./MoviesCard.css";
 import save from "../../images/save.svg";
+import film from "../../images/film.jpg";
 
 function MoviesCard() {
   return (
@@ -13,7 +14,7 @@ function MoviesCard() {
           <img src={save} alt="кнопка сохранения фильма" />
         </button>
       </div>
-      <img className="card__film" alt="стопкадр фильма" src="#" />
+      <img className="card__film" alt="стопкадр фильма" src={film} />
     </li>
   );
 }

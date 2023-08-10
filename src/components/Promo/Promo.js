@@ -7,6 +7,7 @@ function Promo() {
   const navigate = useNavigate();
   return (
     <section className="promo">
+      <img className="promo__earth" src={landing} alt="планета земля" />
       <div className="promo__main">
         <h1 className="promo__title">
           Учебный проект студента факультета Веб&#8209;разработки.
@@ -18,7 +19,6 @@ function Promo() {
           Узнать больше
         </button>
       </div>
-      <img className="promo__earth" src={landing} alt="планета земля" />
     </section>
   );
 }

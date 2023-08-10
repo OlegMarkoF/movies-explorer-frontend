@@ -39,3 +39,33 @@
   font-weight: 500;
   line-height: 16px;
 }
+
+@media screen and (max-width: 800px) {
+  .header {
+    padding: 18px 30px;
+  }
+  .header__signin {
+    margin-left: 14px;
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+  }
+  .header__link {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header {
+    padding: 18px 14px;
+  }
+  .header__signin {
+    margin-left: 14px;
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+  }
+  .header__link {
+    font-size: 10px;
+  }
+}

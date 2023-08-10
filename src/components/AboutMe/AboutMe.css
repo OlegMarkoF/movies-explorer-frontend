@@ -10,7 +10,7 @@
   margin-top: 66px;
   max-width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
 }
 
@@ -75,4 +75,81 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 157.143%;
+}
+
+@media screen  and (max-width: 800px) {
+  .about-me {
+    padding: 90px 50px 0px;
+  }
+
+  .about-me__img {
+    width: 255px;
+    height: 307px;
+  }
+
+  .about-me__text {
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 150%;
+  }
+
+  .about-me__img {
+    font-size: 12px;
+    line-height: 150%;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 100%;
+    letter-spacing: -1.6px;
+  }
+}
+
+@media screen  and (max-width: 400px) {
+  .about-me {
+    padding: 70px 14px 0px;
+  }
+
+  .about-me__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about-me__name {
+    margin: 0;
+    font-size: 30px;
+    letter-spacing: -1.2px;
+  }
+
+  .about-me__job {
+    margin: 20px 0;
+    font-size: 11px;
+    line-height: 145.455%;
+  }
+
+  .about-me__text {
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 11px;
+    line-height: 145.455%;
+  }
+
+  .about-me__box {
+    margin: 0;
+    margin-top: 66px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-me__img {
+    margin-bottom: 40px;
+    width: 292px;
+    height: 352px;
+  }
+
+  .about-me__link {
+    margin-top: 40px;
+  }
+  
 }
