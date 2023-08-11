@@ -16,7 +16,7 @@ function HamburgerMenu({isOpen, onClose}) {
           <Link className="hamburger__link" to="/">
             Главная
           </Link>
-          <Link className="hamburger__link" to="/movies">
+          <Link className="hamburger__link hamburger__link_active" to="/movies">
             Фильмы
           </Link>
           <Link className="hamburger__link" to="/saved-movies">

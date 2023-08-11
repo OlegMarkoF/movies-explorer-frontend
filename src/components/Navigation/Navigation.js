@@ -15,12 +15,12 @@ function Navigation() {
     <nav className="navigation">
       <ul className="navigation__links">
         <li>
-          <Link className="navigation__film" to="/movies">
+          <Link className="navigation__link navigation__link_active" to="/movies">
             Фильмы
           </Link>
         </li>
         <li>
-          <Link className="navigation__save" to="/saved-movies">
+          <Link className="navigation__link" to="/saved-movies">
             Сохраненные фильмы
           </Link>
         </li>

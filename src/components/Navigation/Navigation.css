@@ -14,25 +14,20 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 16px;
 }
 
-.navigation__film {
+.navigation__link {
   margin: 0;
-  text-decoration: none;
-  color: #000;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 138.462%;
-}
-
-.navigation__save {
-  margin: 0;
-  margin-left: 16px;
   text-decoration: none;
   color: #000;
   font-size: 13px;
   font-weight: 400;
   line-height: 138.462%;
+}
+
+.navigation__link_active {
+  font-weight: 500;
 }
 
 .navigation__menu {
@@ -78,10 +73,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .navigation__film {
-    display: none;
-  }
-  .navigation__save {
+  .navigation__link {
     display: none;
   }
   .navigation__menu {
