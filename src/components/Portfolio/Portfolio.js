@@ -1,4 +1,5 @@
 import "./Portfolio.css";
+import arrow from "../../images/arrow.svg";
 
 function Portfolio() {
   return (
@@ -9,33 +10,33 @@ function Portfolio() {
           <a
             className="portfolio__link"
             href="https://github.com/OlegMarkoF/how-to-learn"
-            target="_blank"
+            target="blank"
             rel="noreferrer"
           >
             <p className="portfolio__text">Статичный сайт</p>
-            <p className="portfolio__arrow">↗</p>
+            <img className="portfolio__arrow" alt="стрелка" src={arrow} />
           </a>
         </li>
         <li className="portfolio__li">
           <a
             className="portfolio__link"
             href="https://olegmarkof.github.io/russian-travel/"
-            target="_blank"
+            target="blank"
             rel="noreferrer"
           >
             <p className="portfolio__text">Адаптивный сайт</p>
-            <p className="portfolio__arrow">↗</p>
+            <img className="portfolio__arrow" alt="стрелка" src={arrow} />
           </a>
         </li>
         <li className="portfolio__li">
           <a
             className="portfolio__link"
             href="https://github.com/OlegMarkoF/react-mesto-api-full-gha"
-            target="_blank"
+            target="blank"
             rel="noreferrer"
           >
             <p className="portfolio__text">Одностраничное приложение</p>
-            <p className="portfolio__arrow">↗</p>
+            <img className="portfolio__arrow" alt="стрелка" src={arrow} />
           </a>
         </li>
       </ul>

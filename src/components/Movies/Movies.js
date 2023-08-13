@@ -1,5 +1,5 @@
 import "./Movies.css";
-import MoviesHeader from "../Header/MoviesHeader";
+import Header from "../Header/Header";
 // import Preloader from "../Preloader/Preloader";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
@@ -8,8 +8,8 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 function Movies({ isMovies }) {
   return (
     <>
-    <div className="movies">
-      <MoviesHeader />
+    <div className="movie">
+      <Header />
       <main>
         <SearchForm />
         {/* <Preloader /> */}

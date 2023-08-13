@@ -1,5 +1,8 @@
 .footer {
-  margin: 0 auto;
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   padding: 79px 70px 20px;
   width: 100%;
   box-sizing: border-box;
@@ -49,6 +52,11 @@
   line-height: normal;
 }
 
+.footer__yp:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 .footer__git {
   margin: 0;
   margin-left: 20px;
@@ -61,16 +69,16 @@
   line-height: normal;
 }
 
+.footer__git:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 800px) {
   .footer {
-    padding: 79px 0 20px;
+    padding: 79px 30px 20px;
     background-color: #fff;
   }
-
-  .footer__year {
-    color: rgba(160, 160, 160, 1);
-  }
-
   
 }
 

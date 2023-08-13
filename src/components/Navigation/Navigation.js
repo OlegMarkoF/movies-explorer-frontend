@@ -38,6 +38,7 @@ function Navigation() {
         <button
           className="navigation__burger"
           onClick={openHamburger}
+          type="button"
         ></button>
       )}
     </nav>

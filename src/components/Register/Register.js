@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/logo.svg";
+import Logo from "../Logo/Logo";
 import "./Register.css";
 
 function Register({ handleRegister }) {
@@ -10,7 +10,7 @@ function Register({ handleRegister }) {
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
-  }
+  };
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -28,9 +28,11 @@ function Register({ handleRegister }) {
   return (
     <div className="register">
       <form onSubmit={handleSubmit} className="register__form">
-      <img className="register__logo" src={logo} alt="лого"/>
-      <h2 className="register__welcome">Добро пожаловать!</h2>
-      <label className="register__label" htmlFor="name">Имя</label>
+        <Logo />
+        <h2 className="register__welcome">Добро пожаловать!</h2>
+        <label className="register__label" htmlFor="name">
+          Имя
+        </label>
         <input
           className="register__input register__input_name"
           id="name"
@@ -38,9 +40,12 @@ function Register({ handleRegister }) {
           type="name"
           onChange={handleChangeName}
           required
+          placeholder=""
         />
         <span id="name-error" className="register__span"></span>
-        <label className="register__label" htmlFor="email">E-mail</label>
+        <label className="register__label" htmlFor="email">
+          E-mail
+        </label>
         <input
           className="register__input register__input_email"
           id="email"
@@ -48,9 +53,12 @@ function Register({ handleRegister }) {
           type="email"
           onChange={handleChangeEmail}
           required
+          placeholder=""
         />
         <span id="email-error" className="register__span"></span>
-        <label className="register__label" htmlFor="password">Пароль</label>
+        <label className="register__label" htmlFor="password">
+          Пароль
+        </label>
         <input
           className="register__input register__input_password"
           id="password"
@@ -58,6 +66,7 @@ function Register({ handleRegister }) {
           type="password"
           onChange={handleChangePassword}
           required
+          placeholder=""
         />
         <span id="password-error" className="register__span"></span>
         <div className="register__button-container">

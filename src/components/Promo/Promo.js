@@ -1,10 +1,8 @@
 import "./Promo.css";
 
 import landing from "../../images/landing-logo.svg";
-import { useNavigate } from "react-router-dom";
 
 function Promo() {
-  const navigate = useNavigate();
   return (
     <section className="promo">
       <img className="promo__earth" src={landing} alt="планета земля" />
@@ -15,9 +13,9 @@ function Promo() {
         <p className="promo__text">
           Листайте ниже, чтобы узнать больше про этот проект и его создателя.
         </p>
-        <button className="promo__button" type="button" onClick={() => navigate("#about-me")}>
+        <a className="promo__button" href="#about-me">
           Узнать больше
-        </button>
+        </a>
       </div>
     </section>
   );

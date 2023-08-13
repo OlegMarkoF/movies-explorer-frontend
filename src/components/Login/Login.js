@@ -1,7 +1,7 @@
 import "./Login.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/logo.svg";
+import Logo from "../Logo/Logo";
 
 function Login({ handleLogin }) {
   const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ function Login({ handleLogin }) {
     return (
       <div className="login">
         <form onSubmit={handleSubmit} className="login__form">
-          <img className="login__logo" src={logo} alt="лого"/>
+          <Logo/>
           <p className="login__welcome">Рады видеть!</p>
           <label className="login__label" htmlFor="email">E-mail</label>
           <input 
@@ -34,6 +34,7 @@ function Login({ handleLogin }) {
             value={email} 
             onChange={handleChangeEmail} 
             required
+            placeholder=""
           />
           <span id="email-error" className="popup__field-error"></span>
           <label className="login__label" htmlFor="password">Пароль</label>
@@ -46,6 +47,7 @@ function Login({ handleLogin }) {
             onChange={handleChangePassword}
             minLength="2"
             maxLength="40"
+            placeholder=""
             required
           />
           <span id="password-error" className="login__span"></span>

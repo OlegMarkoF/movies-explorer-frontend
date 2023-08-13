@@ -1,5 +1,5 @@
 .movies {
-  margin: 0 auto 80px;
+  margin: 0 auto 252px;
   max-width: 1140px;
 }
 
@@ -26,6 +26,10 @@
   font-weight: 500;
 }
 
+.movies__more:hover {
+  opacity: 0.8;
+}
+
 @media screen and (max-width: 800px) {
   .movies__list {
     grid-template-columns: repeat(2, 1fr);
@@ -40,5 +44,8 @@
   }
   .movies__list {
     grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-rows: 0;
+    row-gap: 0;
   }
 }

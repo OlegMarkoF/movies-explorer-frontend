@@ -1,11 +1,11 @@
 import "./Profile.css";
 import { Link } from "react-router-dom";
-import MoviesHeader from "../Header/MoviesHeader";
+import Header from "../Header/Header";
 
 function Profile() {
   return (
     <>
-      <MoviesHeader />
+      <Header />
       <section className="profile">
         <form className="profile__form">
           <h2 className="profile__title">Привет, Олег</h2>

@@ -7,10 +7,10 @@ import Techs from "../Techs/Techs";
 import Footer from "../Footer/Footer";
 import Portfolio from "../Portfolio/Portfolio";
 
-function Main() {
+function Main({ loggedIn }) {
   return (
-    <div>
-      <Header/>
+    <>
+      <Header loggedIn={loggedIn}/>
       <main className="main">
           <Promo/>
           <AboutProject/>
@@ -19,7 +19,7 @@ function Main() {
           <Portfolio/>
       </main>
       <Footer/>
-    </div>
+    </>
   );
 }
 

@@ -1,8 +1,15 @@
 import "./MoviesCard.css";
-import save from "../../images/save.svg";
 import film from "../../images/film.jpg";
 
-function MoviesCard() {
+function MoviesCard({isMovies, onDelete, onSave}) {
+
+  function handleSave () {
+    onSave();
+  }
+  function handleDelete () {
+    onDelete();
+  }
+
   return (
     <li className="card">
       <div className="card__header">
@@ -10,9 +17,7 @@ function MoviesCard() {
           <h2 className="card__title">33 слова о дизайне</h2>
           <p className="card__duration">1ч 47м</p>
         </div>
-        <button className="card__save" type="button">
-          <img src={save} alt="кнопка сохранения фильма" />
-        </button>
+        <button className={isMovies ? `card__save` : `card__delete` } type="button" onClick={isMovies ? handleSave : handleDelete}></button>
       </div>
       <img className="card__film" alt="стопкадр фильма" src={film} />
     </li>

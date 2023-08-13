@@ -1,7 +1,7 @@
 .promo {
   margin: 0 auto;
-  padding: 75px 70px;
-  max-width: 1280px;
+  padding: 150px 70px 75px;
+  width: 100%;
   box-sizing: border-box;
   background-color: rgba(70, 93, 255, 1);
   display: flex;
@@ -38,7 +38,11 @@
 
 .promo__button {
   margin-top: 135px;
+  padding-top: 10px;
+  box-sizing: border-box;
   border: 1px solid white;
+  text-decoration: none;
+  text-align: center;
   width: 129px;
   height: 36px;
   border-radius: 3px;

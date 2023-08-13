@@ -7,10 +7,11 @@ function NotFound() {
       <div className="notfound__box">
         <h2 className="notfound__404">404</h2>
         <p className="notfound__text">Страница не найдена</p>
-      </div>
-      <Link className="notfound__link" to="/">
+        <Link className="notfound__link" to="/">
         Назад
       </Link>
+      </div>
+      
     </section>
   );
 }

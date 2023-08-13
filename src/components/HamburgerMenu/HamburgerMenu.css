@@ -47,6 +47,11 @@
   line-height: normal;
 }
 
+.hamburger__link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 .hamburger__link_active {
   border-bottom: 2px solid #000;
 }
@@ -54,6 +59,7 @@
 .hamburger__account {
   margin: 0;
   padding: 0;
+  margin-bottom: 92px;
   border: none;
   width: 100px;
   height: 30px;
@@ -65,6 +71,10 @@
   font-weight: 500;
   line-height: 114.286%;
   cursor: pointer;
+}
+
+.hamburger__account:hover {
+  opacity: 0.8;
 }
 
 .hamburger__icon {
@@ -85,6 +95,10 @@
   border: none;
   background: #fff;
   cursor: pointer;
+}
+
+.hamburger__close-button:hover {
+  opacity: 0.8;
 }
 
 .hamburger__close {
