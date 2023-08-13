@@ -8,14 +8,14 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 function Movies({ isMovies }) {
   return (
     <>
-    <div className="movie">
+    <main className="movie">
       <Header />
-      <main>
+      <div>
         <SearchForm />
         {/* <Preloader /> */}
         <MoviesCardList isMovies={isMovies}/>
-      </main>
-    </div>
+      </div>
+    </main>
     <Footer/>
     </>
   );
