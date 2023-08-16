@@ -68,16 +68,9 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 800px) {
-  .card__film {
-    width: 339px;
-    height: 190px;
-  }
-} 
-
 @media screen and (max-width: 400px) {
-  .card__film {
-    width: 300px;
-    height: 168px;
+  .card {
+    margin-bottom: 16px;
   }
-} 
+ 
+}

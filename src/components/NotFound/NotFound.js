@@ -11,7 +11,6 @@ function NotFound() {
         Назад
       </Link>
       </div>
-      
     </section>
   );
 }

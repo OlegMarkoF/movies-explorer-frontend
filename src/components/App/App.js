@@ -12,7 +12,7 @@ import { Route, Routes } from 'react-router-dom';
 function App({ loggedIn }) {
 
   return (
-    <div className="page">
+    <main className="page">
       <div className="page__content">
         <Routes>
           <Route path='/signin' element={<Login/>}/>
@@ -24,7 +24,7 @@ function App({ loggedIn }) {
           <Route path='/' element={<Main/> }/>
         </Routes>
       </div>
-    </div>
+    </main>
   );
 }
 

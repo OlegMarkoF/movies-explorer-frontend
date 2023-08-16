@@ -26,7 +26,7 @@ function Register({ handleRegister }) {
   };
 
   return (
-    <div className="register">
+    <section className="register">
       <form onSubmit={handleSubmit} className="register__form">
         <Logo />
         <h2 className="register__welcome">Добро пожаловать!</h2>
@@ -85,7 +85,7 @@ function Register({ handleRegister }) {
           Войти
         </Link>
       </div>
-    </div>
+    </section>
   );
 }
 

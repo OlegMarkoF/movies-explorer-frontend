@@ -7,7 +7,6 @@ function HamburgerMenu({isOpen, onClose}) {
   const navigate = useNavigate();
   return (
     <section className={isOpen ? `hamburger hamburger_opened` : `hamburger`}>
-      
       <div className="hamburger__box">
       <button className="hamburger__close-button" type="button" onClick={onClose}>
         <img className="hamburger__close" src={close} alt="закрыть меню" />

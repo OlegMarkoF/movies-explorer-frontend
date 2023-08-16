@@ -11,7 +11,7 @@ function Header() {
   const headerMovies = () => {
     if (location.pathname === "/") {
       return (
-        <div className="header__menu">
+        <header className="header__menu">
           <Logo />
           <div className="header__links">
             <Link to="/signup" className="header__link">
@@ -24,14 +24,14 @@ function Header() {
               Войти
             </button>
           </div>
-        </div>
+        </header>
       );
     } else {
       return (
-        <div className="header__menu">
+        <header className="header__menu">
           <Logo />
           <Navigation />
-        </div>
+        </header>
       );
     }
   };

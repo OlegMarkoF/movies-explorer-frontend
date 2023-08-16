@@ -110,11 +110,13 @@
 }
 
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
+
   .login__form {
     margin: 0 auto;
     max-width: 260px;
     align-items: center;
+    justify-content: space-between;
   }
 
   .login__label {
