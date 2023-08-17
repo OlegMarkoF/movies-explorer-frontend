@@ -60,13 +60,13 @@ function Login({ handleLogin }) {
             Войти
           </button>
         </div>
-        <div className="login__signin">
-        <p className="login__login-text">Ещё не зарегистрированы?</p>
-        <Link to="/signup" className="login__login-link">
-          Регистрация
-        </Link>
-      </div>
       </form>
+      <div className="login__signin">
+          <p className="login__login-text">Ещё не зарегистрированы?</p>
+          <Link to="/signup" className="login__login-link">
+            Регистрация
+          </Link>
+        </div>
     </section>
   );
 }

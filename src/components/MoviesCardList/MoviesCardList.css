@@ -43,19 +43,15 @@
     margin: 0 auto;
   }
   
-  .movies__list:last-child {
-    display: none;
-  }
-  
   .movies__list {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
-    grid-auto-rows: 0;
-    row-gap: 0;
+    gap: 0;
   }
 
 
   .movies__more {
+    margin-top: 50px;
     margin-bottom: 333px;
   }
 }

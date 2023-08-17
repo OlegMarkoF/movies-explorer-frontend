@@ -5,8 +5,8 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 function SearchForm() {
   return (
-    <section className="search">
-      <div className="search__box">
+    <main className="search">
+      <section className="search__box">
         <form className="search__form">
           <img className="search__glass" src={glass} alt="лупа" />
           <input className="search__input" placeholder="Фильм"></input>
@@ -15,8 +15,8 @@ function SearchForm() {
           </button>
         </form>
         <FilterCheckbox/>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

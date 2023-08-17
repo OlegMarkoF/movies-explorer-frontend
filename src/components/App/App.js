@@ -13,7 +13,7 @@ function App({ loggedIn }) {
 
   return (
     <main className="page">
-      <div className="page__content">
+      <section className="page__content">
         <Routes>
           <Route path='/signin' element={<Login/>}/>
           <Route path='/signup' element={<Register/>}/>
@@ -23,7 +23,7 @@ function App({ loggedIn }) {
           <Route path='/*' element={<NotFound/>}/>
           <Route path='/' element={<Main/> }/>
         </Routes>
-      </div>
+      </section>
     </main>
   );
 }

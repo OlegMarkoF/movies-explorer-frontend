@@ -15,7 +15,10 @@ function Navigation() {
     <nav className="navigation">
       <ul className="navigation__links">
         <li>
-          <Link className="navigation__link navigation__link_active" to="/movies">
+          <Link
+            className="navigation__link navigation__link_active"
+            to="/movies"
+          >
             Фильмы
           </Link>
         </li>

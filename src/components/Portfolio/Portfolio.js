@@ -1,5 +1,4 @@
 import "./Portfolio.css";
-import arrow from "../../images/arrow.svg";
 
 function Portfolio() {
   return (
@@ -14,7 +13,6 @@ function Portfolio() {
             rel="noreferrer"
           >
             <p className="portfolio__text">Статичный сайт</p>
-            <img className="portfolio__arrow" alt="стрелка" src={arrow} />
           </a>
         </li>
         <li className="portfolio__li">
@@ -25,7 +23,6 @@ function Portfolio() {
             rel="noreferrer"
           >
             <p className="portfolio__text">Адаптивный сайт</p>
-            <img className="portfolio__arrow" alt="стрелка" src={arrow} />
           </a>
         </li>
         <li className="portfolio__li">
@@ -36,7 +33,6 @@ function Portfolio() {
             rel="noreferrer"
           >
             <p className="portfolio__text">Одностраничное приложение</p>
-            <img className="portfolio__arrow" alt="стрелка" src={arrow} />
           </a>
         </li>
       </ul>

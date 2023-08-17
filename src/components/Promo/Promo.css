@@ -65,7 +65,7 @@
   height: 304px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .promo {
     padding: 140px 44px 76px;
     flex-direction: column;

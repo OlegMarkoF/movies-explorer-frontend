@@ -9,9 +9,9 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 function SavedMovies({ isMovies }) {
   return (
     <>
-      <section className="saved-movies">
+      <main className="saved-movies">
         <Header />
-        <main className="saved-movies__main">
+        <section className="saved-movies__main">
           <SearchForm />
           {/* <Preloader /> */}
           <div className="saved-movies__list">
@@ -19,8 +19,8 @@ function SavedMovies({ isMovies }) {
           <MoviesCard isMovies={isMovies}/>
           <MoviesCard isMovies={isMovies}/>
           </div>
-        </main>
-      </section>
+        </section>
+      </main>
       <Footer />
     </>
   );

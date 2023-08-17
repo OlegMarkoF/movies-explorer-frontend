@@ -35,6 +35,10 @@
   cursor: pointer;
 }
 
+.filter__span:hover {
+  opacity: 0.8;
+}
+
 .filter__span::before {
   content: "";
   width: 10px;
