@@ -1,5 +1,10 @@
+
+import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+
 import './App.css';
 
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -7,9 +12,12 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
-import { Route, Routes } from 'react-router-dom';
 
-function App({ loggedIn }) {
+function App() {
+  const [currentUser, setCurrentUser] = useState({});
+  const [isPreloaderActive, setIsPreloaderActive] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [saveCards, setSaveCards] = useState([]);
 
   return (
     <main className="page">
