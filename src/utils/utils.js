@@ -1,3 +1,4 @@
+
 export function sendRequest(url, method, credentials, endpoint, body) {
   const headers = { "Content-Type": "application/json" };
   const config = { method, headers };
@@ -14,4 +15,14 @@ export function sendRequest(url, method, credentials, endpoint, body) {
       ? result
       : result.then((err) => Promise.reject(`${err.message}`));
   });
+}
+
+export function durationMovie(duration) {
+  const min = duration % 60;
+  const hours = (duration - min)/60;
+  if (hours < 1) {
+    return `${min}м`
+  } else {
+    return `${hours}ч ${min}м`;
+  }
 }
