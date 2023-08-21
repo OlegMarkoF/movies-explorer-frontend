@@ -26,3 +26,9 @@ export function durationMovie(duration) {
     return `${hours}ч ${min}м`;
   }
 }
+
+export function handleSavedStatus(savedCards, movieCard) {
+  return savedCards.find((card) => {
+    return card.movieId === (movieCard.id || movieCard.movieId)
+  });
+}

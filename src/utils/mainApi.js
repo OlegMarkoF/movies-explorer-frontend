@@ -1,6 +1,6 @@
 import { sendRequest } from "./utils";
 
-const API_MAIN_URL = "markov.nomoredomains.xyz";
+const API_MAIN_URL = "https://markov.nomoredomains.xyz";
 
 export function register({ password, email, name }) {
     return sendRequest(API_MAIN_URL, "/signup", "POST", true, {

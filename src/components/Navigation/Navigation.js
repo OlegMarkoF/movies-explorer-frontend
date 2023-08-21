@@ -2,10 +2,11 @@ import "./Navigation.css";
 import { useState } from "react";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import icon from "../../images/icon-account.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const openHamburger = () => {
     setIsOpen(!isOpen);
@@ -16,14 +17,14 @@ function Navigation() {
       <ul className="navigation__links">
         <li>
           <Link
-            className="navigation__link navigation__link_active"
+            className={location.pathname === "/movies" ? `navigation__link navigation__link_active` : `navigation__link`}
             to="/movies"
           >
             Фильмы
           </Link>
         </li>
         <li>
-          <Link className="navigation__link" to="/saved-movies">
+          <Link className={location.pathname === "/saved-movies" ? `navigation__link navigation__link_active` : `navigation__link`} to="/saved-movies">
             Сохраненные фильмы
           </Link>
         </li>
