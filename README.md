@@ -1,6 +1,7 @@
 # movies-explorer-frontend
 
 Верстка сайта по макету light-5
+Ссылка на Pull request: https://github.com/OlegMarkoF/movies-explorer-frontend/pull/2
 
 ## Available Scripts
 
