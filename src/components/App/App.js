@@ -1,8 +1,7 @@
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
-
-import './App.css';
+import "./App.css";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
@@ -12,27 +11,278 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
+import Preloader from "../Preloader/Preloader";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+// import { UNAUTHORIZED, CONFLICT } from '../../utils/errors';
+import { movieApi } from "../../utils/moviesApi";
+import * as mainApi from "../../utils/mainApi";
 
 function App() {
+  const [user, setUser] = useState({});
   const [currentUser, setCurrentUser] = useState({});
-  const [isPreloaderActive, setIsPreloaderActive] = useState(true);
+  const [isPreloaderActive, setIsPreloaderActive] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [saveCards, setSaveCards] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [apiItems, setApiItems] = useState([]);
+  const [notification, setNotification] = useState({ text: "" });
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/movies");
+    }
+  }, []);
+
+  useEffect(() => {
+    mainApi
+      .getUserInfo()
+      .then((user) => {
+        setLoggedIn(true);
+        setCurrentUser(user);
+        if (!localStorage.getItem("movies")) {
+          getMoviesByApi();
+        } else {
+          setApiItems(JSON.parse(localStorage.getItem("movies")));
+        }
+        getMySavedMovies(user._id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user]);
+
+  const handleRegister = ({ password, email, name }) => {
+    setIsPreloaderActive(true);
+    mainApi
+      .register({ password, email, name })
+      .then((res) => {
+        if (res) {
+          handleLogin({ email: email, password: password });
+          setNotification({ text: "Вы успешно зарегистрировались!" });
+          setUser({ name: name, email: email });
+        }
+      })
+      .catch((err) => {
+        setIsPreloaderActive(false);
+      });
+  };
+
+  const handleLogin = ({ email, password }) => {
+    setIsPreloaderActive(true);
+    mainApi
+      .authorize({ email, password })
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("token", res.token);
+          setUser({ name: res.name, email: res.email });
+          setLoggedIn(true);
+          navigate("/movies");
+          setIsPreloaderActive(false);
+        }
+      })
+      .catch((err) => {
+        setIsPreloaderActive(false);
+      });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("");
+    localStorage.removeItem("");
+    localStorage.removeItem("");
+    localStorage.removeItem("");
+
+    localStorage.clear();
+    setCurrentUser({});
+    setApiItems([]);
+    setSavedMovies([]);
+    setLoggedIn(false);
+    navigate("/");
+  };
+
+  const handleCardSave = (card) => {
+    const savedCard = savedMovies.find((i) => i.movieId === card.id);
+    tokenCheck();
+    savedCard
+      ? handleCardDelete(savedCard)
+      : mainApi
+          .createMoviesCard(card)
+          .then((res) => {
+            setSavedMovies((savedMovies) => [...savedMovies, res]);
+            localStorage.setItem(
+              "liked",
+              JSON.stringify([...savedMovies, res])
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+  };
+
+  const handleCardDelete = (card) => {
+    tokenCheck();
+    mainApi
+      .deleteCard(card._id)
+      .then(() => {
+        setSavedMovies((savedMovies) =>
+          savedMovies.filter((i) => i._id !== card._id)
+        );
+        localStorage.setItem(
+          "liked",
+          JSON.stringify(savedMovies.filter((i) => i._id !== card._id))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const isLiked = (movie) => {
+    return savedMovies.some((i) => i.moviedId === movie.id);
+  };
+
+  const handleChangeProfile = (user) => {
+    setIsPreloaderActive(true);
+    tokenCheck();
+
+    mainApi
+      .updateUserInfo(user)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsPreloaderActive(false);
+        setNotification({ text: "Данные изменены" });
+      })
+      .catch(() => {
+        setIsPreloaderActive(false);
+      });
+  };
+
+  const getMySavedMovies = () => {
+    tokenCheck();
+    mainApi
+      .getCardsByOwner()
+      .then((res) => {
+        setSavedMovies(res.filter((i) => i.owner === user));
+        localStorage.setItem(
+          "liked",
+          JSON.stringify(res.filter((i) => i.owner === user))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getMoviesByApi = () => {
+    setIsPreloaderActive(true);
+    movieApi
+      .getMovies()
+      .then((apiItems) => {
+        if (apiItems) {
+          setApiItems(apiItems);
+          localStorage.setItem("movies", JSON.stringify(apiItems));
+          setIsPreloaderActive(false);
+        } else {
+          setNotification({ text: "Ничего не найдено" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const tokenCheck = () => {
+    let token = localStorage.getItem("token");
+    if (token) {
+      mainApi
+        .getContent(token)
+        .then((res) => {
+          setCurrentUser(res);
+          setLoggedIn(true);
+          navigate(location);
+        })
+        .catch((err) => {
+          console.log(err);
+          setNotification({ text: "Некорректный токен" });
+          handleLogout();
+        });
+    }
+  };
 
   return (
-    <main className="page">
-      <section className="page__content">
-        <Routes>
-          <Route path='/signin' element={<Login/>}/>
-          <Route path='/signup' element={<Register/>}/>
-          <Route path='/movies' element={<Movies isMovies={true} loggedIn={loggedIn}/>}/>
-          <Route path='/saved-movies' element={<SavedMovies isMovies={false} loggedIn={loggedIn}/>}/>
-          <Route path='/profile' element={<Profile loggedIn={loggedIn}/>}/>
-          <Route path='/*' element={<NotFound/>}/>
-          <Route path='/' element={<Main/> }/>
-        </Routes>
-      </section>
-    </main>
+    <CurrentUserContext.Provider value={currentUser}>
+      <main className="page">
+        <section className="page__content">
+          <Routes>
+            <Route
+              path="/signin"
+              element={
+                <Login
+                  loggedIn={loggedIn}
+                  handleLogin={handleLogin}
+                  tokenCheck={tokenCheck}
+                />
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <Register loggedIn={loggedIn} handleRegister={handleRegister} />
+              }
+            />
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRoute path="/movies" loggedIn={loggedIn}>
+                  <Movies
+                    isMovies={true}
+                    apiItems={apiItems}
+                    isPreloaderActive={isPreloaderActive}
+                    isLiked={isLiked}
+                    savedMovies={savedMovies}
+                    handleCardDelete={handleCardDelete}
+                    handleCardSave={handleCardSave}
+                  />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
+                  <SavedMovies
+                    isMovies={false}
+                    savedMovies={savedMovies}
+                    isLiked={isLiked}
+                    handleCardDelete={handleCardDelete}
+                  />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute path="/profile" loggedIn={loggedIn}>
+                  <Profile
+                    profile={currentUser}
+                    handleLogout={handleLogout}
+                    handleChangeProfile={handleChangeProfile}
+                  />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/*" element={<NotFound />} />
+            <Route path="/" element={<Main loggedIn={loggedIn} />} />
+          </Routes>
+          <Preloader isPreloaderActive={isPreloaderActive} />
+        </section>
+      </main>
+    </CurrentUserContext.Provider>
   );
 }
 

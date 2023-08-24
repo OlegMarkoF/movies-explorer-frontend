@@ -8,63 +8,104 @@ import { handleSavedStatus } from "../../utils/utils";
 function MoviesCardList({
   cards,
   savedMovies,
-  cardsRender,
-  isNotFoundCards,
+  isMoviesLiked,
   onCardSave,
   onCardDelete,
+  foundCards,
   isLoading,
 }) {
-  const [cardsForRender, setCardsForRender] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [moviesCount, setMoviesCount] = useState(0);
+  const [moreMoviesCount, setMoreMoviesCount] = useState(0);
+  const [showMovies, setShowMovies] = useState(moviesCount);
   const location = useLocation();
 
-  useEffect(() => {
-    if (location.pathname === "/movies" && cards.length) {
-      const result = cards.filter((card, item) => {
-        return item < cardsRender.total;
-      });
-      setCardsForRender(result);
+  const handleScreenWidth = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  const handleMoviesButtonClick = () => {
+    setShowMovies(showMovies + moreMoviesCount);
+  };
+
+  const hendleMoviesCounter = () => {
+    if (screenWidth >= 1280) {
+      setMoviesCount(12);
+      setShowMovies(12);
+      setMoreMoviesCount(3);
+    } else if (screenWidth >= 768 && screenWidth < 1280) {
+      setMoviesCount(8);
+      setShowMovies(8);
+      setMoreMoviesCount(2);
+    } else if (screenWidth < 768) {
+      setMoviesCount(5);
+      setShowMovies(5);
+      setMoreMoviesCount(2);
     }
-  }, [location.pathname, cards, cardsRender]);
+  };
 
   useEffect(() => {
-    if (location.pathname === "/saved-movies") {
-      setCardsForRender(cards);
-    }
-  }, [location.pathname, cards]);
+    hendleMoviesCounter();
+  }, [screenWidth]);
 
-  function handleClickMoreButton() {
-    const start = cardsForRender.length;
-    const end = start + cardsRender.more;
-    const counter = cards.length - start;
-    if (counter > 0) {
-      const addMoreCards = cards.slice(start, end);
-      setCardsForRender([...cardsForRender, ...addMoreCards]);
-    }
-  }
+  useEffect(() => {
+    window.addEventListener("resize", handleScreenWidth);
+    handleMoviesButtonClick();
+    return () => {
+      window.removeEventListener("resize", handleScreenWidth);
+    };
+  }, []);
+
+  console.log(cards);
 
   return (
     <section className="movies">
-      {!localStorage.getItem("searchRequest") && cards.length === 0 && null}
-      {isLoading && cards.length === 0 && <Preloader />}
-      {isNotFoundCards && <p className="movies__info">Ничего не найдено</p>}
-      {cards.length !== 0 && !isNotFoundCards && (
+      {isLoading ? (
+        <Preloader />
+      ) : (
         <>
-          <ul className={`movies__list ${cardsForRender.length > 3 ? "movies__list_space" : ""}`}>
-            {cardsForRender.map((card) => (
-                <MoviesCard 
-                card={card} 
-                key={card.id || card._id}
-                isSaved={handleSavedStatus(savedMovies, card)}
-                onCardSave={onCardSave}
-                onCardDelete={onCardDelete} 
+          <ul className="movies__list">
+            {(foundCards === false && cards.length === 0) ? (
+              <><p className="movies__info">Ничего не найдено</p></>
+            ) : (location.pathname === "/movies") ? (
+              cards
+                .slice(0, showMovies)
+                .map((card) => (
+                  <MoviesCard
+                    card={card}
+                    key={card.id || card._id}
+                    isSaved={handleSavedStatus(savedMovies, card)}
+                    onCardSave={onCardSave}
+                    onCardDelete={onCardDelete}
+                    isMoviesLiked={isMoviesLiked}
+                  />
+                ))
+            ) : (
+              cards.map((card) => (
+                <MoviesCard
+                  card={card}
+                  key={card.id || card._id}
+                  isSaved={handleSavedStatus(savedMovies, card)}
+                  onCardSave={onCardSave}
+                  onCardDelete={onCardDelete}
+                  isMoviesLiked={isMoviesLiked}
                 />
-            ))}
+              ))
+            )}
           </ul>
+          {location.pathname === "/movies" && cards.length > showMovies ? (
+            <button
+              className="movies__more"
+              type="button"
+              onClick={handleMoviesButtonClick}
+            >
+              Ещё
+            </button>
+          ) : (
+            ""
+          )}
         </>
       )}
-      <button className="movies__more" type="button">
-        Ещё
-      </button>
     </section>
   );
 }

@@ -1,25 +1,55 @@
 import "./MoviesCard.css";
-import film from "../../images/film.jpg";
+import { useLocation } from "react-router-dom";
+import { durationMovie } from "../../utils/utils";
 
-function MoviesCard({isMovies, onDelete, onSave}) {
+function MoviesCard({ card, isSaved, onCardDelete, onCardSave }) {
+  const location = useLocation();
+  const API_MOVIES_URL = "https://api.nomoreparties.co";
 
-  function handleSave () {
-    onSave();
+  function handleSaveCard() {
+    onCardSave(card);
   }
-  function handleDelete () {
-    onDelete();
+  function handleDeleteCard() {
+    onCardDelete(card);
   }
 
   return (
     <li className="card">
       <div className="card__header">
         <div>
-          <h2 className="card__title">33 слова о дизайне</h2>
-          <p className="card__duration">1ч 47м</p>
+          <h2 className="card__title">{card.nameRU.trim()}</h2>
+          <p className="card__duration">{durationMovie(card.duration)}</p>
         </div>
-        <button className={isMovies ? `card__save` : `card__delete` } type="button" onClick={isMovies ? handleSave : handleDelete}></button>
+        {location.pathname === "/movies" ? (
+          <button
+            className={`${isSaved(card) ? "card__save_active" : "card__save"}`}
+            type="button"
+            onClick={handleSaveCard}
+          ></button>
+        ) : (
+          <button
+            className="card__delete"
+            type="button"
+            onClick={handleDeleteCard}
+          ></button>
+        )}
       </div>
-      <img className="card__film" alt="стопкадр фильма" src={film} />
+      <a
+        className="card__link"
+        href={card.trailerLink}
+        target="blank"
+        rel="noreferrer"
+      >
+        <img
+          className="card__film"
+          alt={`стопкадр фильма ${card.nameRU.trim()}`}
+          src={
+            location.pathname === "/movies"
+              ? `${API_MOVIES_URL}${card.image.url}`
+              : `${card.image}`
+          }
+        />
+      </a>
     </li>
   );
 }
