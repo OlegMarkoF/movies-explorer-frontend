@@ -11,9 +11,10 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
-import Preloader from "../Preloader/Preloader";
+// import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-// import { UNAUTHORIZED, CONFLICT } from '../../utils/errors';
+import { UNAUTHORIZED, CONFLICT } from "../../utils/errors";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { movieApi } from "../../utils/moviesApi";
 import * as mainApi from "../../utils/mainApi";
 
@@ -24,6 +25,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [apiItems, setApiItems] = useState([]);
+  const [isInfoOpenPopup, setIsInfoOpenPopup] = useState(false);
   const [notification, setNotification] = useState({ text: "" });
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,13 +64,17 @@ function App() {
       .register({ password, email, name })
       .then((res) => {
         if (res) {
-          handleLogin({ email: email, password: password });
+          handleLogin({ password: password, email: email });
+          setIsInfoOpenPopup(true);
           setNotification({ text: "Вы успешно зарегистрировались!" });
           setUser({ name: name, email: email });
         }
       })
       .catch((err) => {
         setIsPreloaderActive(false);
+        setIsInfoOpenPopup(true);
+        // eslint-disable-next-line no-lone-blocks
+        {(err.status === CONFLICT) ? setNotification({ text: "Пользователь уже сужествует" }) : setNotification({ text: "Произошла ошибка" })};
       });
   };
 
@@ -87,15 +93,19 @@ function App() {
       })
       .catch((err) => {
         setIsPreloaderActive(false);
+        setIsInfoOpenPopup(true);
+        // eslint-disable-next-line no-lone-blocks
+        {(err.status === UNAUTHORIZED) ? setNotification({ text: "Вы ввели неправильный логин или пароль" }) : setNotification({ text: "Произошла ошибка" })};
       });
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("");
-    localStorage.removeItem("");
-    localStorage.removeItem("");
-    localStorage.removeItem("");
+    localStorage.removeItem("short");
+    localStorage.removeItem("mySearch");
+    localStorage.removeItem("myFound");
+    localStorage.removeItem("cards");
+    localStorage.removeItem("liked");
 
     localStorage.clear();
     setCurrentUser({});
@@ -156,9 +166,13 @@ function App() {
         setCurrentUser(res);
         setIsPreloaderActive(false);
         setNotification({ text: "Данные изменены" });
+        setIsInfoOpenPopup(true);
       })
-      .catch(() => {
+      .catch((err) => {
         setIsPreloaderActive(false);
+        setIsInfoOpenPopup(true);
+        // eslint-disable-next-line no-lone-blocks
+        {(err.status === CONFLICT) ? setNotification({ text: "Пользователь уже сужествует" }) : setNotification({ text: "Произошла ошибка" })};
       });
   };
 
@@ -178,6 +192,10 @@ function App() {
       });
   };
 
+  const closePopup = () => {
+    setIsInfoOpenPopup(false);
+  }
+
   const getMoviesByApi = () => {
     setIsPreloaderActive(true);
     movieApi
@@ -188,6 +206,7 @@ function App() {
           localStorage.setItem("movies", JSON.stringify(apiItems));
           setIsPreloaderActive(false);
         } else {
+          setIsInfoOpenPopup(true);
           setNotification({ text: "Ничего не найдено" });
         }
       })
@@ -208,6 +227,7 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
+          setIsInfoOpenPopup(true);
           setNotification({ text: "Некорректный токен" });
           handleLogout();
         });
@@ -279,8 +299,9 @@ function App() {
             <Route path="/*" element={<NotFound />} />
             <Route path="/" element={<Main loggedIn={loggedIn} />} />
           </Routes>
-          <Preloader isPreloaderActive={isPreloaderActive} />
+          {/* <Preloader isPreloaderActive={isPreloaderActive} /> */}
         </section>
+        <InfoTooltip isOpen={isInfoOpenPopup} onClose={closePopup} notification={notification}/>
       </main>
     </CurrentUserContext.Provider>
   );
