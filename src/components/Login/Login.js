@@ -14,7 +14,7 @@ function Login({ handleLogin }) {
   const [passwordError, setPasswordError] = useState(
     "Необходимо указать пароль"
   );
-  const [isFornValid, setIsFornValid] = useState(false);
+  const [isFornValid, setIsFornValid] = useState(true);
 
   useEffect(() => {
     if (emailError || passwordError) {
@@ -26,10 +26,24 @@ function Login({ handleLogin }) {
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
+    setEmailError("");
+  };
+
+  const handleClear = (e) => {
+    // eslint-disable-next-line default-case
+    switch (e.target.name) {
+      case "email":
+        setEmailClick(true);
+        break;
+      case "password":
+        setPasswordClick(true);
+        break;
+    }
   };
 
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
+    setPasswordError("");
   };
 
   const handleSubmit = (e) => {
@@ -54,6 +68,7 @@ function Login({ handleLogin }) {
           onChange={handleChangeEmail}
           required
           placeholder=""
+          onClear={handleClear}
         />
         <span
           id="email-error"
@@ -79,6 +94,7 @@ function Login({ handleLogin }) {
           maxLength="40"
           placeholder=""
           required
+          onClear={handleClear}
         />
         <span
           id="password-error"
