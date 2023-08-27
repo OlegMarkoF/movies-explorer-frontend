@@ -50,5 +50,23 @@
   right: 6px;
   transform: translate(0, -50%);
   transition: inherit;
-  background-color: #fff;
+  background-color: #F5F5F5;
+}
+
+.filter__checkbox-input:focus + .filter__span {
+  outline: 1px dotted #212121;
+  outline: 1px auto red;
+}
+
+.filter__checkbox-input:focus:not(:focus-visible) + .filter__span {
+  outline: 0;
+}
+
+.filter__checkbox-input:checked + .filter__span {
+  background-color: #2be080;
+}
+
+.filter__checkbox-input:checked + .filter__span::before {
+  background-color: #EBEBEB;
+  transform: translate(200%, -50%);
 }

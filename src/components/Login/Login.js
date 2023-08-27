@@ -14,7 +14,7 @@ function Login({ handleLogin }) {
   const [passwordError, setPasswordError] = useState(
     "Необходимо указать пароль"
   );
-  const [isFornValid, setIsFornValid] = useState(true);
+  const [isFornValid, setIsFornValid] = useState(false);
 
   useEffect(() => {
     if (emailError || passwordError) {
@@ -68,7 +68,7 @@ function Login({ handleLogin }) {
           onChange={handleChangeEmail}
           required
           placeholder=""
-          onClear={handleClear}
+          onBlur={handleClear}
         />
         <span
           id="email-error"
@@ -94,7 +94,7 @@ function Login({ handleLogin }) {
           maxLength="40"
           placeholder=""
           required
-          onClear={handleClear}
+          onBlur={handleClear}
         />
         <span
           id="password-error"

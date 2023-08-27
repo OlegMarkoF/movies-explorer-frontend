@@ -1,28 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import "./Register.css";
 
 function Register({ handleRegister }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [nameClick, setNameClick] = useState(false);
+  const [emailClick, setEmailClick] = useState(false);
+  const [passwordClick, setPasswordClick] = useState(false);
+  const [nameError, setNameError] = useState(
+    "Необходимо указать имя"
+  );
+  const [emailError, setEmailError] = useState(
+    "Необходимо указать адрес почты"
+  );
+  const [passwordError, setPasswordError] = useState(
+    "Необходимо указать пароль"
+  );
+  const [isFornValid, setIsFornValid] = useState(false);
+
+  useEffect(() => {
+    if (emailError || passwordError || nameError) {
+      setIsFornValid(false);
+    } else {
+      setIsFornValid(true);
+    }
+  }, [nameError, emailError, passwordError]);
+
+  const handleChangeName = (e) => {
+    setName(e.target.value)
+    if (e.target.value.length < 2 || e.target.value.length > 16) {
+      setNameError("Имя должно быть длинее 2 символов")
+      if (!e.target.value) {
+        setNameError("Поле имя не должно быть пустым")
+      }
+    } else {
+      setNameError("");
+    }
+  };
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
-  };
-
-  const handleChangeName = (e) => {
-    setName(e.target.value);
+    setEmailError("");
   };
 
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
+    if (e.target.value.length < 2 || e.target.value.length > 16) {
+      setPasswordError("Пароль должен быть длинее 2 символов")
+      if (!e.target.value) {
+        setPasswordError("Укажите пароль")
+      }
+    } else {
+      setPasswordError("");
+    }
+  };
+  
+  const handleClear = (e) => {
+    // eslint-disable-next-line default-case
+    switch (e.target.name) {
+      case "email":
+        setEmailClick(true);
+        break;
+      case "password":
+        setPasswordClick(true);
+        break;
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegister(email, password, name);
+    handleRegister({ name, email, password });
   };
 
   return (
@@ -38,7 +88,11 @@ function Register({ handleRegister }) {
           id="name"
           name="name"
           type="name"
+          value={name}
           onChange={handleChangeName}
+          onBlur={handleClear}
+          minLength="2"
+          maxLength="30"
           required
           placeholder=""
         />
@@ -51,8 +105,10 @@ function Register({ handleRegister }) {
           id="email"
           name="email"
           type="email"
+          value={email}
           onChange={handleChangeEmail}
           required
+          onBlur={handleClear}
           placeholder=""
         />
         <span id="email-error" className="register__span"></span>
@@ -64,8 +120,12 @@ function Register({ handleRegister }) {
           id="password"
           name="password"
           type="password"
+          value={password}
           onChange={handleChangePassword}
           required
+          onBlur={handleClear}
+          minLength="2"
+          maxLength="16"
           placeholder=""
         />
         <span id="password-error" className="register__span"></span>

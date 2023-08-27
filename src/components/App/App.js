@@ -11,7 +11,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
-// import Preloader from "../Preloader/Preloader";
+import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { UNAUTHORIZED, CONFLICT } from "../../utils/errors";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
@@ -74,7 +74,11 @@ function App() {
         setIsPreloaderActive(false);
         setIsInfoOpenPopup(true);
         // eslint-disable-next-line no-lone-blocks
-        {(err.status === CONFLICT) ? setNotification({ text: "Пользователь уже сужествует" }) : setNotification({ text: "Произошла ошибка" })};
+        {
+          err.status === CONFLICT
+            ? setNotification({ text: "Пользователь уже сужествует" })
+            : setNotification({ text: "Произошла ошибка" });
+        }
       });
   };
 
@@ -95,7 +99,13 @@ function App() {
         setIsPreloaderActive(false);
         setIsInfoOpenPopup(true);
         // eslint-disable-next-line no-lone-blocks
-        {(err.status === UNAUTHORIZED) ? setNotification({ text: "Вы ввели неправильный логин или пароль" }) : setNotification({ text: "Произошла ошибка" })};
+        {
+          err.status === UNAUTHORIZED
+            ? setNotification({
+                text: "Вы ввели неправильный логин или пароль",
+              })
+            : setNotification({ text: "Произошла ошибка" });
+        }
       });
   };
 
@@ -172,7 +182,11 @@ function App() {
         setIsPreloaderActive(false);
         setIsInfoOpenPopup(true);
         // eslint-disable-next-line no-lone-blocks
-        {(err.status === CONFLICT) ? setNotification({ text: "Пользователь уже сужествует" }) : setNotification({ text: "Произошла ошибка" })};
+        {
+          err.status === CONFLICT
+            ? setNotification({ text: "Пользователь уже сужествует" })
+            : setNotification({ text: "Произошла ошибка" });
+        }
       });
   };
 
@@ -194,7 +208,7 @@ function App() {
 
   const closePopup = () => {
     setIsInfoOpenPopup(false);
-  }
+  };
 
   const getMoviesByApi = () => {
     setIsPreloaderActive(true);
@@ -235,75 +249,85 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <main className="page">
-        <section className="page__content">
-          <Routes>
-            <Route
-              path="/signin"
-              element={
-                <Login
-                  loggedIn={loggedIn}
-                  handleLogin={handleLogin}
-                  tokenCheck={tokenCheck}
-                />
-              }
-            />
-            <Route
-              path="/signup"
-              element={
-                <Register loggedIn={loggedIn} handleRegister={handleRegister} />
-              }
-            />
-            <Route
-              path="/movies"
-              element={
-                <ProtectedRoute path="/movies" loggedIn={loggedIn}>
-                  <Movies
-                    isMovies={true}
-                    apiItems={apiItems}
-                    isPreloaderActive={isPreloaderActive}
-                    isLiked={isLiked}
-                    savedMovies={savedMovies}
-                    handleCardDelete={handleCardDelete}
-                    handleCardSave={handleCardSave}
+    <main className="page">
+      {isPreloaderActive ? (
+        <Preloader />
+      ) : (
+        <CurrentUserContext.Provider value={currentUser}>
+          <section className="page__content">
+            <Routes>
+              <Route
+                path="/signin"
+                element={
+                  <Login
+                    loggedIn={loggedIn}
+                    handleLogin={handleLogin}
+                    tokenCheck={tokenCheck}
                   />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/saved-movies"
-              element={
-                <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
-                  <SavedMovies
-                    isMovies={false}
-                    savedMovies={savedMovies}
-                    isLiked={isLiked}
-                    handleCardDelete={handleCardDelete}
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <Register
+                    loggedIn={loggedIn}
+                    handleRegister={handleRegister}
                   />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute path="/profile" loggedIn={loggedIn}>
-                  <Profile
-                    profile={currentUser}
-                    handleLogout={handleLogout}
-                    handleChangeProfile={handleChangeProfile}
-                  />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/*" element={<NotFound />} />
-            <Route path="/" element={<Main loggedIn={loggedIn} />} />
-          </Routes>
-          {/* <Preloader isPreloaderActive={isPreloaderActive} /> */}
-        </section>
-        <InfoTooltip isOpen={isInfoOpenPopup} onClose={closePopup} notification={notification}/>
-      </main>
-    </CurrentUserContext.Provider>
+                }
+              />
+              <Route
+                path="/movies"
+                element={
+                  <ProtectedRoute path="/movies" loggedIn={loggedIn}>
+                    <Movies
+                      isMovies={true}
+                      apiItems={apiItems}
+                      isPreloaderActive={isPreloaderActive}
+                      isLiked={isLiked}
+                      savedMovies={savedMovies}
+                      handleCardDelete={handleCardDelete}
+                      handleCardSave={handleCardSave}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/saved-movies"
+                element={
+                  <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
+                    <SavedMovies
+                      isMovies={false}
+                      savedMovies={savedMovies}
+                      isLiked={isLiked}
+                      handleCardDelete={handleCardDelete}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute path="/profile" loggedIn={loggedIn}>
+                    <Profile
+                      profile={currentUser}
+                      handleLogout={handleLogout}
+                      handleChangeProfile={handleChangeProfile}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/*" element={<NotFound />} />
+              <Route path="/" element={<Main loggedIn={loggedIn} />} />
+            </Routes>
+          </section>
+          <InfoTooltip
+            isOpen={isInfoOpenPopup}
+            onClose={closePopup}
+            notification={notification}
+          />
+        </CurrentUserContext.Provider>
+      )}
+    </main>
   );
 }
 
