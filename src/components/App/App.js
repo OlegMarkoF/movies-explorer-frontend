@@ -116,6 +116,7 @@ function App() {
     localStorage.removeItem("myFound");
     localStorage.removeItem("cards");
     localStorage.removeItem("liked");
+    localStorage.removeItem("movies");
 
     localStorage.clear();
     setCurrentUser({});

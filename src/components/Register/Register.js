@@ -4,6 +4,7 @@ import Logo from "../Logo/Logo";
 import "./Register.css";
 
 function Register({ handleRegister }) {
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -67,6 +68,9 @@ function Register({ handleRegister }) {
       case "password":
         setPasswordClick(true);
         break;
+      case "name":
+        setNameClick(true);
+        break;
     }
   };
 
@@ -96,7 +100,11 @@ function Register({ handleRegister }) {
           required
           placeholder=""
         />
-        <span id="name-error" className="register__span"></span>
+        <span id="name-error" className={
+            nameClick && nameError
+              ? "error register__span name-error"
+              : "error name-error"
+          }></span>
         <label className="register__label" htmlFor="email">
           E-mail
         </label>
@@ -111,7 +119,11 @@ function Register({ handleRegister }) {
           onBlur={handleClear}
           placeholder=""
         />
-        <span id="email-error" className="register__span"></span>
+        <span id="email-error" className={
+            emailClick && emailError
+              ? "error register__span email-error"
+              : "error email-error"
+          }></span>
         <label className="register__label" htmlFor="password">
           Пароль
         </label>
@@ -128,12 +140,17 @@ function Register({ handleRegister }) {
           maxLength="16"
           placeholder=""
         />
-        <span id="password-error" className="register__span"></span>
+        <span id="password-error" className={
+            passwordClick && passwordError
+              ? "error register__span password-error"
+              : "error password-error"
+          }></span>
         <div className="register__button-container">
           <button
             type="submit"
             onSubmit={handleSubmit}
-            className="register__link"
+            disabled={!isFornValid}
+            className={isFornValid ? "register__link" : "register__link_disabled"}
           >
             Зарегистрироваться
           </button>

@@ -40,7 +40,7 @@ export function getUserInfo() {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
+    }
   }).then(checkRes);
 }
 
@@ -54,7 +54,7 @@ export function getContent(token) {
   }).then(checkRes);
 }
 
-export function updateUserInfo({ email, name }) {
+export function updateUserInfo(data) {
   return fetch(`${API_MAIN_URL}/users/me`, {
     method: "PATCH",
     headers: {
@@ -62,8 +62,8 @@ export function updateUserInfo({ email, name }) {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
-      email: email,
-      name: name,
+      email: data.email,
+      name: data.name,
     }),
   }).then(checkRes);
 }
