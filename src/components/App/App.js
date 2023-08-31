@@ -77,15 +77,15 @@ function App() {
         {
           err.status === CONFLICT
             ? setNotification({ text: "Пользователь уже сужествует" })
-            : setNotification({ text: "Произошла ошибка" });
+            : setNotification({ text: "Ошибка регистрации" });
         }
       });
   };
 
-  const handleLogin = ({ email, password }) => {
+  const handleLogin = ({ password, email }) => {
     setIsPreloaderActive(true);
     mainApi
-      .authorize({ email, password })
+      .authorize({ password, email })
       .then((res) => {
         if (res.token) {
           localStorage.setItem("token", res.token);
@@ -104,7 +104,7 @@ function App() {
             ? setNotification({
                 text: "Вы ввели неправильный логин или пароль",
               })
-            : setNotification({ text: "Произошла ошибка" });
+            : setNotification({ text: "Ошибка входа" });
         }
       });
   };
