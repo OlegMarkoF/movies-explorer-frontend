@@ -2,7 +2,7 @@
 
 Верстка сайта по макету `light-5`\
 Ссылка на Pull request: https://github.com/OlegMarkoF/movies-explorer-frontend/pull/2 \
-Ссылка на сервер: https://markov.project.nomoredomainsicu.ru
+Ссылка на сервер: http://markov.project.nomoredomainsicu.ru
 
 ## Available Scripts
 
