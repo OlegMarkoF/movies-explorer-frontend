@@ -19,6 +19,6 @@ class moviesApi {
 }
 
 export const movieApi = new moviesApi({
-  baseUrl: "https://api.nomoreparties.co",
+  baseUrl: "http://api.nomoreparties.co",
   headers: { "Content-Type": "application/json" },
 });

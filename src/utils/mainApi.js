@@ -1,5 +1,5 @@
-const API_MOVIES_URL = "https://api.nomoreparties.co";
-const API_MAIN_URL = "https://markov.nomoredomains.xyz";
+const API_MOVIES_URL = "http://api.nomoreparties.co";
+const API_MAIN_URL = "http://markov.nomoredomains.xyz";
 
 const checkRes = (res) => {
   return res.ok
