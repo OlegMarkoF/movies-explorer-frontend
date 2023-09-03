@@ -4,12 +4,12 @@ import Logo from "../Logo/Logo";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ loggedIn }) {
+function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const headerMovies = () => {
-    if (!loggedIn) {
+    if (location.pathname === "/") {
       return (
         <header className="header__menu">
           <Logo />

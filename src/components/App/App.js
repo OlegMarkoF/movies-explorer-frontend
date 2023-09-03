@@ -191,6 +191,25 @@ function App() {
       });
   };
 
+  const getMoviesByApi = () => {
+    setIsPreloaderActive(true);
+    movieApi
+      .getMovies()
+      .then((apiItems) => {
+        if (apiItems) {
+          setApiItems(apiItems);
+          localStorage.setItem("movies", JSON.stringify(apiItems));
+          setIsPreloaderActive(false);
+        } else {
+          setIsInfoOpenPopup(true);
+          setNotification({ text: "Ничего не найдено" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getMySavedMovies = (user) => {
     tokenCheck();
     mainApi
@@ -211,24 +230,6 @@ function App() {
     setIsInfoOpenPopup(false);
   };
 
-  const getMoviesByApi = () => {
-    setIsPreloaderActive(true);
-    movieApi
-      .getMovies()
-      .then((apiItems) => {
-        if (apiItems) {
-          setApiItems(apiItems);
-          localStorage.setItem("movies", JSON.stringify(apiItems));
-          setIsPreloaderActive(false);
-        } else {
-          setIsInfoOpenPopup(true);
-          setNotification({ text: "Ничего не найдено" });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const tokenCheck = () => {
     let token = localStorage.getItem("token");
