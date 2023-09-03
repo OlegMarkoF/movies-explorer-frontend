@@ -49,7 +49,7 @@ export function getContent(token) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${localStorage.getItem("token")}`
     }
   }).then(checkRes);
 }

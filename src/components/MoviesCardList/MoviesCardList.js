@@ -13,7 +13,7 @@ function MoviesCardList({
   onCardDelete,
   foundCards,
   isLoading,
-}) {
+  }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [moviesCount, setMoviesCount] = useState(0);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
@@ -55,8 +55,6 @@ function MoviesCardList({
       window.removeEventListener("resize", handleScreenWidth);
     };
   }, []);
-
-  console.log(cards);
 
   return (
     <section className="movies">
