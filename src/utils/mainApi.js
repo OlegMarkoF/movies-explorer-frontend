@@ -44,7 +44,7 @@ export function getUserInfo() {
   }).then(checkRes);
 }
 
-export function getContent(token) {
+export function getContent() {
   return fetch(`${API_MAIN_URL}/users/me`, {
     method: "POST",
     headers: {

@@ -234,7 +234,7 @@ function App() {
     let token = localStorage.getItem("token");
     if (token) {
       mainApi
-        .getContent(token)
+        .getUserInfo()
         .then((res) => {
           setCurrentUser(res);
           setLoggedIn(true);
