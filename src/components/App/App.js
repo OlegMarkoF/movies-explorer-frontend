@@ -150,7 +150,7 @@ function App() {
     mainApi
       .deleteCard(card._id)
       .then(() => {
-        setSavedMovies((savedMovies) =>
+        setSavedMovies(savedMovies =>
           savedMovies.filter((i) => i._id !== card._id)
         );
         localStorage.setItem(
@@ -191,7 +191,7 @@ function App() {
       });
   };
 
-  const getMySavedMovies = () => {
+  const getMySavedMovies = (user) => {
     tokenCheck();
     mainApi
       .getCardsByOwner()
