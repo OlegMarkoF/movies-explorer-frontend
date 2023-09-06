@@ -1,5 +1,5 @@
 const API_MOVIES_URL = "https://api.nomoreparties.co";
-const API_MAIN_URL = "https://markov.nomoredomains.xyz";
+const API_MAIN_URL = "http://markov.nomoredomains.xyz";
 
 const checkRes = (res) => {
   return res.ok
@@ -44,16 +44,6 @@ export function getUserInfo() {
   }).then(checkRes);
 }
 
-export function getContent() {
-  return fetch(`${API_MAIN_URL}/users/me`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`
-    }
-  }).then(checkRes);
-}
-
 export function updateUserInfo(data) {
   return fetch(`${API_MAIN_URL}/users/me`, {
     method: "PATCH",
@@ -68,7 +58,17 @@ export function updateUserInfo(data) {
   }).then(checkRes);
 }
 
-export function getCardsByOwner() {
+// export function getContent(token) {
+//   return fetch(`${API_MAIN_URL}/users/me`, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`
+//     }
+//   }).then(checkRes);
+// }
+
+export function getCards() {
   return fetch(`${API_MAIN_URL}/movies`, {
     method: "GET",
     headers: {

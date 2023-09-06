@@ -18,7 +18,9 @@
 .filter__checkbox-input {
   position: absolute;
   opacity: 0;
-  width: max-content;
+  /* width: max-content; */
+  width: 100%;
+  height: 100%;
 }
 
 .filter__span {
@@ -67,6 +69,6 @@
 }
 
 .filter__checkbox-input:checked + .filter__span::before {
-  background-color: #EBEBEB;
   transform: translate(200%, -50%);
+  background-color: #EBEBEB;
 }

@@ -51,7 +51,7 @@ function App() {
         } else {
           setApiItems(JSON.parse(localStorage.getItem("movies")));
         }
-        getMySavedMovies(user._id);
+        getMySavedMovies(user._id || user.id);
       })
       .catch((err) => {
         console.log(err);
@@ -125,6 +125,25 @@ function App() {
     setLoggedIn(false);
     navigate("/");
   };
+  
+  const getMoviesByApi = () => {
+    setIsPreloaderActive(true);
+    movieApi
+      .getMovies()
+      .then((apiItems) => {
+        if (apiItems) {
+          setApiItems(apiItems);
+          localStorage.setItem("movies", JSON.stringify(apiItems));
+          setIsPreloaderActive(false);
+        } else {
+          setIsInfoOpenPopup(true);
+          setNotification({ text: "Ничего не найдено" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleCardSave = (card) => {
     const savedCard = savedMovies.find((i) => i.movieId === card.id);
@@ -191,29 +210,10 @@ function App() {
       });
   };
 
-  const getMoviesByApi = () => {
-    setIsPreloaderActive(true);
-    movieApi
-      .getMovies()
-      .then((apiItems) => {
-        if (apiItems) {
-          setApiItems(apiItems);
-          localStorage.setItem("movies", JSON.stringify(apiItems));
-          setIsPreloaderActive(false);
-        } else {
-          setIsInfoOpenPopup(true);
-          setNotification({ text: "Ничего не найдено" });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const getMySavedMovies = (user) => {
     tokenCheck();
     mainApi
-      .getCardsByOwner()
+      .getCards()
       .then((res) => {
         setSavedMovies(res.filter((i) => i.owner === user));
         localStorage.setItem(
@@ -235,7 +235,7 @@ function App() {
     let token = localStorage.getItem("token");
     if (token) {
       mainApi
-        .getUserInfo()
+        .getUserInfo(token)
         .then((res) => {
           setCurrentUser(res);
           setLoggedIn(true);
@@ -287,8 +287,9 @@ function App() {
                       isPreloaderActive={isPreloaderActive}
                       isLiked={isLiked}
                       savedMovies={savedMovies}
-                      handleCardDelete={handleCardDelete}
-                      handleCardSave={handleCardSave}
+                      onCardDelete={handleCardDelete}
+                      onCardSave={handleCardSave}
+                      loggedIn={loggedIn}
                     />
                   </ProtectedRoute>
                 }
