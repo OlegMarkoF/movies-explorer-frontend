@@ -8,8 +8,36 @@ export function durationMovie(duration) {
   }
 }
 
-export function handleSavedStatus(savedCards, movieCard) {
+
+
+export function getSavedStatus(savedCards, movieCard) {
   return savedCards.find((card) => {
-    return card.movieId === (movieCard.id || movieCard.movieId);
+    return card.movieId === (movieCard.id || movieCard.movieId || movieCard._id);
   });
 }
+
+// export function filterShortMovies(movies){
+//   return movies.filter((item) => item.duration <= 40);
+// }
+
+// export function filterMovies(movies, searchQuery, shortFilms) {
+//   const moviesQuery = movies.filter((item) => {
+//     const nameRU = String(item.nameRU).toLowerCase();
+//     const nameEN = String(item.nameEN).toLowerCase();
+//     const searchName = searchQuery.toLowerCase().trim();
+//     return (nameRU.indexOf(searchName) !== -1 || nameEN.indexOf(searchName) !== -1);
+//   });
+//   if(shortFilms === 'On') {
+//     return filterShortMovies(moviesQuery);
+//   }
+//   return moviesQuery;
+// };
+
+// export function changeMovies(movies) {
+//   movies.array.forEach(movie => {
+//     if (movie.image) {
+//       movie.image = `https://api.nomoreparties.co${movie.image.url}`
+//       movie.thumbnail = `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
+//     }
+//   });
+// }

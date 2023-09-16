@@ -8,8 +8,8 @@ import { useState } from "react";
 function SavedMovies({
   isMovies,
   savedMovies,
-  onCardSave,
   isMoviesLiked,
+  isMovieSaved,
   onCardDelete,
 }) {
   const [searchResult, setSearchResult] = useState(
@@ -17,9 +17,9 @@ function SavedMovies({
       ? JSON.parse(localStorage.getItem("liked"))
       : []
   );
-  const [isFilterMovies, setIsFilterMovies] = useState(undefined);
+  const [moviesFound, setMoviesFound] = useState(undefined);
 
-  const handleSearchSubmit = (searchRequest, short) => {
+  const handleSearchButton = (searchRequest, short) => {
     const searchResult = savedMovies.filter((item) =>
       item.nameRU.toLowerCase().includes(searchRequest.toLowerCase())
     );
@@ -27,8 +27,8 @@ function SavedMovies({
       ? setSearchResult(searchResult.filter((item) => item.duration <= 40))
       : setSearchResult(searchResult);
     searchResult.length > 0
-      ? setIsFilterMovies(true)
-      : setIsFilterMovies(false);
+      ? setMoviesFound(true)
+      : setMoviesFound(false);
     localStorage.setItem("mySavedSearch", JSON.stringify(searchRequest));
   };
 
@@ -38,20 +38,17 @@ function SavedMovies({
         <Header />
         <section className="saved-movies__main">
           <SearchForm 
-          onSearch={handleSearchSubmit}
-          // onFilterChange={handleonFilterClick}
-          // isFilterOn={isFilterOn}
-          // isSearching={isSearching}
+          onSearch={handleSearchButton}
           />
           <div className="saved-movies__list">
             <MoviesCardList
-              cards={searchResult}
+              movies={searchResult}
               isMovies={isMovies}
               savedMovies={savedMovies}
-              onCardSave={onCardSave}
+              isMovieSaved={isMovieSaved}
               isMoviesLiked={isMoviesLiked}
               onCardDelete={onCardDelete}
-              isFilterMovies={isFilterMovies}
+              moviesFound={moviesFound}
             />
           </div>
         </section>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext, useEffect, useState } from "react";
+import useFormValidation from "../../hooks/useFormValidation";
 
 function Profile({ handleChangeProfile, handleLogout }) {
   const currentUser = useContext(CurrentUserContext);
@@ -13,6 +14,10 @@ function Profile({ handleChangeProfile, handleLogout }) {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
+  const { values, errors, isValid, handleChange, setValues, setValid } = useFormValidation({
+    name: currentUser.name,
+    email: currentUser.email,
+  });
 
   useEffect(() => {
     if (emailError || nameError) {
@@ -76,12 +81,7 @@ function Profile({ handleChangeProfile, handleLogout }) {
     <>
       <Header />
       <section className="profile">
-        <form
-          className="profile__form"
-          name="profile"
-          onSubmit={handleSubmit}
-          noValidate
-        >
+        <form className="profile__form" name="profile" onSubmit={handleSubmit} noValidate>
           <h2 className="profile__title">Привет, {name}!</h2>
           <input
             className="profile__input profile__input_name"
@@ -104,7 +104,7 @@ function Profile({ handleChangeProfile, handleLogout }) {
                 : "error profile__name-error"
             }
           >
-            {nameError}
+            {errors.name}
           </span>
           <input
             className="profile__input"
@@ -130,11 +130,13 @@ function Profile({ handleChangeProfile, handleLogout }) {
             {emailError}
           </span>
           <button
-            className={
-              isFormValid ? "profile__button" : "profile__button_disabled"
-            }
+            onSubmit={handleSubmit}
             type="submit"
             disabled={isFormValid}
+            className={
+              (isFormValid) ? "profile__button_disabled" : "profile__button"
+            }
+            // className="profile__button"
           >
             Редактировать
           </button>

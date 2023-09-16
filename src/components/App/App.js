@@ -41,6 +41,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (loggedIn === true) {
     mainApi
       .getUserInfo()
       .then((user) => {
@@ -51,12 +52,13 @@ function App() {
         } else {
           setApiItems(JSON.parse(localStorage.getItem("movies")));
         }
-        getMySavedMovies(user._id || user.id);
+        getMySavedMovies(user._id);
       })
       .catch((err) => {
         console.log(err);
-      });
+      })};
   }, [user]);
+
 
   const handleRegister = ({ password, email, name }) => {
     setIsPreloaderActive(true);
@@ -117,7 +119,6 @@ function App() {
     localStorage.removeItem("cards");
     localStorage.removeItem("liked");
     localStorage.removeItem("movies");
-
     localStorage.clear();
     setCurrentUser({});
     setApiItems([]);
@@ -145,11 +146,11 @@ function App() {
       });
   };
 
-  const handleCardSave = (card) => {
+  const onCardSave = (card) => {
     const savedCard = savedMovies.find((i) => i.movieId === card.id);
     tokenCheck();
     savedCard
-      ? handleCardDelete(savedCard)
+      ? onCardDelete(savedCard)
       : mainApi
           .createMoviesCard(card)
           .then((res) => {
@@ -164,7 +165,7 @@ function App() {
           });
   };
 
-  const handleCardDelete = (card) => {
+  const onCardDelete = (card) => {
     tokenCheck();
     mainApi
       .deleteCard(card._id)
@@ -182,14 +183,13 @@ function App() {
       });
   };
 
-  const isLiked = (movie) => {
+  const isMoviesLiked = (movie) => {
     return savedMovies.some((i) => i.moviedId === movie.id);
   };
 
   const handleChangeProfile = (user) => {
     setIsPreloaderActive(true);
     tokenCheck();
-
     mainApi
       .updateUserInfo(user)
       .then((res) => {
@@ -282,14 +282,13 @@ function App() {
                 element={
                   <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                     <Movies
-                      isMovies={true}
                       apiItems={apiItems}
+                      isMovies={true}
                       isPreloaderActive={isPreloaderActive}
-                      isLiked={isLiked}
+                      isMoviesLiked={isMoviesLiked}
                       savedMovies={savedMovies}
-                      onCardDelete={handleCardDelete}
-                      onCardSave={handleCardSave}
-                      loggedIn={loggedIn}
+                      onCardDelete={onCardDelete}
+                      onCardSave={onCardSave}
                     />
                   </ProtectedRoute>
                 }
@@ -301,8 +300,8 @@ function App() {
                     <SavedMovies
                       isMovies={false}
                       savedMovies={savedMovies}
-                      isLiked={isLiked}
-                      handleCardDelete={handleCardDelete}
+                      isMoviesLiked={isMoviesLiked}
+                      onCardDelete={onCardDelete}
                     />
                   </ProtectedRoute>
                 }

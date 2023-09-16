@@ -1,6 +1,7 @@
 import "./Login.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useFormValidation from "../../hooks/useFormValidation";
 import Logo from "../Logo/Logo";
 
 function Login({ handleLogin }) {
@@ -8,19 +9,20 @@ function Login({ handleLogin }) {
   const [password, setPassword] = useState("");
   const [emailClick, setEmailClick] = useState(false);
   const [passwordClick, setPasswordClick] = useState(false);
+  const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
   const [emailError, setEmailError] = useState(
     "Необходимо указать адрес почты"
   );
   const [passwordError, setPasswordError] = useState(
     "Необходимо указать пароль"
   );
-  const [isFornValid, setIsFornValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     if (emailError || passwordError) {
-      setIsFornValid(false);
+      setIsFormValid(false);
     } else {
-      setIsFornValid(true);
+      setIsFormValid(true);
     }
   }, [emailError, passwordError]);
 
@@ -48,7 +50,7 @@ function Login({ handleLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin({ email, password });
+    handleLogin({email, password});
   };
 
   return (
@@ -110,8 +112,8 @@ function Login({ handleLogin }) {
           <button
             type="submit"
             onSubmit={handleSubmit}
-            className={isFornValid ? "login__link" : "login__link_disabled"}
-            disabled={!isFornValid}
+            className={isFormValid ? "login__link" : "login__link_disabled"}
+            disabled={!isFormValid}
           >
             Войти
           </button>

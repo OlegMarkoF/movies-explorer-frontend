@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
+import useFormValidation from "../../hooks/useFormValidation";
 import "./Register.css";
 
 function Register({ handleRegister }) {
@@ -11,6 +12,7 @@ function Register({ handleRegister }) {
   const [nameClick, setNameClick] = useState(false);
   const [emailClick, setEmailClick] = useState(false);
   const [passwordClick, setPasswordClick] = useState(false);
+  const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
   const [nameError, setNameError] = useState(
     "Необходимо указать имя"
   );
@@ -20,13 +22,13 @@ function Register({ handleRegister }) {
   const [passwordError, setPasswordError] = useState(
     "Необходимо указать пароль"
   );
-  const [isFornValid, setIsFornValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     if (emailError || passwordError || nameError) {
-      setIsFornValid(false);
+      setIsFormValid(false);
     } else {
-      setIsFornValid(true);
+      setIsFormValid(true);
     }
   }, [nameError, emailError, passwordError]);
 
@@ -76,12 +78,12 @@ function Register({ handleRegister }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegister({ name, email, password });
+    handleRegister({name, email, password});
   };
 
   return (
     <section className="register">
-      <form onSubmit={handleSubmit} className="register__form">
+      <form onSubmit={handleSubmit} className="register__form" noValidate>
         <Logo />
         <h2 className="register__welcome">Добро пожаловать!</h2>
         <label className="register__label" htmlFor="name">
@@ -115,9 +117,9 @@ function Register({ handleRegister }) {
           type="email"
           value={email}
           onChange={handleChangeEmail}
-          required
           onBlur={handleClear}
           placeholder=""
+          required
         />
         <span id="email-error" className={
             emailClick && emailError
@@ -134,11 +136,11 @@ function Register({ handleRegister }) {
           type="password"
           value={password}
           onChange={handleChangePassword}
-          required
           onBlur={handleClear}
           minLength="2"
           maxLength="16"
           placeholder=""
+          required
         />
         <span id="password-error" className={
             passwordClick && passwordError
@@ -149,8 +151,8 @@ function Register({ handleRegister }) {
           <button
             type="submit"
             onSubmit={handleSubmit}
-            disabled={!isFornValid}
-            className={isFornValid ? "register__link" : "register__link_disabled"}
+            disabled={!isFormValid}
+            className={isFormValid ? "register__link" : "register__link_disabled"}
           >
             Зарегистрироваться
           </button>

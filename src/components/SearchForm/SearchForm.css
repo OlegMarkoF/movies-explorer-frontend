@@ -64,6 +64,24 @@
   cursor: pointer;
 }
 
+.search__error {
+  padding: 0;
+  margin: 0 auto;
+  max-width: 200px;
+  min-height: 12px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  box-sizing: border-box;
+  text-align: center;
+  display: none;
+}
+
+.search__error_active {
+  display: block;
+}
+
 @media screen and (max-width: 400px) {
   .search__glass {
     display: none;

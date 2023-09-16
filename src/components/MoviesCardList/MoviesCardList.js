@@ -3,19 +3,19 @@ import { useLocation } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
-import { handleSavedStatus } from "../../utils/utils";
+// import { getSavedStatus } from "../../utils/utils";
 
 function MoviesCardList({
-  cards,
+  movies,
   savedMovies,
   isMoviesLiked,
-  onCardSave,
   onCardDelete,
-  foundCards,
-  isLoading,
-  }) {
+  onCardSave,
+  moviesFound,
+  isPreloaderActive,
+}) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [moviesCount, setMoviesCount] = useState(0);
+  const [moviesCount, setMoviesCount] = useState(12);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
   const [showMovies, setShowMovies] = useState(moviesCount);
   const location = useLocation();
@@ -58,40 +58,40 @@ function MoviesCardList({
 
   return (
     <section className="movies">
-      {isLoading ? (
+      {isPreloaderActive ? (
         <Preloader />
       ) : (
         <>
           <ul className="movies__list">
-            {(foundCards === false && cards.length === 0) ? (
-              <><p className="movies__info">Ничего не найдено</p></>
-            ) : (location.pathname === "/movies") ? (
-              cards
+            {moviesFound === false && movies.length === 0 ? (
+              <p className="movies__info">Ничего не найдено</p>
+            ) : location.pathname === "/movies" ? (
+              movies
                 .slice(0, showMovies)
-                .map((card) => (
+                .map((movie) => (
                   <MoviesCard
-                    card={card}
-                    key={card.id || card._id}
-                    isSaved={handleSavedStatus(savedMovies, card)}
+                    movie={movie}
+                    key={movie.id || movie._id}
+                    isMoviesLiked={isMoviesLiked}
+                    savedMovies={savedMovies}
                     onCardSave={onCardSave}
                     onCardDelete={onCardDelete}
-                    isMoviesLiked={isMoviesLiked}
                   />
                 ))
             ) : (
-              cards.map((card) => (
+              movies.map((movie) => (
                 <MoviesCard
-                  card={card}
-                  key={card.id || card._id}
-                  isSaved={handleSavedStatus(savedMovies, card)}
+                  movie={movie}
+                  key={movie.id || movie._id}
+                  isMoviesLiked={isMoviesLiked}
+                  savedMovies={savedMovies}
                   onCardSave={onCardSave}
                   onCardDelete={onCardDelete}
-                  isMoviesLiked={isMoviesLiked}
                 />
               ))
             )}
           </ul>
-          {location.pathname === "/movies" && cards.length > showMovies ? (
+          {location.pathname === "/movies" && movies.length > showMovies ? (
             <button
               className="movies__more"
               type="button"

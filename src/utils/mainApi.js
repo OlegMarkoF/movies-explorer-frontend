@@ -58,15 +58,15 @@ export function updateUserInfo(data) {
   }).then(checkRes);
 }
 
-// export function getContent(token) {
-//   return fetch(`${API_MAIN_URL}/users/me`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`
-//     }
-//   }).then(checkRes);
-// }
+export function getToken(token) {
+  return fetch(`${API_MAIN_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  }).then(checkRes);
+}
 
 export function getCards() {
   return fetch(`${API_MAIN_URL}/movies`, {
@@ -87,9 +87,9 @@ export function createMoviesCard({
   image,
   trailerLink,
   thumbnail,
-  movieId,
   nameRU,
   nameEN,
+  id,
 }) {
   return fetch(`${API_MAIN_URL}/movies`, {
     method: "POST",
@@ -106,15 +106,15 @@ export function createMoviesCard({
       image: `${API_MOVIES_URL}${image.url}`,
       trailerLink: trailerLink,
       thumbnail: `${API_MOVIES_URL}${thumbnail.url}`,
-      movieId: movieId,
       nameRU: nameRU,
       nameEN: nameEN,
+      movieId: id,
     }),
   }).then(checkRes);
 }
 
-export function deleteCard(moviedId) {
-  return fetch(`${API_MAIN_URL}/movies/${moviedId}`, {
+export function deleteCard(movieId) {
+  return fetch(`${API_MAIN_URL}/movies/${movieId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -122,3 +122,4 @@ export function deleteCard(moviedId) {
     },
   }).then(checkRes);
 }
+

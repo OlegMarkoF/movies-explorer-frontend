@@ -1,14 +1,24 @@
 .movies {
   margin: 0 auto 252px;
   max-width: 1140px;
+  min-height: 800px; /* <-- Временный костыль. Не забыть убрать! */
 }
 
 .movies__list {
   margin: 0;
   padding: 0;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px 17px;
+}
+
+.movies__message {
+  color: #000;
+}
+
+.movies__message_err {
+  color: #ff004c;
 }
 
 .movies__list_space {
@@ -32,6 +42,10 @@
 
 .movies__more:hover {
   opacity: 0.8;
+}
+
+.movies__more_hidden {
+  display: none;
 }
 
 @media screen and (max-width: 800px) {

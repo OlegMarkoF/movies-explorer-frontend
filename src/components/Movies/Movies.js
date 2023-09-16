@@ -14,12 +14,12 @@ function Movies({
   onCardDelete,
   onCardSave,
 }) {
+  const [moviesFound, setMoviesFound] = useState(undefined);
   const [searchResult, setSearchResult] = useState(
     localStorage.getItem("mySearch")
       ? JSON.parse(localStorage.getItem("myFound"))
       : []
   );
-  const [moviesFound, setMoviesFound] = useState(undefined);
 
   useEffect(() => {
     showSearchResult();
@@ -90,14 +90,14 @@ function Movies({
         <div>
           <SearchForm handleSearchButton={handleSearchButton} />
           <MoviesCardList
+            movies={searchResult}
             isMovies={isMovies}
-            cards={searchResult}
-            moviesFound={moviesFound}
-            isPreloaderActive={isPreloaderActive}
-            isMoviesLiked={isMoviesLiked}
             savedMovies={savedMovies}
+            // isPreloaderActive={isPreloaderActive}
+            isMoviesLiked={isMoviesLiked}
             onCardDelete={onCardDelete}
             onCardSave={onCardSave}
+            moviesFound={moviesFound}
           />
         </div>
       </main>
