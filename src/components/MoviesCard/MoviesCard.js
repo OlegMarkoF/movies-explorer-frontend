@@ -28,7 +28,7 @@ function MoviesCard({ movie, onCardDelete, isMoviesLiked, savedMovies, onCardSav
   return (
     <li className="card">
       <div className="card__header">
-        <div>
+        <div className="card__text">
           <h2 className="card__title">{movie.nameRU}</h2>
           <p className="card__duration">{durationMovie(movie.duration)}</p>
         </div>

@@ -283,12 +283,12 @@ function App() {
                   <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                     <Movies
                       apiItems={apiItems}
-                      isMovies={true}
                       isPreloaderActive={isPreloaderActive}
+                      isMovies={true}
                       isMoviesLiked={isMoviesLiked}
                       savedMovies={savedMovies}
-                      onCardDelete={onCardDelete}
                       onCardSave={onCardSave}
+                      onCardDelete={onCardDelete}
                     />
                   </ProtectedRoute>
                 }
@@ -298,9 +298,9 @@ function App() {
                 element={
                   <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
                     <SavedMovies
-                      isMovies={false}
                       savedMovies={savedMovies}
                       isMoviesLiked={isMoviesLiked}
+                      isMovies={false}
                       onCardDelete={onCardDelete}
                     />
                   </ProtectedRoute>

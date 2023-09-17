@@ -50,14 +50,14 @@
   position: absolute;
   top: 50%;
   right: 6px;
-  transform: translate(0, -50%);
+  transform: translate(-130%, -50%);
   transition: inherit;
   background-color: #F5F5F5;
 }
 
 .filter__checkbox-input:focus + .filter__span {
   outline: 1px dotted #212121;
-  outline: 1px auto red;
+  /* outline: 1px auto red; */
 }
 
 .filter__checkbox-input:focus:not(:focus-visible) + .filter__span {
@@ -69,6 +69,6 @@
 }
 
 .filter__checkbox-input:checked + .filter__span::before {
-  transform: translate(-130%, -50%);
-  background-color: #EBEBEB;
+  transform: translate(0, -50%);
+  background-color: #fff;
 }

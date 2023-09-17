@@ -89,11 +89,8 @@ function SearchForm({ handleSearchButton }) {
             placeholder="Фильм"
             name="search"
             type="search"
-            autoComplete="off"
-            autoCapitalize="off"
-            // disabled={isSearching ? true : false}
             onChange={handleSearchInput}
-            value={searchRequest || ""}
+            value={searchRequest}
           />
           <button
             className="search__button"
@@ -112,7 +109,6 @@ function SearchForm({ handleSearchButton }) {
               className="filter__checkbox-input"
               type="checkbox"
               value="no"
-              name="toggle"
               checked={location.pathname === "/movies" ? short : savedShort}
               onChange={
                 location.pathname === "/movies"

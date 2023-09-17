@@ -24,7 +24,21 @@ function Movies({
   useEffect(() => {
     showSearchResult();
     localStorage.setItem("myFound", JSON.stringify(searchResult));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setSearchResult]);
+  
+  
+  const handleSearchButton = (searchRequest, short) => {
+    const searchResult = apiItems.filter((item) =>
+      item.nameRU.toLowerCase().includes(searchRequest.toLowerCase())
+    );
+    short
+      ? setSearchResult(searchResult.filter((item) => item.duration <= 40))
+      : setSearchResult(searchResult);
+    searchResult.length > 0 ? setMoviesFound(true) : setMoviesFound(false);
+    localStorage.setItem("mySearch", JSON.stringify(searchRequest));
+    localStorage.setItem("myFound", JSON.stringify(searchResult));
+  };
 
   const showSearchResult = () => {
     if (localStorage.getItem("mySearch")) {
@@ -71,18 +85,6 @@ function Movies({
     }
   };
 
-  const handleSearchButton = (searchRequest, short) => {
-    const searchResult = apiItems.filter((item) =>
-      item.nameRU.toLowerCase().includes(searchRequest.toLowerCase())
-    );
-    short
-      ? setSearchResult(searchResult.filter((item) => item.duration <= 40))
-      : setSearchResult(searchResult);
-    searchResult.length > 0 ? setMoviesFound(true) : setMoviesFound(false);
-    localStorage.setItem("mySearch", JSON.stringify(searchRequest));
-    localStorage.setItem("myFound", JSON.stringify(searchResult));
-  };
-
   return (
     <>
       <main className="movie">
@@ -91,13 +93,13 @@ function Movies({
           <SearchForm handleSearchButton={handleSearchButton} />
           <MoviesCardList
             movies={searchResult}
-            isMovies={isMovies}
-            savedMovies={savedMovies}
+            moviesFound={moviesFound}
             isPreloaderActive={isPreloaderActive}
             isMoviesLiked={isMoviesLiked}
+            isMovies={isMovies}
+            savedMovies={savedMovies}
             onCardDelete={onCardDelete}
             onCardSave={onCardSave}
-            moviesFound={moviesFound}
           />
         </div>
       </main>

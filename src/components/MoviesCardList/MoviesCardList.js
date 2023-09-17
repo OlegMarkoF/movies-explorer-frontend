@@ -15,7 +15,7 @@ function MoviesCardList({
   isPreloaderActive,
 }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [moviesCount, setMoviesCount] = useState(0);
+  const [moviesCount, setMoviesCount] = useState(12);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
   const [showMovies, setShowMovies] = useState(moviesCount);
   const location = useLocation();
@@ -56,7 +56,7 @@ function MoviesCardList({
     };
   }, []);
 
-  console.log(movies);
+  console.log();
 
   return (
     <section className="movies">
@@ -65,10 +65,8 @@ function MoviesCardList({
       ) : (
         <>
           <ul className="movies__list">
-            {moviesFound === false && movies.length === 0 ? (
-              <p className="movies__info">Ничего не найдено</p>
-            ) : location.pathname === "/movies" ? (
-              movies.slice(0, showMovies).map((movie) => {
+            {movies.length > 0 ? location.pathname === "/movies" ? (
+              movies.slice(4, showMovies).map((movie) => {
                 return (
                   <MoviesCard
                     movie={movie}
@@ -93,6 +91,8 @@ function MoviesCardList({
                   />
                 );
               })
+            ) : (
+              <p className="movies__info">Ничего не найдено</p>
             )}
           </ul>
           {location.pathname === "/movies" && movies.length > showMovies ? (
