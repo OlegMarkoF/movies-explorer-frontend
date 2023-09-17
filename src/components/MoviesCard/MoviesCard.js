@@ -26,7 +26,7 @@ function MoviesCard({ movie, onCardDelete, isMoviesLiked, savedMovies, onCardSav
   }
 
   return (
-    <li className="movie">
+    <li className="card">
       <div className="card__header">
         <div>
           <h2 className="card__title">{movie.nameRU}</h2>
@@ -34,7 +34,7 @@ function MoviesCard({ movie, onCardDelete, isMoviesLiked, savedMovies, onCardSav
         </div>
         {location.pathname === "/movies" ? (
           <button
-            className={`${(isMoviesLiked(movie)) ? "card__save_active" : "card__save"}`}
+            className={`${(isMoviesLiked) ? "card__save" : "card__save_active"}`}
             type="button"
             onClick={handleSave}
           ></button>

@@ -1,7 +1,6 @@
 .filter {
   display: flex;
   justify-content: center;
-  gap: 12px;
   margin: 29px auto 118px;
 }
 
@@ -13,6 +12,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 128.571%;
+  gap: 12px;
 }
 
 .filter__checkbox-input {
@@ -32,7 +32,7 @@
   box-sizing: content-box;
   position: relative;
   border-radius: 20px;
-  background-color: #2be080;
+  background-color: #EBEBEB;
   transition: 0.25s;
   cursor: pointer;
 }
@@ -69,6 +69,6 @@
 }
 
 .filter__checkbox-input:checked + .filter__span::before {
-  transform: translate(200%, -50%);
+  transform: translate(-130%, -50%);
   background-color: #EBEBEB;
 }

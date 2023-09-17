@@ -38,15 +38,15 @@ function SavedMovies({
         <Header />
         <section className="saved-movies__main">
           <SearchForm 
-          onSearch={handleSearchButton}
+          handleSearchButton={handleSearchButton}
           />
           <div className="saved-movies__list">
             <MoviesCardList
               movies={searchResult}
               isMovies={isMovies}
+              isMoviesLiked={isMoviesLiked}
               savedMovies={savedMovies}
               isMovieSaved={isMovieSaved}
-              isMoviesLiked={isMoviesLiked}
               onCardDelete={onCardDelete}
               moviesFound={moviesFound}
             />

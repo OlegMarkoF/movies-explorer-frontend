@@ -10,12 +10,12 @@ function SearchForm({ handleSearchButton }) {
   let mySearch = localStorage.getItem("mySearch");
   const location = useLocation();
   const [searchRequest, setSearchRequest] = useState("");
-  const [savedShort, setSavedShort] = useState(false);
+  const [savedShort, setSavedShort] = useState(true);
   const [searchError, setSearchError] = useState("");
   const [short, setShort] = useState(
     localStorage.getItem("short")
       ? JSON.parse(localStorage.getItem("short"))
-      : false
+      : true
   );
 
   useEffect(() => {
@@ -95,15 +95,19 @@ function SearchForm({ handleSearchButton }) {
             onChange={handleSearchInput}
             value={searchRequest || ""}
           />
-          <button className="search__button" tipe="submit" onSubmit={handleSubmit}>
+          <button
+            className="search__button"
+            tipe="submit"
+            onSubmit={handleSubmit}
+          >
             <img className="search__img" src={find} alt="кнопка поиска" />
           </button>
         </form>
-        <span className={"search__error search__error_active"}>{searchError}</span>
-        <section className="filter">
-          <span className="filter__span"></span>
+        <span className={"search__error search__error_active"}>
+          {searchError}
+        </span>
+        <div className="filter">
           <label className="filter__checkbox">
-            Короткометражки
             <input
               className="filter__checkbox-input"
               type="checkbox"
@@ -116,8 +120,10 @@ function SearchForm({ handleSearchButton }) {
                   : toggleCheckboxSaved
               }
             />
+            <span className="filter__span"></span>
+            Короткометражки
           </label>
-        </section>
+        </div>
       </section>
     </main>
   );

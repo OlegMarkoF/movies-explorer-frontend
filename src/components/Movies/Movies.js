@@ -93,7 +93,7 @@ function Movies({
             movies={searchResult}
             isMovies={isMovies}
             savedMovies={savedMovies}
-            // isPreloaderActive={isPreloaderActive}
+            isPreloaderActive={isPreloaderActive}
             isMoviesLiked={isMoviesLiked}
             onCardDelete={onCardDelete}
             onCardSave={onCardSave}

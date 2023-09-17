@@ -89,7 +89,7 @@ export function createMoviesCard({
   thumbnail,
   nameRU,
   nameEN,
-  id,
+  movieId,
 }) {
   return fetch(`${API_MAIN_URL}/movies`, {
     method: "POST",
@@ -105,10 +105,10 @@ export function createMoviesCard({
       description: description,
       image: `${API_MOVIES_URL}${image.url}`,
       trailerLink: trailerLink,
-      thumbnail: `${API_MOVIES_URL}${thumbnail.url}`,
+      thumbnail: `${API_MOVIES_URL}${image.formats.thumbnail.url}`,
       nameRU: nameRU,
       nameEN: nameEN,
-      movieId: id,
+      movieId: movieId,
     }),
   }).then(checkRes);
 }

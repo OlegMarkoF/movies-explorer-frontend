@@ -15,7 +15,7 @@ function MoviesCardList({
   isPreloaderActive,
 }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [moviesCount, setMoviesCount] = useState(12);
+  const [moviesCount, setMoviesCount] = useState(0);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
   const [showMovies, setShowMovies] = useState(moviesCount);
   const location = useLocation();
@@ -56,6 +56,8 @@ function MoviesCardList({
     };
   }, []);
 
+  console.log(movies);
+
   return (
     <section className="movies">
       {isPreloaderActive ? (
@@ -66,29 +68,31 @@ function MoviesCardList({
             {moviesFound === false && movies.length === 0 ? (
               <p className="movies__info">Ничего не найдено</p>
             ) : location.pathname === "/movies" ? (
-              movies
-                .slice(0, showMovies)
-                .map((movie) => (
+              movies.slice(0, showMovies).map((movie) => {
+                return (
                   <MoviesCard
                     movie={movie}
-                    key={movie.id || movie._id}
+                    key={movie.id || movie.movieId}
                     isMoviesLiked={isMoviesLiked}
                     savedMovies={savedMovies}
                     onCardSave={onCardSave}
                     onCardDelete={onCardDelete}
                   />
-                ))
+                );
+              })
             ) : (
-              movies.map((movie) => (
-                <MoviesCard
-                  movie={movie}
-                  key={movie.id || movie._id}
-                  isMoviesLiked={isMoviesLiked}
-                  savedMovies={savedMovies}
-                  onCardSave={onCardSave}
-                  onCardDelete={onCardDelete}
-                />
-              ))
+              movies.map((movie) => {
+                return (
+                  <MoviesCard
+                    movie={movie}
+                    key={movie.id || movie.movieId}
+                    isMoviesLiked={isMoviesLiked}
+                    savedMovies={savedMovies}
+                    onCardSave={onCardSave}
+                    onCardDelete={onCardDelete}
+                  />
+                );
+              })
             )}
           </ul>
           {location.pathname === "/movies" && movies.length > showMovies ? (
