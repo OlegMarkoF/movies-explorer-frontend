@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext, useEffect, useState } from "react";
-import useFormValidation from "../../hooks/useFormValidation";
+// import useFormValidation from "../../hooks/useFormValidation";
 
 function Profile({ handleChangeProfile, handleLogout }) {
   const currentUser = useContext(CurrentUserContext);
@@ -14,10 +14,10 @@ function Profile({ handleChangeProfile, handleLogout }) {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
-  const { values, errors, isValid, handleChange, setValues, setValid } = useFormValidation({
-    name: currentUser.name,
-    email: currentUser.email,
-  });
+  // const { values, errors, isValid, handleChange, setValues, setValid } = useFormValidation({
+  //   name: currentUser.name,
+  //   email: currentUser.email,
+  // });
 
   useEffect(() => {
     if (emailError || nameError) {
@@ -104,7 +104,7 @@ function Profile({ handleChangeProfile, handleLogout }) {
                 : "error profile__name-error"
             }
           >
-            {errors.name}
+            {nameError}
           </span>
           <input
             className="profile__input"

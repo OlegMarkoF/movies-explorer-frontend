@@ -9,7 +9,7 @@ function Login({ handleLogin }) {
   const [password, setPassword] = useState("");
   const [emailClick, setEmailClick] = useState(false);
   const [passwordClick, setPasswordClick] = useState(false);
-  const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
+  // const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
   const [emailError, setEmailError] = useState(
     "Необходимо указать адрес почты"
   );

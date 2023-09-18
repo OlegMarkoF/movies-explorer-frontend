@@ -47,6 +47,7 @@ function SearchForm({ handleSearchButton }) {
         localStorage.getItem("savedShort", false);
       }
     }
+    setSearchRequest("");
   }
 
   const toggleCheckbox = () => {

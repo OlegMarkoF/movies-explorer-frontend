@@ -12,7 +12,7 @@ function Register({ handleRegister }) {
   const [nameClick, setNameClick] = useState(false);
   const [emailClick, setEmailClick] = useState(false);
   const [passwordClick, setPasswordClick] = useState(false);
-  const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
+  // const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
   const [nameError, setNameError] = useState(
     "Необходимо указать имя"
   );
@@ -151,9 +151,15 @@ function Register({ handleRegister }) {
           <button
             type="submit"
             onSubmit={handleSubmit}
-            disabled={!isFormValid}
-            className={isFormValid ? "register__link" : "register__link_disabled"}
+            // disabled={!isFormValid}
+            className="register__link"
           >
+          {/* <button
+          type="submit"
+          onSubmit={handleSubmit}
+          disabled={!isFormValid}
+          className={isFormValid ? "register__link" : "register__link_disabled"}
+        > */}
             Зарегистрироваться
           </button>
         </div>

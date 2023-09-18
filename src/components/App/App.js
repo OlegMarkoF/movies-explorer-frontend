@@ -19,8 +19,8 @@ import { movieApi } from "../../utils/moviesApi";
 import * as mainApi from "../../utils/mainApi";
 
 function App() {
-  const [user, setUser] = useState({});
   const [currentUser, setCurrentUser] = useState({});
+  const [user, setUser] = useState({});
   const [isPreloaderActive, setIsPreloaderActive] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
