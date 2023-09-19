@@ -10,10 +10,11 @@ function MoviesCardList({
   isMoviesLiked,
   onCardDelete,
   onCardSave,
+  moviesFound,
   isPreloaderActive,
 }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [moviesCount, setMoviesCount] = useState(0);
+  const [moviesCount, setMoviesCount] = useState(12);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
   // const [moviesCount, setMoviesCount] = useState(moviesCount);
   const location = useLocation();
@@ -82,13 +83,14 @@ function MoviesCardList({
       });
     }
   };
+  console.log(moviesCount);
 
   return (
     <section className="movies">
-      {location.pathname === "/movies" && movies.length === 0 && <p className="movies__info">Ничего не найдено</p>}
+
       <ul className="movies__list">
-        {isPreloaderActive ? <Preloader /> : renderMovies(moviesCount)}{" "}
-      </ul>
+        {isPreloaderActive ? <Preloader /> : renderMovies(moviesCount)}{""}
+      </ul>      
       {location.pathname === "/movies" && movies.length > moviesCount ? (
         <button
           className="movies__more"
@@ -97,9 +99,7 @@ function MoviesCardList({
         >
           Ещё
         </button>
-      ) : (
-        ""
-      )}
+      ) : ("")}
     </section>
   );
 }
