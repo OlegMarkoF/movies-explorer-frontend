@@ -19,6 +19,7 @@
   max-width: 396px;
   justify-content: center;
   align-items: flex-start;
+  position: relative;
 }
 
 .login__button-container {
@@ -128,13 +129,22 @@
 
 .error {
   margin: 0;
-  display: none;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   color: #ee3465;
   box-sizing: border-box;
+  position: absolute;
+}
 
+.email-error {
+  top: 220px;
+  left: 0;
+}
+
+.password-error {
+  top: 308px;
+  left: 0;
 }
 
 .login__span {

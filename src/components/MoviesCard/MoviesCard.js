@@ -3,7 +3,13 @@ import { useLocation } from "react-router-dom";
 import { durationMovie } from "../../utils/utils";
 import { useEffect, useState } from "react";
 
-function MoviesCard({ movie, onCardDelete, isMoviesLiked, savedMovies, onCardSave }) {
+function MoviesCard({
+  movie,
+  onCardDelete,
+  isMoviesLiked,
+  savedMovies,
+  onCardSave,
+}) {
   const [isSaved, setIsSaved] = useState(false);
   const location = useLocation();
   const API_MOVIES_URL = "https://api.nomoreparties.co";
@@ -13,7 +19,7 @@ function MoviesCard({ movie, onCardDelete, isMoviesLiked, savedMovies, onCardSav
       if (movie._id === i._id) {
         setIsSaved(true);
       }
-    })
+    });
   }, [savedMovies]);
 
   function handleSave() {
@@ -34,7 +40,7 @@ function MoviesCard({ movie, onCardDelete, isMoviesLiked, savedMovies, onCardSav
         </div>
         {location.pathname === "/movies" ? (
           <button
-            className={`${(isMoviesLiked) ? "card__save" : "card__save_active"}`}
+            className={`${isMoviesLiked(movie) ? "card__save" : "card__save_active"}`}
             type="button"
             onClick={handleSave}
           ></button>

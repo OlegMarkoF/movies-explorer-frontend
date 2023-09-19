@@ -78,8 +78,8 @@ function App() {
         // eslint-disable-next-line no-lone-blocks
         {
           err.status === CONFLICT
-            ? setNotification({ text: "Пользователь уже сужествует" })
-            : setNotification({ text: "Ошибка регистрации" });
+            ? setNotification({ text: "Ошибка регистрации" })
+            : setNotification({ text: "Пользователь уже сужествует" });
         }
       });
   };
@@ -104,9 +104,9 @@ function App() {
         {
           err.status === UNAUTHORIZED
             ? setNotification({
-                text: "Вы ввели неправильный логин или пароль",
+                text: "Ошибка входа",
               })
-            : setNotification({ text: "Ошибка входа" });
+            : setNotification({ text: "Вы ввели неправильный логин или пароль" });
         }
       });
   };
@@ -146,13 +146,48 @@ function App() {
       });
   };
 
-  const onCardSave = (card) => {
-    const savedCard = savedMovies.find((i) => i.movieId === card.id);
+  const getMySavedMovies = (user) => {
     tokenCheck();
-    savedCard
+    mainApi
+      .getCards()
+      .then((res) => {
+        setSavedMovies(res.filter((i) => i.owner === user));
+        localStorage.setItem(
+          "liked",
+          JSON.stringify(res.filter((i) => i.owner === user))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
+  
+  const onCardDelete = (movie) => {
+    tokenCheck();
+    mainApi
+      .deleteCard(movie._id)
+      .then(() => {
+        setSavedMovies(savedMovies =>
+          savedMovies.filter((i) => i._id !== movie._id)
+        );
+        localStorage.setItem(
+          "liked",
+          JSON.stringify(savedMovies.filter((i) => i._id !== movie._id))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onCardSave = (movie) => {
+    const savedCard = savedMovies.find((i) => i.movieId === movie.id);
+    tokenCheck();
+    (savedCard)
       ? onCardDelete(savedCard)
       : mainApi
-          .createMoviesCard(card)
+          .addMovies(movie)
           .then((res) => {
             setSavedMovies((savedMovies) => [...savedMovies, res]);
             localStorage.setItem(
@@ -165,26 +200,8 @@ function App() {
           });
   };
 
-  const onCardDelete = (card) => {
-    tokenCheck();
-    mainApi
-      .deleteCard(card._id)
-      .then(() => {
-        setSavedMovies(savedMovies =>
-          savedMovies.filter((i) => i._id !== card._id)
-        );
-        localStorage.setItem(
-          "liked",
-          JSON.stringify(savedMovies.filter((i) => i._id !== card._id))
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const isMoviesLiked = (movie) => {
-    return savedMovies.some((i) => i.moviedId === movie.id);
+    return savedMovies.some((i) => i.movieId === movie.id);
   };
 
   const handleChangeProfile = (user) => {
@@ -204,25 +221,9 @@ function App() {
         // eslint-disable-next-line no-lone-blocks
         {
           err.status === CONFLICT
-            ? setNotification({ text: "Пользователь уже сужествует" })
-            : setNotification({ text: "Произошла ошибка" });
+            ? setNotification({ text: "Произошла ошибка" })
+            : setNotification({ text: "Пользователь уже сужествует" })
         }
-      });
-  };
-
-  const getMySavedMovies = (user) => {
-    tokenCheck();
-    mainApi
-      .getCards()
-      .then((res) => {
-        setSavedMovies(res.filter((i) => i.owner === user));
-        localStorage.setItem(
-          "liked",
-          JSON.stringify(res.filter((i) => i.owner === user))
-        );
-      })
-      .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -282,13 +283,13 @@ function App() {
                 element={
                   <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                     <Movies
-                      apiItems={apiItems}
-                      isPreloaderActive={isPreloaderActive}
                       isMovies={true}
                       isMoviesLiked={isMoviesLiked}
+                      apiItems={apiItems}
+                      isPreloaderActive={isPreloaderActive}
                       savedMovies={savedMovies}
-                      onCardSave={onCardSave}
                       onCardDelete={onCardDelete}
+                      onCardSave={onCardSave}
                     />
                   </ProtectedRoute>
                 }

@@ -15,7 +15,7 @@ function SearchForm({ handleSearchButton }) {
   const [short, setShort] = useState(
     localStorage.getItem("short")
       ? JSON.parse(localStorage.getItem("short"))
-      : true
+      : false
   );
 
   useEffect(() => {
@@ -47,7 +47,6 @@ function SearchForm({ handleSearchButton }) {
         localStorage.getItem("savedShort", false);
       }
     }
-    setSearchRequest("");
   }
 
   const toggleCheckbox = () => {
@@ -109,7 +108,6 @@ function SearchForm({ handleSearchButton }) {
             <input
               className="filter__checkbox-input"
               type="checkbox"
-              value="no"
               checked={location.pathname === "/movies" ? short : savedShort}
               onChange={
                 location.pathname === "/movies"

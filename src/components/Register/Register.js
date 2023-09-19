@@ -1,8 +1,7 @@
+import "./Register.css";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
-import useFormValidation from "../../hooks/useFormValidation";
-import "./Register.css";
 
 function Register({ handleRegister }) {
 
@@ -12,16 +11,9 @@ function Register({ handleRegister }) {
   const [nameClick, setNameClick] = useState(false);
   const [emailClick, setEmailClick] = useState(false);
   const [passwordClick, setPasswordClick] = useState(false);
-  // const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
-  const [nameError, setNameError] = useState(
-    "Необходимо указать имя"
-  );
-  const [emailError, setEmailError] = useState(
-    "Необходимо указать адрес почты"
-  );
-  const [passwordError, setPasswordError] = useState(
-    "Необходимо указать пароль"
-  );
+  const [nameError, setNameError] = useState(" ");
+  const [emailError, setEmailError] = useState(" ");
+  const [passwordError, setPasswordError] = useState(" ");
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
@@ -33,7 +25,7 @@ function Register({ handleRegister }) {
   }, [nameError, emailError, passwordError]);
 
   const handleChangeName = (e) => {
-    setName(e.target.value)
+    setName(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 16) {
       setNameError("Имя должно быть длинее 2 символов")
       if (!e.target.value) {
@@ -46,7 +38,13 @@ function Register({ handleRegister }) {
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
-    setEmailError("");
+    const regexForEmail =
+      /^((([0-9A-Za-z]{1}[-0-9A-z.]+[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я.]+[0-9А-Яа-я]{1}))@([-A-Za-z]+\.){1,2}[-A-Za-z]{2,})$/u;
+    if (!regexForEmail.test(String(e.target.value).toLocaleLowerCase())) {
+      setEmailError("Неверный формат почты");
+    } else {
+      setEmailError("");
+    }
   };
 
   const handleChangePassword = (e) => {
@@ -78,7 +76,7 @@ function Register({ handleRegister }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegister({name, email, password});
+    handleRegister({ name, email, password });
   };
 
   return (
@@ -89,6 +87,7 @@ function Register({ handleRegister }) {
         <label className="register__label" htmlFor="name">
           Имя
         </label>
+        <div className="register__box-input">
         <input
           className="register__input register__input_name"
           id="name"
@@ -106,10 +105,12 @@ function Register({ handleRegister }) {
             nameClick && nameError
               ? "error register__span name-error"
               : "error name-error"
-          }></span>
+          }>{nameError}</span>
+        </div>
         <label className="register__label" htmlFor="email">
           E-mail
         </label>
+        <div className="register__box-input">
         <input
           className="register__input register__input_email"
           id="email"
@@ -125,10 +126,12 @@ function Register({ handleRegister }) {
             emailClick && emailError
               ? "error register__span email-error"
               : "error email-error"
-          }></span>
+          }>{emailError}</span>
+          </div>
         <label className="register__label" htmlFor="password">
           Пароль
         </label>
+        <div className="register__box-input">
         <input
           className="register__input register__input_password"
           id="password"
@@ -146,20 +149,15 @@ function Register({ handleRegister }) {
             passwordClick && passwordError
               ? "error register__span password-error"
               : "error password-error"
-          }></span>
+          }>{passwordError}</span>
+          </div>
         <div className="register__button-container">
           <button
-            type="submit"
-            onSubmit={handleSubmit}
-            // disabled={!isFormValid}
-            className="register__link"
-          >
-          {/* <button
           type="submit"
           onSubmit={handleSubmit}
-          disabled={!isFormValid}
           className={isFormValid ? "register__link" : "register__link_disabled"}
-        > */}
+          disabled={!isFormValid}
+        >
             Зарегистрироваться
           </button>
         </div>

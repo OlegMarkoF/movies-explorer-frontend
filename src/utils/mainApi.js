@@ -78,19 +78,7 @@ export function getCards() {
   }).then(checkRes);
 }
 
-export function createMoviesCard({
-  country,
-  director,
-  duration,
-  year,
-  description,
-  image,
-  trailerLink,
-  thumbnail,
-  nameRU,
-  nameEN,
-  movieId,
-}) {
+export function addMovies(movie) {
   return fetch(`${API_MAIN_URL}/movies`, {
     method: "POST",
     headers: {
@@ -98,17 +86,17 @@ export function createMoviesCard({
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
-      country: country,
-      director: director,
-      duration: duration,
-      year: year,
-      description: description,
-      image: `${API_MOVIES_URL}${image.url}`,
-      trailerLink: trailerLink,
-      thumbnail: `${API_MOVIES_URL}${image.formats.thumbnail.url}`,
-      nameRU: nameRU,
-      nameEN: nameEN,
-      movieId: movieId,
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: `${API_MOVIES_URL}${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `${API_MOVIES_URL}${movie.image.formats.thumbnail.url}`,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+      movieId: movie.id,
     }),
   }).then(checkRes);
 }

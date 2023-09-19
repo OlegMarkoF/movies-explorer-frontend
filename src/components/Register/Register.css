@@ -19,6 +19,7 @@
   max-width: 396px;
   justify-content: center;
   align-items: flex-start;
+  position: relative;
 }
 
 .register__button-container {
@@ -97,12 +98,21 @@
 
 .error {
   margin: 0;
-  display: none;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   color: #ee3465;
   box-sizing: border-box;
+  position: absolute;
+  top: 60px;
+  left: 0;
+}
+
+.register__box-input {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
 .register__span {

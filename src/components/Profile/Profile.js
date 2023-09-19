@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext, useEffect, useState } from "react";
-// import useFormValidation from "../../hooks/useFormValidation";
 
 function Profile({ handleChangeProfile, handleLogout }) {
   const currentUser = useContext(CurrentUserContext);
@@ -11,13 +10,10 @@ function Profile({ handleChangeProfile, handleLogout }) {
   const [email, setEmail] = useState(currentUser.email);
   const [nameClick, setNameClick] = useState(false);
   const [emailClick, setEmailClick] = useState(false);
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState(" ");
+  const [emailError, setEmailError] = useState(" ");
   const [isFormValid, setIsFormValid] = useState(false);
-  // const { values, errors, isValid, handleChange, setValues, setValid } = useFormValidation({
-  //   name: currentUser.name,
-  //   email: currentUser.email,
-  // });
+  const [isShowButton, setIsShowButton] = useState(false);
 
   useEffect(() => {
     if (emailError || nameError) {
@@ -46,23 +42,38 @@ function Profile({ handleChangeProfile, handleLogout }) {
   const handleChangeName = (e) => {
     setName(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 16) {
-      setNameError("Имя должно быть длиннее двух символов");
+      setNameError("Имя должно быть длиннее 2 символов");
       if (!e.target.value) {
-        setNameError("Поле не должно быть пустым");
+        setNameError("Поле имя не должно быть пустым");
       }
+    } else {
+      setNameError("");
+    }
+  };
+
+const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+    const regexForEmail =
+      /^((([0-9A-Za-z]{1}[-0-9A-z.]+[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я.]+[0-9А-Яа-я]{1}))@([-A-Za-z]+\.){1,2}[-A-Za-z]{2,})$/u;
+    if (!regexForEmail.test(String(e.target.value).toLocaleLowerCase())) {
+      setEmailError("Неверный формат почты");
     } else {
       setEmailError("");
     }
   };
 
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-    setEmailError("");
-  };
+  // const handleButtonClick = () => {
+  //   setIsShowButton(true);
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleChangeProfile({ name, email });
+    if (emailError || nameError) {
+      setIsShowButton(true);
+    } else {
+      setIsShowButton(false);
+    }
   };
 
   const handleClear = (e) => {
@@ -81,8 +92,14 @@ function Profile({ handleChangeProfile, handleLogout }) {
     <>
       <Header />
       <section className="profile">
-        <form className="profile__form" name="profile" onSubmit={handleSubmit} noValidate>
+        <form
+          className="profile__form"
+          name="profile"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <h2 className="profile__title">Привет, {name}!</h2>
+	  <div className="register__box-input">
           <input
             className="profile__input profile__input_name"
             id="name"
@@ -106,6 +123,8 @@ function Profile({ handleChangeProfile, handleLogout }) {
           >
             {nameError}
           </span>
+	  </div>
+	  <div className="register__box-input">
           <input
             className="profile__input"
             id="email"
@@ -115,7 +134,7 @@ function Profile({ handleChangeProfile, handleLogout }) {
             onBlur={handleClear}
             value={email}
             minLength="2"
-            maxLength="16"
+            maxLength="30"
             required
             placeholder="E-mail"
           />
@@ -129,20 +148,38 @@ function Profile({ handleChangeProfile, handleLogout }) {
           >
             {emailError}
           </span>
-          <button
-            onSubmit={handleSubmit}
-            type="submit"
-            disabled={isFormValid}
-            className={
-              (isFormValid) ? "profile__button_disabled" : "profile__button"
-            }
-            // className="profile__button"
-          >
-            Редактировать
-          </button>
-          <Link className="profile__link" to="/signin" onClick={handleLogout}>
-            Выйти из аккаунта
-          </Link>
+	  </div>
+          {isFormValid && !isShowButton ? (
+            <button
+              type="submit"
+	            onSubmit={handleSubmit}
+              // onClick={handleButtonClick}
+              className="profile__button"
+	            disabled={!isFormValid}
+            >
+              Сохранить
+            </button>
+          ) : (
+            <>
+              <button
+                onSubmit={handleSubmit}
+                type="submit"
+                disabled={!isFormValid}
+                className={
+                  isFormValid ? "profile__button" : "profile__button_disabled"
+                }
+              >
+                Редактировать
+              </button>
+              <Link
+                className="profile__link"
+                to="/signin"
+                onClick={handleLogout}
+              >
+                Выйти из аккаунта
+              </Link>
+            </>
+          )}
         </form>
       </section>
     </>

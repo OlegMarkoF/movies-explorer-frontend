@@ -90,6 +90,22 @@
   font-weight: 400;
 }
 
+.profile__email-error {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 30px;
+  left: 0;
+}
+
+.profile__name-error {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 30px;
+  left: 0;
+}
+
 .profile__button:hover {
   opacity: 0.8;
 }

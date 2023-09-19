@@ -1,7 +1,6 @@
 .movies {
   margin: 0 auto 252px;
   max-width: 1140px;
-  min-height: 800px; /* <-- Временный костыль. Не забыть убрать! */
 }
 
 .movies__list {

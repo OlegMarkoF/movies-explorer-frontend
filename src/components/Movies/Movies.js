@@ -93,13 +93,13 @@ function Movies({
           <SearchForm handleSearchButton={handleSearchButton} />
           <MoviesCardList
             movies={searchResult}
-            moviesFound={moviesFound}
-            isPreloaderActive={isPreloaderActive}
-            isMoviesLiked={isMoviesLiked}
-            isMovies={isMovies}
             savedMovies={savedMovies}
+            isMoviesLiked={isMoviesLiked}
             onCardDelete={onCardDelete}
             onCardSave={onCardSave}
+            moviesFound={moviesFound}
+            isPreloaderActive={isPreloaderActive}
+            isMovies={isMovies}
           />
         </div>
       </main>

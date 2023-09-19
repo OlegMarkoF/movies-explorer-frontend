@@ -1,21 +1,16 @@
 import "./Login.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useFormValidation from "../../hooks/useFormValidation";
 import Logo from "../Logo/Logo";
 
 function Login({ handleLogin }) {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailClick, setEmailClick] = useState(false);
   const [passwordClick, setPasswordClick] = useState(false);
-  // const { values, errors, isValid, handleChange, resetForm } = useFormValidation();
-  const [emailError, setEmailError] = useState(
-    "Необходимо указать адрес почты"
-  );
-  const [passwordError, setPasswordError] = useState(
-    "Необходимо указать пароль"
-  );
+  const [emailError, setEmailError] = useState(" ");
+  const [passwordError, setPasswordError] = useState(" ");
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
@@ -28,8 +23,27 @@ function Login({ handleLogin }) {
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
-    setEmailError("");
+    const regexForEmail =
+      /^((([0-9A-Za-z]{1}[-0-9A-z.]+[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я.]+[0-9А-Яа-я]{1}))@([-A-Za-z]+\.){1,2}[-A-Za-z]{2,})$/u;
+    if (!regexForEmail.test(String(e.target.value).toLocaleLowerCase())) {
+      setEmailError("Неверный формат почты");
+    } else {
+      setEmailError("");
+    }
   };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+    if (e.target.value.length < 2 || e.target.value.length > 16) {
+      setPasswordError("Пароль должен быть длинее 2 символов")
+      if (!e.target.value) {
+        setPasswordError("Укажите пароль")
+      }
+    } else {
+      setPasswordError("");
+    }
+  };
+
 
   const handleClear = (e) => {
     // eslint-disable-next-line default-case
@@ -43,14 +57,9 @@ function Login({ handleLogin }) {
     }
   };
 
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-    setPasswordError("");
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin({email, password});
+    handleLogin({ email, password });
   };
 
   return (
@@ -61,6 +70,7 @@ function Login({ handleLogin }) {
         <label className="login__label" htmlFor="email">
           E-mail
         </label>
+        <div className="register__box-input">
         <input
           className="login__input"
           id="email"
@@ -68,9 +78,9 @@ function Login({ handleLogin }) {
           type="email"
           value={email}
           onChange={handleChangeEmail}
+          onBlur={handleClear}
           required
           placeholder=""
-          onBlur={handleClear}
         />
         <span
           id="email-error"
@@ -82,9 +92,11 @@ function Login({ handleLogin }) {
         >
           {emailError}
         </span>
+        </div>
         <label className="login__label" htmlFor="password">
           Пароль
         </label>
+        <div className="register__box-input">
         <input
           className="login__input"
           id="password"
@@ -93,7 +105,7 @@ function Login({ handleLogin }) {
           value={password}
           onChange={handleChangePassword}
           minLength="2"
-          maxLength="40"
+          maxLength="16"
           placeholder=""
           required
           onBlur={handleClear}
@@ -108,6 +120,7 @@ function Login({ handleLogin }) {
         >
           {passwordError}
         </span>
+        </div>
         <div className="login__button-container">
           <button
             type="submit"

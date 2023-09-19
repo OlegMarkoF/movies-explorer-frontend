@@ -42,12 +42,12 @@ function SavedMovies({
           />
           <div className="saved-movies__list">
             <MoviesCardList
-              movies={searchResult}
               isMovies={isMovies}
-              isMoviesLiked={isMoviesLiked}
+              movies={searchResult}
               savedMovies={savedMovies}
-              isMovieSaved={isMovieSaved}
+              isMoviesLiked={isMoviesLiked}
               onCardDelete={onCardDelete}
+              isMovieSaved={isMovieSaved}
               moviesFound={moviesFound}
             />
           </div>
