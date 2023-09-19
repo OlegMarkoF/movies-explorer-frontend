@@ -40,7 +40,7 @@ function MoviesCard({
         </div>
         {location.pathname === "/movies" ? (
           <button
-            className={`${isMoviesLiked(movie) ? "card__save" : "card__save_active"}`}
+            className={`${isMoviesLiked(movie) ? "card__save_active" : "card__save"}`}
             type="button"
             onClick={handleSave}
           ></button>
