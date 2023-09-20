@@ -79,7 +79,7 @@ function App() {
         {
           err.status === CONFLICT
             ? setNotification({ text: "Ошибка регистрации" })
-            : setNotification({ text: "Пользователь уже сужествует" });
+            : setNotification({ text: "Пользователь уже существует" });
         }
       });
   };
@@ -116,7 +116,6 @@ function App() {
     localStorage.removeItem("short");
     localStorage.removeItem("mySearch");
     localStorage.removeItem("myFound");
-    localStorage.removeItem("cards");
     localStorage.removeItem("liked");
     localStorage.removeItem("movies");
     localStorage.clear();
@@ -136,13 +135,12 @@ function App() {
           setApiItems(apiItems);
           localStorage.setItem("movies", JSON.stringify(apiItems));
           setIsPreloaderActive(false);
-        } else {
-          setIsInfoOpenPopup(true);
-          setNotification({ text: "Ничего не найдено" });
-        }
+        } 
       })
       .catch((err) => {
         console.log(err);
+        setIsInfoOpenPopup(true);
+        setNotification({ text: "Ничего не найдено" });
       });
   };
 

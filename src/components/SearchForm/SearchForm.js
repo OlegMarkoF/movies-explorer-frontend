@@ -10,8 +10,8 @@ function SearchForm({ handleSearchButton }) {
   let mySearch = localStorage.getItem("mySearch");
   const location = useLocation();
   const [searchRequest, setSearchRequest] = useState("");
-  const [savedShort, setSavedShort] = useState(true);
   const [searchError, setSearchError] = useState("");
+  const [savedShort, setSavedShort] = useState(false);
   const [short, setShort] = useState(
     localStorage.getItem("short")
       ? JSON.parse(localStorage.getItem("short"))
@@ -41,10 +41,10 @@ function SearchForm({ handleSearchButton }) {
       setSearchError("");
       if (location.pathname === "/movie") {
         handleSearchButton(searchRequest, short);
-        localStorage.getItem("short", false);
+        localStorage.setItem("short", false);
       } else {
         handleSearchButton(searchRequest, savedShort);
-        localStorage.getItem("savedShort", false);
+        localStorage.setItem("savedShort", false);
       }
     }
   }
@@ -76,7 +76,9 @@ function SearchForm({ handleSearchButton }) {
   };
 
   const handleSearchInput = (e) => {
-    setSearchRequest(e.target.value);
+    const value = e.target.value;
+    setSearchRequest(value);
+    localStorage.setItem(mySearch, value);
   };
 
   return (
@@ -108,6 +110,7 @@ function SearchForm({ handleSearchButton }) {
             <input
               className="filter__checkbox-input"
               type="checkbox"
+              value="no"
               checked={location.pathname === "/movies" ? short : savedShort}
               onChange={
                 location.pathname === "/movies"

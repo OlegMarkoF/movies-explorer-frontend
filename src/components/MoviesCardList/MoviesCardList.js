@@ -14,9 +14,9 @@ function MoviesCardList({
   isPreloaderActive,
 }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [moviesCount, setMoviesCount] = useState(12);
+  const [moviesCount, setMoviesCount] = useState(0);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
-  // const [moviesCount, setMoviesCount] = useState(moviesCount);
+  const [showMovies, setShowMovies] = useState(moviesCount);
   const location = useLocation();
 
   const handleScreenWidth = () => {
@@ -24,27 +24,28 @@ function MoviesCardList({
   };
 
   const handleMoviesButtonClick = () => {
-    setMoviesCount(moviesCount + moreMoviesCount);
+    setShowMovies(showMovies + moreMoviesCount);
   };
 
   const hendleMoviesCounter = () => {
     if (screenWidth >= 1280) {
       setMoviesCount(12);
-      setMoviesCount(12);
+      setShowMovies(12);
       setMoreMoviesCount(3);
     } else if (screenWidth >= 768 && screenWidth < 1280) {
       setMoviesCount(8);
-      setMoviesCount(8);
+      setShowMovies(8);
       setMoreMoviesCount(2);
     } else if (screenWidth < 768) {
       setMoviesCount(5);
-      setMoviesCount(5);
+      setShowMovies(5);
       setMoreMoviesCount(2);
     }
   };
 
   useEffect(() => {
     hendleMoviesCounter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenWidth]);
 
   useEffect(() => {
@@ -55,9 +56,9 @@ function MoviesCardList({
     };
   }, []);
 
-  const renderMovies = (moviesCount) => {
-    if (movies.length > 0) {
-      return movies.slice(0, moviesCount).map((movie) => {
+  const renderMovies = (showMovies) => {
+    if (location.pathname === "/movies") {
+      return movies.slice(0, showMovies).map((movie) => {
         return (
           <MoviesCard
             key={movie.id || movie._id}
@@ -83,15 +84,17 @@ function MoviesCardList({
       });
     }
   };
-  console.log(moviesCount);
 
   return (
     <section className="movies">
-
+      {isPreloaderActive ? (<Preloader />) : (
+      <>
       <ul className="movies__list">
-        {isPreloaderActive ? <Preloader /> : renderMovies(moviesCount)}{""}
+      {(moviesFound === false && movies.length === 0) 
+      ? (<p className="movies__text">Ничего не найдено</p>) 
+      : renderMovies(showMovies)}
       </ul>      
-      {location.pathname === "/movies" && movies.length > moviesCount ? (
+      {location.pathname === "/movies" && movies.length > showMovies ? (
         <button
           className="movies__more"
           type="button"
@@ -100,8 +103,10 @@ function MoviesCardList({
           Ещё
         </button>
       ) : ("")}
+      </>
+    )}
     </section>
-  );
-}
+  )}
+
 
 export default MoviesCardList;

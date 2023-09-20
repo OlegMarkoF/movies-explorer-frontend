@@ -4,18 +4,18 @@
   height: 100%;
   padding: 0 70px 0;
 }
-
+/* 
 .saved-movies__list {
   display: grid;
+  grid-template-columns: repeat(auto-fit, 365px);
+  align-items: center;
+  justify-content: center;
   gap: 20px 17px;
-}
+} */
 
 @media screen and (max-width: 800px) {
   .saved-movies {
     padding: 0 30px;
-  }
-  .saved-movies__list {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -24,11 +24,10 @@
     margin-bottom: 423px;
     padding: 0 10px;
   }
-  .saved-movies__list {
+  /* .saved-movies__list {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, 1fr);
-    grid-auto-rows: 0;
-    row-gap: 0;
-  }
+    grid-template-rows: repeat(5, 1fr);
+    gap: 0;
+  } */
   
 }
