@@ -20,6 +20,7 @@ function MoviesCard({
         setIsSaved(true);
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedMovies]);
 
   function handleSave() {

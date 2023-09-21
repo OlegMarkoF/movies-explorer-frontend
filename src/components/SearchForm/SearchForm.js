@@ -2,7 +2,6 @@ import "./SearchForm.css";
 import "../FilterCheckbox/FilterCheckbox.css";
 import find from "../../images/find.svg";
 import glass from "../../images/magnifying_glass.svg";
-// import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 

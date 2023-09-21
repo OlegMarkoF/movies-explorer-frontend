@@ -27,6 +27,8 @@ function MoviesCardList({
     setShowMovies(showMovies + moreMoviesCount);
   };
 
+
+
   const hendleMoviesCounter = () => {
     if (screenWidth >= 1280) {
       setMoviesCount(12);
@@ -50,7 +52,7 @@ function MoviesCardList({
 
   useEffect(() => {
     window.addEventListener("resize", handleScreenWidth);
-    handleMoviesButtonClick();
+    // handleMoviesButtonClick();
     return () => {
       window.removeEventListener("resize", handleScreenWidth);
     };

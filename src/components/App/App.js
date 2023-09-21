@@ -32,12 +32,14 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (loggedIn) {
       navigate("/movies");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -57,8 +59,8 @@ function App() {
       .catch((err) => {
         console.log(err);
       })};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
-
 
   const handleRegister = ({ password, email, name }) => {
     setIsPreloaderActive(true);
