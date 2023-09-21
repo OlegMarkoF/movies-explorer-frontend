@@ -56,8 +56,6 @@ function MoviesCardList({
     };
   }, []);
 
-  console.log('работай сука')
-
   const renderMovies = (showMovies) => {
     if (location.pathname === "/saved-movies") {
       return movies.map((movie) => {
