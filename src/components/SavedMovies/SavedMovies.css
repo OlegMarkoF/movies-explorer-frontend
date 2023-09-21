@@ -24,10 +24,10 @@
     margin-bottom: 423px;
     padding: 0 10px;
   }
-  /* .saved-movies__list {
+  .saved-movies__list {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
     gap: 0;
-  } */
+  }
   
 }

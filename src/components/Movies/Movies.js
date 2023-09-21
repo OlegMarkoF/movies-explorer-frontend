@@ -14,6 +14,7 @@ function Movies({
   onCardDelete,
   onCardSave
 }) {
+  
   const [moviesFound, setMoviesFound] = useState(undefined);
   const [searchResult, setSearchResult] = useState(
     localStorage.getItem("mySearch")

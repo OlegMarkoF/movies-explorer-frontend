@@ -56,21 +56,10 @@ function MoviesCardList({
     };
   }, []);
 
+  console.log('работай сука')
+
   const renderMovies = (showMovies) => {
-    if (location.pathname === "/movies") {
-      return movies.slice(0, showMovies).map((movie) => {
-        return (
-          <MoviesCard
-            key={movie.id || movie._id}
-            movie={movie}
-            onCardDelete={onCardDelete}
-            isMoviesLiked={isMoviesLiked}
-            savedMovies={savedMovies}
-            onCardSave={onCardSave}
-          />
-        );
-      });
-    } else {
+    if (location.pathname === "/saved-movies") {
       return movies.map((movie) => {
         return (
           <MoviesCard
@@ -79,6 +68,19 @@ function MoviesCardList({
             onCardDelete={onCardDelete}
             savedMovies={savedMovies}
             onCardSave={onCardSave}
+          />
+        );
+      });
+    } else {
+      return movies.slice(0, showMovies).map((movie) => {
+        return (
+          <MoviesCard
+            key={movie.id || movie._id}
+            movie={movie}
+            onCardDelete={onCardDelete}
+            savedMovies={savedMovies}
+            onCardSave={onCardSave}
+            isMoviesLiked={isMoviesLiked}
           />
         );
       });

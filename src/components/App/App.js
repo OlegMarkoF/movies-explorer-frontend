@@ -49,12 +49,13 @@ function App() {
       .then((user) => {
         setLoggedIn(true);
         setCurrentUser(user);
-        if (!localStorage.getItem("movies")) {
+        getMySavedMovies(user._id);
+        
+        if (!localStorage.getItem("")) {
           getMoviesByApi();
         } else {
           setApiItems(JSON.parse(localStorage.getItem("movies")));
         }
-        getMySavedMovies(user._id);
       })
       .catch((err) => {
         console.log(err);
@@ -140,6 +141,7 @@ function App() {
         } 
       })
       .catch((err) => {
+        setIsPreloaderActive(false);
         console.log(err);
         setIsInfoOpenPopup(true);
         setNotification({ text: "Ничего не найдено" });

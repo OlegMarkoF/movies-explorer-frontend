@@ -1,36 +1,22 @@
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 import { durationMovie } from "../../utils/utils";
-import { useEffect, useState } from "react";
 
 function MoviesCard({
   movie,
   onCardDelete,
   isMoviesLiked,
-  savedMovies,
   onCardSave,
 }) {
-  const [isSaved, setIsSaved] = useState(false);
+  
   const location = useLocation();
   const API_MOVIES_URL = "https://api.nomoreparties.co";
 
-  useEffect(() => {
-    savedMovies?.map((i) => {
-      if (movie._id === i._id) {
-        setIsSaved(true);
-      }
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [savedMovies]);
-
   function handleSave() {
     onCardSave(movie);
-    setIsSaved(true);
   }
-  function handleDelete(e) {
-    e.preventDefault();
+  function handleDelete() {
     onCardDelete(movie);
-    setIsSaved(false);
   }
 
   return (

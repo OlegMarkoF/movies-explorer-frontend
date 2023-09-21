@@ -1,3 +1,11 @@
+input {
+  outline: none;
+}
+
+button {
+  outline: none;
+}
+
 .page {
   font-family: Inter, Arial, sans-serif;
   position: relative;
@@ -8,14 +16,6 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-}
-
-input {
-  outline: none;
-}
-
-button {
-  outline: none;
 }
 
 .page__content {
