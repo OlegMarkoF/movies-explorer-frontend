@@ -27,8 +27,6 @@ function MoviesCardList({
     setShowMovies(showMovies + moreMoviesCount);
   };
 
-
-
   const hendleMoviesCounter = () => {
     if (screenWidth >= 1280) {
       setMoviesCount(12);
@@ -86,7 +84,7 @@ function MoviesCardList({
       });
     }
   };
-
+  
   return (
     <section className="movies">
       {isPreloaderActive ? (<Preloader />) : (
