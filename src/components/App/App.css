@@ -10,6 +10,14 @@
   flex-direction: column;
 }
 
+input {
+  outline: none;
+}
+
+button {
+  outline: none;
+}
+
 .page__content {
   width: 100%;
   height: 100%;
