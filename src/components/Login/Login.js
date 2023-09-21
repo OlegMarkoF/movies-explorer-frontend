@@ -34,7 +34,7 @@ function Login({ handleLogin }) {
 
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
-    if (e.target.value.length < 2 || e.target.value.length > 16) {
+    if (e.target.value.length < 2 || e.target.value.length > 30) {
       setPasswordError("Пароль должен быть длинее 2 символов")
       if (!e.target.value) {
         setPasswordError("Укажите пароль")

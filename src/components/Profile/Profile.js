@@ -41,7 +41,7 @@ function Profile({ handleChangeProfile, handleLogout }) {
 
   const handleChangeName = (e) => {
     setName(e.target.value);
-    if (e.target.value.length < 2 || e.target.value.length > 16) {
+    if (e.target.value.length < 2 || e.target.value.length > 40) {
       setNameError("Имя должно быть длиннее 2 символов");
       if (!e.target.value) {
         setNameError("Поле имя не должно быть пустым");
@@ -55,7 +55,7 @@ const handleChangeEmail = (e) => {
     setEmail(e.target.value);
     const regexForEmail =
       /^((([0-9A-Za-z]{1}[-0-9A-z.]+[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я.]+[0-9А-Яа-я]{1}))@([-A-Za-z]+\.){1,2}[-A-Za-z]{2,})$/u;
-    if (!regexForEmail.test(String(e.target.value).toLocaleLowerCase())) {
+    if (!regexForEmail.test(String(e.target.value).toLowerCase())) {
       setEmailError("Неверный формат почты");
     } else {
       setEmailError("");
