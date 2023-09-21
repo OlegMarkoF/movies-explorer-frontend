@@ -25,7 +25,7 @@ function Login({ handleLogin }) {
     setEmail(e.target.value);
     const regexForEmail =
       /^((([0-9A-Za-z]{1}[-0-9A-z.]+[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я.]+[0-9А-Яа-я]{1}))@([-A-Za-z]+\.){1,2}[-A-Za-z]{2,})$/u;
-    if (!regexForEmail.test(String(e.target.value).toLocaleLowerCase())) {
+    if (!regexForEmail.test(String(e.target.value).toLowerCase())) {
       setEmailError("Неверный формат почты");
     } else {
       setEmailError("");

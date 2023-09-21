@@ -45,7 +45,7 @@ function MoviesCardList({
 
   useEffect(() => {
     hendleMoviesCounter();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenWidth]);
 
   useEffect(() => {
@@ -84,29 +84,35 @@ function MoviesCardList({
       });
     }
   };
-  
+
   return (
     <section className="movies">
-      {isPreloaderActive ? (<Preloader />) : (
-      <>
-      <ul className="movies__list">
-      {(moviesFound === false && movies.length === 0) 
-      ? (<p className="movies__text">Ничего не найдено</p>) 
-      : renderMovies(showMovies)}
-      </ul>      
-      {location.pathname === "/movies" && movies.length > showMovies ? (
-        <button
-          className="movies__more"
-          type="button"
-          onClick={handleMoviesButtonClick}
-        >
-          Ещё
-        </button>
-      ) : ("")}
-      </>
-    )}
+      {isPreloaderActive ? (
+        <Preloader />
+      ) : (
+        <>
+          <ul className="movies__list">
+            {moviesFound === false && movies.length === 0 ? (
+              <p className="movies__text">Ничего не найдено</p>
+            ) : (
+              renderMovies(showMovies)
+            )}
+          </ul>
+          {location.pathname === "/movies" && movies.length > showMovies ? (
+            <button
+              className="movies__more"
+              type="button"
+              onClick={handleMoviesButtonClick}
+            >
+              Ещё
+            </button>
+          ) : (
+            ""
+          )}
+        </>
+      )}
     </section>
-  )}
-
+  );
+}
 
 export default MoviesCardList;

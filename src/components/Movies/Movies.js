@@ -12,7 +12,7 @@ function Movies({
   isPreloaderActive,
   savedMovies,
   onCardDelete,
-  onCardSave,
+  onCardSave
 }) {
   const [moviesFound, setMoviesFound] = useState(undefined);
   const [searchResult, setSearchResult] = useState(

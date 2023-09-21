@@ -27,7 +27,8 @@ function MoviesCard({
     onCardSave(movie);
     setIsSaved(true);
   }
-  function handleDelete() {
+  function handleDelete(e) {
+    e.preventDefault();
     onCardDelete(movie);
     setIsSaved(false);
   }

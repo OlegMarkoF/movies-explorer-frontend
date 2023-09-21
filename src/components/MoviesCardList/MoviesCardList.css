@@ -64,11 +64,34 @@
   display: none;
 }
 
+/* @media screen and (max-width: 800px) { */
+  /* .movies__list {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 36px 30px;
+  } */
+/* } */
+
+/* @media screen and (max-width: 400px) {
+  .movies {
+    margin: 0 auto;
+  }
+  
+  /* .movies__list {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 0;
+  }
+
+  .movies__more {
+    margin-top: 50px;
+    margin-bottom: 333px;
+  } 
+} */
+
 @media screen and (max-width: 800px) {
   .movies__list {
-    /* grid-template-columns: repeat(2, 1fr); */
-    /* grid-template-rows: repeat(4, 1fr); */
-    gap: 36px 30px;
+    padding: 0 30px;
   }
 }
 
@@ -78,14 +101,12 @@
   }
   
   .movies__list {
-    /* grid-template-columns: 1fr; */
-    /* grid-template-rows: repeat(5, 1fr); */
-    gap: 0;
+    margin-bottom: 423px;
+    padding: 0 10px;
   }
-
 
   .movies__more {
     margin-top: 50px;
     margin-bottom: 333px;
-  }
+  } 
 }
