@@ -5,7 +5,7 @@ import glass from "../../images/magnifying_glass.svg";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-function SearchForm({ handleSearchButton }) {
+function SearchForm({ handleSearchButton, showCards }) {
   let mySearch = localStorage.getItem("mySearch");
   const location = useLocation();
   const [searchRequest, setSearchRequest] = useState("");
@@ -23,42 +23,44 @@ function SearchForm({ handleSearchButton }) {
         setSearchRequest(JSON.parse(mySearch));
       }
     }
-    localStorage.setItem("savedShort", JSON.stringify(false));
+    // localStorage.setItem("savedShort", JSON.stringify(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setShort(JSON.parse(localStorage.getItem("short")));
-    setSavedShort(JSON.parse(localStorage.getItem("savedShort")));
-  }, []);
+  // useEffect(() => {
+  //   setShort(JSON.parse(localStorage.getItem("short")));
+  //   setSavedShort(JSON.parse(localStorage.getItem("savedShort")));
+  // }, []);
 
-  function handleSubmit(e) {
+  // форма поиска
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!searchRequest) {
       setSearchError("Нужно ввести ключевое слово");
     } else {
-      setSearchError("");
+      setSearchError(" ");
       if (location.pathname === "/movie") {
-        handleSearchButton(searchRequest, short);
         localStorage.setItem("short", false);
+        handleSearchButton(searchRequest, short);
       } else {
-        handleSearchButton(searchRequest, savedShort);
         localStorage.setItem("savedShort", false);
+        handleSearchButton(searchRequest, savedShort);
       }
     }
-  }
+  };
 
+  // положение чекбокса
   const toggleCheckbox = () => {
     if (short) {
       setShort(false);
       handleSearchButton(searchRequest, false);
       if (location.pathname === "/movies")
-        localStorage.setItem("short", JSON.stringify(false));
+      localStorage.setItem("short", JSON.stringify(false));
     } else {
       setShort(true);
       handleSearchButton(searchRequest, true);
       if (location.pathname === "/movies")
-        localStorage.setItem("short", JSON.stringify(true));
+      localStorage.setItem("short", JSON.stringify(true));
     }
   };
 
@@ -66,10 +68,12 @@ function SearchForm({ handleSearchButton }) {
     if (savedShort) {
       setSavedShort(false);
       handleSearchButton(searchRequest, false);
+      if (location.pathname === "/saved-movies")
       localStorage.setItem("savedShort", JSON.stringify(false));
     } else {
       setSavedShort(true);
       handleSearchButton(searchRequest, true);
+      if (location.pathname === "/saved-movies")
       localStorage.setItem("savedShort", JSON.stringify(true));
     }
   };
@@ -78,12 +82,15 @@ function SearchForm({ handleSearchButton }) {
     const value = e.target.value;
     setSearchRequest(value);
     localStorage.setItem(mySearch, value);
+    if (location.pathname === "/movies") {
+      showCards(e);
+    }
   };
 
   return (
     <main className="search">
       <section className="search__box">
-        <form className="search__form" onSubmit={handleSubmit} noValidate>
+        <form className="search__form" onSubmit={handleSubmit} type="submit" noValidate>
           <img className="search__glass" src={glass} alt="лупа" />
           <input
             className="search__input"
@@ -95,7 +102,7 @@ function SearchForm({ handleSearchButton }) {
           />
           <button
             className="search__button"
-            tipe="submit"
+            type="submit"
             onSubmit={handleSubmit}
           >
             <img className="search__img" src={find} alt="кнопка поиска" />

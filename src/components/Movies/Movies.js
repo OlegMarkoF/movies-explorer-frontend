@@ -4,17 +4,17 @@ import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useEffect, useState } from "react";
+import { movieApi } from "../../utils/moviesApi";
 
 function Movies({
   isMovies,
-  isMoviesLiked,
-  apiItems,
   isPreloaderActive,
   savedMovies,
   onCardDelete,
-  onCardSave
+  onCardSave,
 }) {
   
+  const [apiItems, setApiItems] = useState([]);
   const [moviesFound, setMoviesFound] = useState(undefined);
   const [searchResult, setSearchResult] = useState(
     localStorage.getItem("mySearch")
@@ -22,13 +22,37 @@ function Movies({
       : []
   );
 
+  // запрос фильмов с сервера
+  const getMoviesByApi = () => {
+    movieApi
+      .getMovies()
+      .then((apiItems) => {
+        if (apiItems) {
+          setApiItems(apiItems);
+          localStorage.setItem("movies", JSON.stringify(apiItems));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // отобразить карточки мувес
+  const showCards = () => {
+    if (!localStorage.getItem("movies")) {
+      getMoviesByApi();
+    } else {
+      setApiItems(JSON.parse(localStorage.getItem("movies")));
+    }
+  };
+
   useEffect(() => {
     showSearchResult();
     localStorage.setItem("myFound", JSON.stringify(searchResult));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setSearchResult]);
-  
-  
+
+  // фильтр поиска
   const handleSearchButton = (searchRequest, short) => {
     const searchResult = apiItems.filter((item) =>
       item.nameRU.toLowerCase().includes(searchRequest.toLowerCase())
@@ -41,6 +65,7 @@ function Movies({
     localStorage.setItem("myFound", JSON.stringify(searchResult));
   };
 
+  // фильтр поиска по состоянию чекбокса
   const showSearchResult = () => {
     if (localStorage.getItem("mySearch")) {
       setSearchResult(
@@ -91,16 +116,18 @@ function Movies({
       <main className="movie">
         <Header />
         <div>
-          <SearchForm handleSearchButton={handleSearchButton} />
+          <SearchForm
+            handleSearchButton={handleSearchButton}
+            showCards={showCards}
+          />
           <MoviesCardList
-            movies={searchResult}
             savedMovies={savedMovies}
-            isMoviesLiked={isMoviesLiked}
+            isMovies={isMovies}
             onCardDelete={onCardDelete}
+            isPreloaderActive={isPreloaderActive}
             onCardSave={onCardSave}
             moviesFound={moviesFound}
-            isPreloaderActive={isPreloaderActive}
-            isMovies={isMovies}
+            movies={searchResult}
           />
         </div>
       </main>

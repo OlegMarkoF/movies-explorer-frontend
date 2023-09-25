@@ -15,7 +15,7 @@ import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { UNAUTHORIZED, CONFLICT } from "../../utils/errors";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { movieApi } from "../../utils/moviesApi";
+// import { movieApi } from "../../utils/moviesApi";
 import * as mainApi from "../../utils/mainApi";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
   const [isPreloaderActive, setIsPreloaderActive] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [apiItems, setApiItems] = useState([]);
+  // const [apiItems, setApiItems] = useState([]);
   const [isInfoOpenPopup, setIsInfoOpenPopup] = useState(false);
   const [notification, setNotification] = useState({ text: "" });
   const navigate = useNavigate();
@@ -36,11 +36,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn && (location.pathname === "/signin" || location.pathname === "/signup")) {
       navigate("/movies");
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate, loggedIn]);
 
   useEffect(() => {
     if (loggedIn === true) {
@@ -50,12 +50,11 @@ function App() {
         setLoggedIn(true);
         setCurrentUser(user);
         getMySavedMovies(user._id);
-        
-        if (!localStorage.getItem("")) {
-          getMoviesByApi();
-        } else {
-          setApiItems(JSON.parse(localStorage.getItem("movies")));
-        }
+        // if (!localStorage.getItem("movies")) {
+        //   getMoviesByApi();
+        // } else {
+        //   setApiItems(JSON.parse(localStorage.getItem("movies")));
+        // }
       })
       .catch((err) => {
         console.log(err);
@@ -123,30 +122,30 @@ function App() {
     localStorage.removeItem("movies");
     localStorage.clear();
     setCurrentUser({});
-    setApiItems([]);
+    // setApiItems([]);
     setSavedMovies([]);
     setLoggedIn(false);
     navigate("/");
   };
   
-  const getMoviesByApi = () => {
-    setIsPreloaderActive(true);
-    movieApi
-      .getMovies()
-      .then((apiItems) => {
-        if (apiItems) {
-          setApiItems(apiItems);
-          localStorage.setItem("movies", JSON.stringify(apiItems));
-          setIsPreloaderActive(false);
-        } 
-      })
-      .catch((err) => {
-        setIsPreloaderActive(false);
-        console.log(err);
-        setIsInfoOpenPopup(true);
-        setNotification({ text: "Ничего не найдено" });
-      });
-  };
+  // const getMoviesByApi = () => {
+  //   setIsPreloaderActive(true);
+  //   movieApi
+  //     .getMovies()
+  //     .then((apiItems) => {
+  //       if (apiItems) {
+  //         setApiItems(apiItems);
+  //         localStorage.setItem("movies", JSON.stringify(apiItems));
+  //         setIsPreloaderActive(false);
+  //       } 
+  //     })
+  //     .catch((err) => {
+  //       setIsPreloaderActive(false);
+  //       console.log(err);
+  //       setIsInfoOpenPopup(true);
+  //       setNotification({ text: "Ничего не найдено" });
+  //     });
+  // };
 
   const getMySavedMovies = (user) => {
     tokenCheck();
@@ -202,9 +201,10 @@ function App() {
           });
   };
 
-  const isMoviesLiked = (movie) => {
-    return savedMovies.some((i) => i.movieId === movie.id);
-  };
+  // проверка на наличие лайка
+  // const isMoviesLiked = (movie) => {
+  //   return savedMovies.some((i) => i.movieId === movie.id);
+  // };
 
   const handleChangeProfile = (user) => {
     setIsPreloaderActive(true);
@@ -286,8 +286,7 @@ function App() {
                   <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                     <Movies
                       isMovies={true}
-                      isMoviesLiked={isMoviesLiked}
-                      apiItems={apiItems}
+                      // apiItems={apiItems}
                       isPreloaderActive={isPreloaderActive}
                       savedMovies={savedMovies}
                       onCardDelete={onCardDelete}
@@ -302,9 +301,9 @@ function App() {
                   <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
                     <SavedMovies
                       savedMovies={savedMovies}
-                      isMoviesLiked={isMoviesLiked}
                       isMovies={false}
                       onCardDelete={onCardDelete}
+                      isPreloaderActive={isPreloaderActive}
                     />
                   </ProtectedRoute>
                 }

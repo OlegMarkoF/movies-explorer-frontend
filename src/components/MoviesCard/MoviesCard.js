@@ -2,21 +2,38 @@ import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 import { durationMovie } from "../../utils/utils";
 
-function MoviesCard({
+function MoviesCard({ 
   movie,
   onCardDelete,
-  isMoviesLiked,
-  onCardSave,
+  savedMovies,
+  onCardSave
 }) {
-  
   const location = useLocation();
   const API_MOVIES_URL = "https://api.nomoreparties.co";
+  // const [isSaved, setIsSaved] = useState(false);
+
+  // useEffect(() => {
+  //   savedMovies?.map((i) => {
+  //     if (movie._id === i._id) {
+  //       setIsSaved(true);
+  //     } else {
+  //       setIsSaved(false);
+  //     }
+  //     return savedMovies
+  //   })
+  // }, [isSaved, savedMovies]);
+
+  const isMoviesLiked = (movie) => {
+    return savedMovies.some((i) => i.movieId === movie.id);
+  };
 
   function handleSave() {
     onCardSave(movie);
+    // setIsSaved(true);
   }
   function handleDelete() {
     onCardDelete(movie);
+    // setIsSaved(false);
   }
 
   return (
@@ -28,7 +45,9 @@ function MoviesCard({
         </div>
         {location.pathname === "/movies" ? (
           <button
-            className={`${isMoviesLiked(movie) ? "card__save_active" : "card__save"}`}
+            className={`${
+              isMoviesLiked(movie) ? "card__save_active" : "card__save"
+            }`}
             type="button"
             onClick={handleSave}
           ></button>

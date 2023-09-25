@@ -38,7 +38,9 @@
 .notfound__link {
   margin: 184px auto 60px;
   padding: 0;
+  background-color: #fff;
   text-decoration: none;
+  border: none;
   color: #ff6838;
   font-family: Inter;
   text-align: center;

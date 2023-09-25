@@ -18,6 +18,7 @@ function Header({ loggedIn }) {
               Регистрация
             </Link>
             <button
+              type="button"
               className="header__signin"
               onClick={() => navigate("/signin")}
             >

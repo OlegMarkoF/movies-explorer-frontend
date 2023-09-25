@@ -5,13 +5,15 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList({
-  movies,
+  
   savedMovies,
-  isMoviesLiked,
+  isMovies,
+  // isMoviesLiked,
   onCardDelete,
+  isPreloaderActive,
   onCardSave,
   moviesFound,
-  isPreloaderActive,
+  movies,
 }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [moviesCount, setMoviesCount] = useState(0);
@@ -78,12 +80,13 @@ function MoviesCardList({
             onCardDelete={onCardDelete}
             savedMovies={savedMovies}
             onCardSave={onCardSave}
-            isMoviesLiked={isMoviesLiked}
+            // isMoviesLiked={isMoviesLiked}
           />
         );
       });
     }
   };
+
 
   return (
     <section className="movies">
@@ -92,10 +95,11 @@ function MoviesCardList({
       ) : (
         <>
           <ul className="movies__list">
-            {moviesFound === false && movies.length === 0 ? (
-              <p className="movies__text">Ничего не найдено</p>
+            {moviesFound !== false || movies.length !== 0 
+              ? (
+                renderMovies(showMovies)
             ) : (
-              renderMovies(showMovies)
+              <p className="movies__text">Ничего не найдено</p>
             )}
           </ul>
           {location.pathname === "/movies" && movies.length > showMovies ? (

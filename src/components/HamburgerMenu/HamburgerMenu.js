@@ -28,6 +28,7 @@ function HamburgerMenu({ isOpen, onClose }) {
           </Link>
         </div>
         <button
+          type="button"
           className="hamburger__account"
           onClick={() => navigate("/profile")}
         >

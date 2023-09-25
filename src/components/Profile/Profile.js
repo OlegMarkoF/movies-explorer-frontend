@@ -16,9 +16,9 @@ function Profile({ handleChangeProfile, handleLogout }) {
   const [isShowButton, setIsShowButton] = useState(false);
 
   useEffect(() => {
-    if (emailError || nameError) {
+    if (currentUser.name === name && currentUser.email === email) {
       setIsFormValid(false);
-    } else if (email === currentUser.email && name === currentUser.name) {
+    } else if (emailError || nameError) {
       setIsFormValid(false);
     } else {
       setIsFormValid(true);
@@ -69,7 +69,7 @@ const handleChangeEmail = (e) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleChangeProfile({ name, email });
-    if (emailError || nameError) {
+    if (nameError || emailError) {
       setIsShowButton(true);
     } else {
       setIsShowButton(false);
@@ -173,7 +173,7 @@ const handleChangeEmail = (e) => {
               </button>
               <Link
                 className="profile__link"
-                to="/signin"
+                to="/"
                 onClick={handleLogout}
               >
                 Выйти из аккаунта
