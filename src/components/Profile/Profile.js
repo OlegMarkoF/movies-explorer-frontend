@@ -14,30 +14,33 @@ function Profile({ handleChangeProfile, handleLogout }) {
   const [emailError, setEmailError] = useState(" ");
   const [isFormValid, setIsFormValid] = useState(false);
   const [isShowButton, setIsShowButton] = useState(false);
+  
+  useEffect(() => {
+    currentUser.name !== undefined && setName(currentUser.name);
+    currentUser.email !== undefined && setEmail(currentUser.email);
+  }, [currentUser]);
 
   useEffect(() => {
-    if (currentUser.name === name && currentUser.email === email) {
-      setIsFormValid(false);
-    } else if (emailError || nameError) {
+    if (name === currentUser.name && email === currentUser.email ) {
       setIsFormValid(false);
     } else {
       setIsFormValid(true);
     }
   }, [
-    nameError,
-    emailError,
     currentUser.name,
     currentUser.email,
-    nameClick,
-    emailClick,
     name,
     email,
   ]);
 
   useEffect(() => {
-    currentUser.name !== undefined && setName(currentUser.name);
-    currentUser.email !== undefined && setEmail(currentUser.email);
-  }, [currentUser]);
+    if (emailError || nameError) {
+      setIsFormValid(false);
+    }
+  }, [
+    nameError,
+    emailError
+  ]);
 
   const handleChangeName = (e) => {
     setName(e.target.value);

@@ -5,9 +5,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList({
-  
   savedMovies,
-  isMovies,
   // isMoviesLiked,
   onCardDelete,
   isPreloaderActive,
@@ -52,15 +50,16 @@ function MoviesCardList({
 
   useEffect(() => {
     window.addEventListener("resize", handleScreenWidth);
-    // handleMoviesButtonClick();
     return () => {
       window.removeEventListener("resize", handleScreenWidth);
     };
   }, []);
 
+  console.log(savedMovies.length, movies.length)
+
   const renderMovies = (showMovies) => {
     if (location.pathname === "/saved-movies") {
-      return movies.map((movie) => {
+      return savedMovies.map((movie) => {
         return (
           <MoviesCard
             key={movie.id || movie._id}
@@ -86,7 +85,6 @@ function MoviesCardList({
       });
     }
   };
-
 
   return (
     <section className="movies">

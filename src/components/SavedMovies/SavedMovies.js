@@ -7,14 +7,13 @@ import { useState } from "react";
 
 function SavedMovies({
   savedMovies,
-  isMovies,
   onCardDelete,
   isMovieSaved,
   isPreloaderActive
 }) {
   const [searchResult, setSearchResult] = useState(
-    localStorage.getItem("liked")
-      ? JSON.parse(localStorage.getItem("liked"))
+    localStorage.getItem("savedMovies")
+      ? JSON.parse(localStorage.getItem("savedMovies"))
       : []
   );
   const [moviesFound, setMoviesFound] = useState(undefined);
@@ -31,9 +30,8 @@ function SavedMovies({
       : setMoviesFound(false);
        
     localStorage.setItem("mySavedSearch", JSON.stringify(searchRequest));
+    localStorage.setItem("savedMovies", JSON.stringify(searchResult));
   };
-
-  // console.log(searchResult.length)
 
   return (
     <>
@@ -46,7 +44,6 @@ function SavedMovies({
           <div className="saved-movies__list">
             <MoviesCardList
               savedMovies={savedMovies}
-              isMovies={isMovies}
               isMovieSaved={isMovieSaved}
               onCardDelete={onCardDelete}
               isPreloaderActive={isPreloaderActive}

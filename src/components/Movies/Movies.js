@@ -14,7 +14,11 @@ function Movies({
   onCardSave,
 }) {
   
-  const [apiItems, setApiItems] = useState([]);
+  const [apiItems, setApiItems] = useState(
+    localStorage.getItem("movies")
+      ? JSON.parse(localStorage.getItem("movies"))
+      : []
+  );
   const [moviesFound, setMoviesFound] = useState(undefined);
   const [searchResult, setSearchResult] = useState(
     localStorage.getItem("mySearch")

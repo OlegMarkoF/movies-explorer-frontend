@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 
 function SearchForm({ handleSearchButton, showCards }) {
   let mySearch = localStorage.getItem("mySearch");
+  let mySavedSearch = localStorage.getItem("mySavedSearch");
   const location = useLocation();
   const [searchRequest, setSearchRequest] = useState("");
   const [searchError, setSearchError] = useState("");
@@ -21,16 +22,18 @@ function SearchForm({ handleSearchButton, showCards }) {
     if (location.pathname === "/movies") {
       if (mySearch) {
         setSearchRequest(JSON.parse(mySearch));
+      } else if (mySavedSearch) {
+        setSearchRequest(JSON.parse(mySavedSearch));
       }
     }
     // localStorage.setItem("savedShort", JSON.stringify(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   setShort(JSON.parse(localStorage.getItem("short")));
-  //   setSavedShort(JSON.parse(localStorage.getItem("savedShort")));
-  // }, []);
+  useEffect(() => {
+    setShort(JSON.parse(localStorage.getItem("short")));
+    setSavedShort(JSON.parse(localStorage.getItem("savedShort")));
+  }, []);
 
   // форма поиска
   const handleSubmit = (e) => {
@@ -39,7 +42,7 @@ function SearchForm({ handleSearchButton, showCards }) {
       setSearchError("Нужно ввести ключевое слово");
     } else {
       setSearchError(" ");
-      if (location.pathname === "/movie") {
+      if (location.pathname === "/movies") {
         localStorage.setItem("short", false);
         handleSearchButton(searchRequest, short);
       } else {
@@ -81,7 +84,12 @@ function SearchForm({ handleSearchButton, showCards }) {
   const handleSearchInput = (e) => {
     const value = e.target.value;
     setSearchRequest(value);
-    localStorage.setItem(mySearch, value);
+    if (location.pathname === "/movies") {
+      localStorage.setItem(mySearch, value);
+    }
+    if (location.pathname === "/saved-movies") {
+      localStorage.setItem(mySavedSearch, value);
+    }
     if (location.pathname === "/movies") {
       showCards(e);
     }

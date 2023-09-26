@@ -15,7 +15,6 @@ import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { UNAUTHORIZED, CONFLICT } from "../../utils/errors";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-// import { movieApi } from "../../utils/moviesApi";
 import * as mainApi from "../../utils/mainApi";
 
 function App() {
@@ -23,8 +22,11 @@ function App() {
   const [user, setUser] = useState({});
   const [isPreloaderActive, setIsPreloaderActive] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [savedMovies, setSavedMovies] = useState([]);
-  // const [apiItems, setApiItems] = useState([]);
+  const [savedMovies, setSavedMovies] = useState(
+    localStorage.getItem("savedMovies")
+      ? JSON.parse(localStorage.getItem("savedMovies"))
+      : []
+  );
   const [isInfoOpenPopup, setIsInfoOpenPopup] = useState(false);
   const [notification, setNotification] = useState({ text: "" });
   const navigate = useNavigate();
@@ -50,11 +52,6 @@ function App() {
         setLoggedIn(true);
         setCurrentUser(user);
         getMySavedMovies(user._id);
-        // if (!localStorage.getItem("movies")) {
-        //   getMoviesByApi();
-        // } else {
-        //   setApiItems(JSON.parse(localStorage.getItem("movies")));
-        // }
       })
       .catch((err) => {
         console.log(err);
@@ -118,34 +115,15 @@ function App() {
     localStorage.removeItem("short");
     localStorage.removeItem("mySearch");
     localStorage.removeItem("myFound");
-    localStorage.removeItem("liked");
+    localStorage.removeItem("savedMovies");
     localStorage.removeItem("movies");
     localStorage.clear();
     setCurrentUser({});
-    // setApiItems([]);
     setSavedMovies([]);
     setLoggedIn(false);
     navigate("/");
   };
   
-  // const getMoviesByApi = () => {
-  //   setIsPreloaderActive(true);
-  //   movieApi
-  //     .getMovies()
-  //     .then((apiItems) => {
-  //       if (apiItems) {
-  //         setApiItems(apiItems);
-  //         localStorage.setItem("movies", JSON.stringify(apiItems));
-  //         setIsPreloaderActive(false);
-  //       } 
-  //     })
-  //     .catch((err) => {
-  //       setIsPreloaderActive(false);
-  //       console.log(err);
-  //       setIsInfoOpenPopup(true);
-  //       setNotification({ text: "Ничего не найдено" });
-  //     });
-  // };
 
   const getMySavedMovies = (user) => {
     tokenCheck();
@@ -154,7 +132,7 @@ function App() {
       .then((res) => {
         setSavedMovies(res.filter((i) => i.owner === user));
         localStorage.setItem(
-          "liked",
+          "savedMovies",
           JSON.stringify(res.filter((i) => i.owner === user))
         );
       })
@@ -173,7 +151,7 @@ function App() {
           savedMovies.filter((i) => i._id !== movie._id)
         );
         localStorage.setItem(
-          "liked",
+          "savedMovies",
           JSON.stringify(savedMovies.filter((i) => i._id !== movie._id))
         );
       })
@@ -192,7 +170,7 @@ function App() {
           .then((res) => {
             setSavedMovies((savedMovies) => [...savedMovies, res]);
             localStorage.setItem(
-              "liked",
+              "savedMovies",
               JSON.stringify([...savedMovies, res])
             );
           })
@@ -285,8 +263,7 @@ function App() {
                 element={
                   <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                     <Movies
-                      isMovies={true}
-                      // apiItems={apiItems}
+                      // isMovies={true}
                       isPreloaderActive={isPreloaderActive}
                       savedMovies={savedMovies}
                       onCardDelete={onCardDelete}
@@ -301,7 +278,7 @@ function App() {
                   <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
                     <SavedMovies
                       savedMovies={savedMovies}
-                      isMovies={false}
+                      // isMovies={false}
                       onCardDelete={onCardDelete}
                       isPreloaderActive={isPreloaderActive}
                     />
