@@ -4,21 +4,17 @@ import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useEffect, useState } from "react";
-import { movieApi } from "../../utils/moviesApi";
 
 function Movies({
-  isMovies,
   isPreloaderActive,
   savedMovies,
   onCardDelete,
   onCardSave,
+  showCards,
+  movies
 }) {
   
-  const [apiItems, setApiItems] = useState(
-    localStorage.getItem("movies")
-      ? JSON.parse(localStorage.getItem("movies"))
-      : []
-  );
+  
   const [moviesFound, setMoviesFound] = useState(undefined);
   const [searchResult, setSearchResult] = useState(
     localStorage.getItem("mySearch")
@@ -26,29 +22,6 @@ function Movies({
       : []
   );
 
-  // запрос фильмов с сервера
-  const getMoviesByApi = () => {
-    movieApi
-      .getMovies()
-      .then((apiItems) => {
-        if (apiItems) {
-          setApiItems(apiItems);
-          localStorage.setItem("movies", JSON.stringify(apiItems));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  // отобразить карточки мувес
-  const showCards = () => {
-    if (!localStorage.getItem("movies")) {
-      getMoviesByApi();
-    } else {
-      setApiItems(JSON.parse(localStorage.getItem("movies")));
-    }
-  };
 
   useEffect(() => {
     showSearchResult();
@@ -58,7 +31,7 @@ function Movies({
 
   // фильтр поиска
   const handleSearchButton = (searchRequest, short) => {
-    const searchResult = apiItems.filter((item) =>
+    const searchResult = movies.filter((item) =>
       item.nameRU.toLowerCase().includes(searchRequest.toLowerCase())
     );
     short
@@ -73,11 +46,11 @@ function Movies({
   const showSearchResult = () => {
     if (localStorage.getItem("mySearch")) {
       setSearchResult(
-        apiItems.filter((item) =>
+        movies.filter((item) =>
           item.nameRU
             .toLowerCase()
             .includes(
-              JSON.parse(localStorage.getItem("mySearch")).toLowerCase()
+              JSON.parse(localStorage.getItem("mySearch"))
             )
         )
       );
@@ -121,17 +94,17 @@ function Movies({
         <Header />
         <div>
           <SearchForm
+            isPreloaderActive={isPreloaderActive}
             handleSearchButton={handleSearchButton}
             showCards={showCards}
           />
           <MoviesCardList
+            movies={searchResult}
             savedMovies={savedMovies}
-            isMovies={isMovies}
             onCardDelete={onCardDelete}
             isPreloaderActive={isPreloaderActive}
             onCardSave={onCardSave}
             moviesFound={moviesFound}
-            movies={searchResult}
           />
         </div>
       </main>

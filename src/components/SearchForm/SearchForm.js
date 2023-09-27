@@ -5,10 +5,19 @@ import glass from "../../images/magnifying_glass.svg";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+
 function SearchForm({ handleSearchButton, showCards }) {
   let mySearch = localStorage.getItem("mySearch");
   let mySavedSearch = localStorage.getItem("mySavedSearch");
   const location = useLocation();
+
+  // const [mySearch, setMySearch] = useState(localStorage.getItem("mySearch")
+  // ? JSON.parse(localStorage.getItem("mySearch"))
+  // : "");
+  // const [mySavedSearch, setMySavedSearch] = useState(localStorage.getItem("mySavedSearch")
+  // ? JSON.parse(localStorage.getItem("mySavedSearch"))
+  // : "");
+  
   const [searchRequest, setSearchRequest] = useState("");
   const [searchError, setSearchError] = useState("");
   const [savedShort, setSavedShort] = useState(false);
@@ -20,20 +29,30 @@ function SearchForm({ handleSearchButton, showCards }) {
 
   useEffect(() => {
     if (location.pathname === "/movies") {
+      localStorage.setItem("mySearch", mySearch)
+    } else {
+      localStorage.setItem("mySavedSearch", mySavedSearch)
+    }
+  }, [location.pathname, mySearch, mySavedSearch])
+
+  useEffect(() => {
+    if (location.pathname === "/movies") {
       if (mySearch) {
         setSearchRequest(JSON.parse(mySearch));
-      } else if (mySavedSearch) {
+        setShort(JSON.parse(short));
+      } 
+    } else {
         setSearchRequest(JSON.parse(mySavedSearch));
-      }
+        setSavedShort(JSON.parse(localStorage.getItem("savedShort")));
     }
     // localStorage.setItem("savedShort", JSON.stringify(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mySearch, mySavedSearch, short, savedShort]);
 
-  useEffect(() => {
-    setShort(JSON.parse(localStorage.getItem("short")));
-    setSavedShort(JSON.parse(localStorage.getItem("savedShort")));
-  }, []);
+  // useEffect(() => {
+  //   setShort(JSON.parse(localStorage.getItem("short")));
+  //   setSavedShort(JSON.parse(localStorage.getItem("savedShort")));
+  // }, [short, savedShort]);
 
   // форма поиска
   const handleSubmit = (e) => {
@@ -45,7 +64,7 @@ function SearchForm({ handleSearchButton, showCards }) {
       if (location.pathname === "/movies") {
         localStorage.setItem("short", false);
         handleSearchButton(searchRequest, short);
-      } else {
+      } else if (location.pathname === "/saved-movies") {
         localStorage.setItem("savedShort", false);
         handleSearchButton(searchRequest, savedShort);
       }
@@ -82,17 +101,13 @@ function SearchForm({ handleSearchButton, showCards }) {
   };
 
   const handleSearchInput = (e) => {
-    const value = e.target.value;
-    setSearchRequest(value);
-    if (location.pathname === "/movies") {
-      localStorage.setItem(mySearch, value);
-    }
-    if (location.pathname === "/saved-movies") {
-      localStorage.setItem(mySavedSearch, value);
-    }
     if (location.pathname === "/movies") {
       showCards(e);
     }
+    const value = e.target.value;
+    setSearchRequest(value);
+    localStorage.setItem(mySearch, value) || localStorage.setItem(mySavedSearch, value);
+    
   };
 
   return (
@@ -137,6 +152,7 @@ function SearchForm({ handleSearchButton, showCards }) {
           </label>
         </div>
       </section>
+      
     </main>
   );
 }

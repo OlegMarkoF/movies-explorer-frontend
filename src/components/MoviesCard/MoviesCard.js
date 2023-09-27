@@ -53,7 +53,7 @@ function MoviesCard({
       >
         <img
           className="card__film"
-          alt={`стопкадр фильма ${movie.nameRU}`}
+          alt={`Стопкадр фильма "${movie.nameRU}"`}
           src={
             location.pathname === "/movies"
               ? `${API_MOVIES_URL}${movie.image.url}`

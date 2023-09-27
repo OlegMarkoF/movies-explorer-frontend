@@ -10,8 +10,8 @@ function Profile({ handleChangeProfile, handleLogout }) {
   const [email, setEmail] = useState(currentUser.email);
   const [nameClick, setNameClick] = useState(false);
   const [emailClick, setEmailClick] = useState(false);
-  const [nameError, setNameError] = useState(" ");
-  const [emailError, setEmailError] = useState(" ");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [isShowButton, setIsShowButton] = useState(false);
   
@@ -19,22 +19,23 @@ function Profile({ handleChangeProfile, handleLogout }) {
     currentUser.name !== undefined && setName(currentUser.name);
     currentUser.email !== undefined && setEmail(currentUser.email);
   }, [currentUser]);
-
+  
   useEffect(() => {
-    if (name === currentUser.name && email === currentUser.email ) {
+    if (currentUser.name === name && currentUser.email === email) {
       setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
-  }, [
+      } else {
+        setIsFormValid(true);
+      }
+    }, [
     currentUser.name,
     currentUser.email,
+    setIsFormValid,
     name,
-    email,
+    email
   ]);
 
   useEffect(() => {
-    if (emailError || nameError) {
+    if (nameError || emailError) {
       setIsFormValid(false);
     }
   }, [
@@ -43,10 +44,11 @@ function Profile({ handleChangeProfile, handleLogout }) {
   ]);
 
   const handleChangeName = (e) => {
-    setName(e.target.value);
-    if (e.target.value.length < 2 || e.target.value.length > 40) {
+    const value = e.target.value;
+    setName(value);
+    if (value.length < 2) {
       setNameError("Имя должно быть длиннее 2 символов");
-      if (!e.target.value) {
+      if (!value) {
         setNameError("Поле имя не должно быть пустым");
       }
     } else {
@@ -55,10 +57,11 @@ function Profile({ handleChangeProfile, handleLogout }) {
   };
 
 const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
+    const value = e.target.value;
+    setEmail(value);
     const regexForEmail =
       /^((([0-9A-Za-z]{1}[-0-9A-z.]+[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я.]+[0-9А-Яа-я]{1}))@([-A-Za-z]+\.){1,2}[-A-Za-z]{2,})$/u;
-    if (!regexForEmail.test(String(e.target.value).toLowerCase())) {
+    if (!regexForEmail.test(String(value).toLowerCase())) {
       setEmailError("Неверный формат почты");
     } else {
       setEmailError("");
@@ -81,12 +84,12 @@ const handleChangeEmail = (e) => {
 
   const handleClear = (e) => {
     // eslint-disable-next-line default-case
-    switch (e.target.name) {
-      case "email":
-        setEmailClick(true);
-        break;
+    switch (e.target.value) {
       case "name":
         setNameClick(true);
+        break;
+      case "email":
+        setEmailClick(true);
         break;
     }
   };
@@ -107,8 +110,8 @@ const handleChangeEmail = (e) => {
             className="profile__input profile__input_name"
             id="name"
             name="name"
-            type="name"
-            value={name}
+            type="text"
+            value={name || ''}
             onChange={handleChangeName}
             onBlur={handleClear}
             minLength="2"
@@ -135,7 +138,7 @@ const handleChangeEmail = (e) => {
             type="email"
             onChange={handleChangeEmail}
             onBlur={handleClear}
-            value={email}
+            value={email || ''}
             minLength="2"
             maxLength="30"
             required

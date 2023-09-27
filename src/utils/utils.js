@@ -20,18 +20,16 @@ export function getSavedStatus(savedCards, movieCard) {
 //   return movies.filter((item) => item.duration <= 40);
 // }
 
-// export function filterMovies(movies, searchQuery, shortFilms) {
-//   const moviesQuery = movies.filter((item) => {
-//     const nameRU = String(item.nameRU).toLowerCase();
-//     const nameEN = String(item.nameEN).toLowerCase();
-//     const searchName = searchQuery.toLowerCase().trim();
-//     return (nameRU.indexOf(searchName) !== -1 || nameEN.indexOf(searchName) !== -1);
-//   });
-//   if(shortFilms === 'On') {
-//     return filterShortMovies(moviesQuery);
-//   }
-//   return moviesQuery;
-// };
+export function filterMovies(movies, searchQuery) {
+  const moviesQuery = movies.filter((item) => {
+    const nameRU = String(item.nameRU).toLowerCase();
+    const nameEN = String(item.nameEN).toLowerCase();
+    const searchName = searchQuery.toLowerCase().trim();
+    return (nameRU.indexOf(searchName) !== -1 || nameEN.indexOf(searchName) !== -1);
+  });
+  
+  return moviesQuery;
+};
 
 // export function changeMovies(movies) {
 //   movies.array.forEach(movie => {

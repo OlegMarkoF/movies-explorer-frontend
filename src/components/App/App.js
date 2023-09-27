@@ -16,6 +16,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { UNAUTHORIZED, CONFLICT } from "../../utils/errors";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import * as mainApi from "../../utils/mainApi";
+import { movieApi } from "../../utils/moviesApi";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -31,6 +32,11 @@ function App() {
   const [notification, setNotification] = useState({ text: "" });
   const navigate = useNavigate();
   const location = useLocation();
+  const [apiItems, setApiItems] = useState(
+    localStorage.getItem("movies")
+      ? JSON.parse(localStorage.getItem("movies"))
+      : []
+  );
 
   useEffect(() => {
     tokenCheck();
@@ -44,6 +50,7 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, loggedIn]);
 
+  // получаем данные о пользователе
   useEffect(() => {
     if (loggedIn === true) {
     mainApi
@@ -59,6 +66,28 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+
+  
+  // запрос фильмов с сервера
+  const getMoviesByApi = () => {
+    setIsPreloaderActive(true);
+    movieApi
+      .getMovies()
+      .then((apiItems) => {
+        if (apiItems) {
+          setApiItems(apiItems);
+          localStorage.setItem("movies", JSON.stringify(apiItems));
+        }
+        setIsPreloaderActive(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+
+  // ф-ия регистрации
   const handleRegister = ({ password, email, name }) => {
     setIsPreloaderActive(true);
     mainApi
@@ -124,7 +153,7 @@ function App() {
     navigate("/");
   };
   
-
+  // получаем массив сохраненных фильмов
   const getMySavedMovies = (user) => {
     tokenCheck();
     mainApi
@@ -139,6 +168,17 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  
+  // создаем массив movies
+  const showCards = () => {
+    if (!localStorage.getItem("movies")) {
+      getMoviesByApi();
+    } else {
+      setApiItems(JSON.parse(localStorage.getItem("movies")));
+    }
+    
   };
   
   
@@ -179,11 +219,7 @@ function App() {
           });
   };
 
-  // проверка на наличие лайка
-  // const isMoviesLiked = (movie) => {
-  //   return savedMovies.some((i) => i.movieId === movie.id);
-  // };
-
+  // ф-ия изменения данных профиля
   const handleChangeProfile = (user) => {
     setIsPreloaderActive(true);
     tokenCheck();
@@ -263,11 +299,12 @@ function App() {
                 element={
                   <ProtectedRoute path="/movies" loggedIn={loggedIn}>
                     <Movies
-                      // isMovies={true}
                       isPreloaderActive={isPreloaderActive}
                       savedMovies={savedMovies}
                       onCardDelete={onCardDelete}
                       onCardSave={onCardSave}
+                      showCards={showCards}
+                      movies={apiItems}
                     />
                   </ProtectedRoute>
                 }
@@ -278,7 +315,6 @@ function App() {
                   <ProtectedRoute path="/saved-movies" loggedIn={loggedIn}>
                     <SavedMovies
                       savedMovies={savedMovies}
-                      // isMovies={false}
                       onCardDelete={onCardDelete}
                       isPreloaderActive={isPreloaderActive}
                     />

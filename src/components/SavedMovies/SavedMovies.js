@@ -3,34 +3,43 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SavedMovies({
   savedMovies,
   onCardDelete,
   isMovieSaved,
-  isPreloaderActive
+  isPreloaderActive,
 }) {
-  const [searchResult, setSearchResult] = useState(
-    localStorage.getItem("savedMovies")
-      ? JSON.parse(localStorage.getItem("savedMovies"))
-      : []
-  );
   const [moviesFound, setMoviesFound] = useState(undefined);
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies || "");
+  // const [savedShort, setSavedShort] = useState(false);
+  const [searchResult, setSearchResult] = useState(
+    localStorage.getItem("mySavedSearch")
+    ? JSON.parse(localStorage.getItem("mySavedFound"))
+    : []
+  );
+
+  useEffect(() => {
+    const filter = savedMovies.filter((item) =>
+    item.nameRU.toLowerCase().includes(searchResult)
+    );
+    setFilteredMovies(filter);
+  }, [savedMovies, searchResult]);
+
 
   const handleSearchButton = (searchRequest, short) => {
-    const searchResult = savedMovies.filter((item) =>
-      item.nameRU.toLowerCase().includes(searchRequest.toLowerCase())
+    setSearchResult(searchRequest);
+    const filteredMovies = savedMovies.filter((item) =>
+    item.nameRU.toLowerCase().includes(searchRequest)
     );
     short
-      ? setSearchResult(searchResult.filter((item) => item.duration <= 40))
-      : setSearchResult(searchResult);
-    searchResult.length > 0
-      ? setMoviesFound(true)
-      : setMoviesFound(false);
-       
+      ? setFilteredMovies(filteredMovies.filter((item) => item.duration <= 40))
+      : setFilteredMovies(filteredMovies);
+    filteredMovies.length > 0 ? setMoviesFound(true) : setMoviesFound(false);
+
+    localStorage.setItem("mySavedFound", JSON.stringify(filteredMovies));
     localStorage.setItem("mySavedSearch", JSON.stringify(searchRequest));
-    localStorage.setItem("savedMovies", JSON.stringify(searchResult));
   };
 
   return (
@@ -38,17 +47,15 @@ function SavedMovies({
       <main className="saved-movies">
         <Header />
         <section className="saved-movies__main">
-          <SearchForm 
-          handleSearchButton={handleSearchButton}
-          />
+          <SearchForm handleSearchButton={handleSearchButton} />
           <div className="saved-movies__list">
             <MoviesCardList
-              savedMovies={savedMovies}
+              savedMovies={filteredMovies}
               isMovieSaved={isMovieSaved}
               onCardDelete={onCardDelete}
               isPreloaderActive={isPreloaderActive}
               moviesFound={moviesFound}
-              movies={searchResult}
+              // movies={searchResult}
             />
           </div>
         </section>

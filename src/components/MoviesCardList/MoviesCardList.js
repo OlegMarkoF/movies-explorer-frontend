@@ -6,13 +6,13 @@ import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList({
   savedMovies,
-  // isMoviesLiked,
   onCardDelete,
   isPreloaderActive,
   onCardSave,
   moviesFound,
   movies,
 }) {
+  
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [moviesCount, setMoviesCount] = useState(0);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
@@ -32,11 +32,11 @@ function MoviesCardList({
       setMoviesCount(12);
       setShowMovies(12);
       setMoreMoviesCount(3);
-    } else if (screenWidth >= 768 && screenWidth < 1280) {
+    } else if (screenWidth >= 800 && screenWidth < 1280) {
       setMoviesCount(8);
       setShowMovies(8);
       setMoreMoviesCount(2);
-    } else if (screenWidth < 768) {
+    } else if (screenWidth < 800) {
       setMoviesCount(5);
       setShowMovies(5);
       setMoreMoviesCount(2);
@@ -55,9 +55,9 @@ function MoviesCardList({
     };
   }, []);
 
-  console.log(savedMovies.length, movies.length)
+  // console.log(savedMovies.length, movies.length)
 
-  const renderMovies = (showMovies) => {
+  const renderMovies = () => {
     if (location.pathname === "/saved-movies") {
       return savedMovies.map((movie) => {
         return (
@@ -79,7 +79,6 @@ function MoviesCardList({
             onCardDelete={onCardDelete}
             savedMovies={savedMovies}
             onCardSave={onCardSave}
-            // isMoviesLiked={isMoviesLiked}
           />
         );
       });
@@ -90,12 +89,12 @@ function MoviesCardList({
     <section className="movies">
       {isPreloaderActive ? (
         <Preloader />
-      ) : (
+        ) : (
         <>
           <ul className="movies__list">
-            {moviesFound !== false || movies.length !== 0 
-              ? (
-                renderMovies(showMovies)
+            {(moviesFound !== false || movies.length !== 0) 
+            ? (
+              renderMovies()
             ) : (
               <p className="movies__text">Ничего не найдено</p>
             )}
