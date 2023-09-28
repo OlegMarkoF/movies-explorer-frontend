@@ -78,11 +78,13 @@ function App() {
           setApiItems(apiItems);
           localStorage.setItem("movies", JSON.stringify(apiItems));
         }
-        setIsPreloaderActive(false);
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsPreloaderActive(false);
+      })
   };
 
 

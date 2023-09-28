@@ -1,8 +1,10 @@
+import React from "react";
 import "./NotFound.css";
 import { useNavigate } from "react-router-dom";
 
-function NotFound() {
+const NotFound = () => {
   const navigate = useNavigate();
+
   return (
     <main className="notfound">
       <section className="notfound__box">

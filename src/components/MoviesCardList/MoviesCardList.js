@@ -14,48 +14,47 @@ function MoviesCardList({
 }) {
   
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [moviesCount, setMoviesCount] = useState(0);
+  // const [moviesCount, setMoviesCount] = useState(0);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
-  const [showMovies, setShowMovies] = useState(moviesCount);
+  const [showMovies, setShowMovies] = useState(0);
   const location = useLocation();
 
-  const handleScreenWidth = () => {
-    setScreenWidth(window.innerWidth);
-  };
+  useEffect(() => {
+    // hendleMoviesCounter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    hendleMoviesCounter()
+    window.addEventListener("resize", handleScreenWidth);
+    return () => {
+      window.removeEventListener("resize", handleScreenWidth);
+    };
+  }, [movies]);
 
   const handleMoviesButtonClick = () => {
     setShowMovies(showMovies + moreMoviesCount);
   };
 
+  const handleScreenWidth = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
   const hendleMoviesCounter = () => {
     if (screenWidth >= 1280) {
-      setMoviesCount(12);
+      // setMoviesCount(12);
       setShowMovies(12);
       setMoreMoviesCount(3);
     } else if (screenWidth >= 800 && screenWidth < 1280) {
-      setMoviesCount(8);
+      // setMoviesCount(8);
       setShowMovies(8);
       setMoreMoviesCount(2);
     } else if (screenWidth < 800) {
-      setMoviesCount(5);
+      // setMoviesCount(5);
       setShowMovies(5);
       setMoreMoviesCount(2);
     }
   };
-
-  useEffect(() => {
-    hendleMoviesCounter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [screenWidth]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleScreenWidth);
-    return () => {
-      window.removeEventListener("resize", handleScreenWidth);
-    };
-  }, []);
-
-  // console.log(savedMovies.length, movies.length)
 
   const renderMovies = () => {
     if (location.pathname === "/saved-movies") {
@@ -92,7 +91,7 @@ function MoviesCardList({
         ) : (
         <>
           <ul className="movies__list">
-            {(moviesFound !== false || movies.length !== 0) 
+            {(moviesFound !== false) 
             ? (
               renderMovies()
             ) : (

@@ -20,7 +20,10 @@ function SearchForm({ handleSearchButton, showCards }) {
   
   const [searchRequest, setSearchRequest] = useState("");
   const [searchError, setSearchError] = useState("");
-  const [savedShort, setSavedShort] = useState(false);
+  const [savedShort, setSavedShort] = useState(
+    localStorage.getItem("savedShort")
+      ? JSON.parse(localStorage.getItem("savedShort"))
+      : false);
   const [short, setShort] = useState(
     localStorage.getItem("short")
       ? JSON.parse(localStorage.getItem("short"))
@@ -57,10 +60,13 @@ function SearchForm({ handleSearchButton, showCards }) {
   // форма поиска
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (location.pathname === "/movies") {
+      showCards(e);
+    }
     if (!searchRequest) {
       setSearchError("Нужно ввести ключевое слово");
     } else {
-      setSearchError(" ");
+      setSearchError("");
       if (location.pathname === "/movies") {
         localStorage.setItem("short", false);
         handleSearchButton(searchRequest, short);
@@ -101,9 +107,6 @@ function SearchForm({ handleSearchButton, showCards }) {
   };
 
   const handleSearchInput = (e) => {
-    if (location.pathname === "/movies") {
-      showCards(e);
-    }
     const value = e.target.value;
     setSearchRequest(value);
     localStorage.setItem(mySearch, value) || localStorage.setItem(mySavedSearch, value);

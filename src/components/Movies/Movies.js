@@ -32,7 +32,7 @@ function Movies({
   // фильтр поиска
   const handleSearchButton = (searchRequest, short) => {
     const searchResult = movies.filter((item) =>
-      item.nameRU.toLowerCase().includes(searchRequest.toLowerCase())
+      item.nameRU.toLowerCase().includes(searchRequest)
     );
     short
       ? setSearchResult(searchResult.filter((item) => item.duration <= 40))

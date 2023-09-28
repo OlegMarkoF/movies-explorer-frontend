@@ -12,8 +12,7 @@ function SavedMovies({
   isPreloaderActive,
 }) {
   const [moviesFound, setMoviesFound] = useState(undefined);
-  const [filteredMovies, setFilteredMovies] = useState(savedMovies || "");
-  // const [savedShort, setSavedShort] = useState(false);
+  const [filteredMovies, setFilteredMovies] = useState(savedMovies || []);
   const [searchResult, setSearchResult] = useState(
     localStorage.getItem("mySavedSearch")
     ? JSON.parse(localStorage.getItem("mySavedFound"))
@@ -33,10 +32,12 @@ function SavedMovies({
     const filteredMovies = savedMovies.filter((item) =>
     item.nameRU.toLowerCase().includes(searchRequest)
     );
+    
     short
       ? setFilteredMovies(filteredMovies.filter((item) => item.duration <= 40))
-      : setFilteredMovies(filteredMovies);
-    filteredMovies.length > 0 ? setMoviesFound(true) : setMoviesFound(false);
+      : setFilteredMovies(filteredMovies)
+    
+      filteredMovies.length > 0 ? setMoviesFound(true) : setMoviesFound(false);
 
     localStorage.setItem("mySavedFound", JSON.stringify(filteredMovies));
     localStorage.setItem("mySavedSearch", JSON.stringify(searchRequest));
