@@ -1,0 +1,63 @@
+.info {
+    margin: 0;
+    visibility: hidden;
+    position: fixed;
+    opacity: 0;
+    transition: all 0.7 ease 0s;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.info_opened {
+    visibility: visible;
+    opacity: 1;
+}
+
+.info_tip {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.info__box {
+    position: relative;
+    margin: 200px auto 0;
+    max-width: 430px;
+    max-height: 330px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+.info__notification {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #000;
+}
+
+.info__close-button {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 22.44px;
+    right: 22.44px;
+    border: none;
+    background: #fff;
+    cursor: pointer;
+  }
+  
+  .info__close:hover {
+    opacity: 0.7;
+  }
+  
+  .info__close {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }

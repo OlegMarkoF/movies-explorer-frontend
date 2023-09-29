@@ -1,0 +1,120 @@
+.promo {
+  margin: 0 auto;
+  padding: 150px 70px 75px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgba(70, 93, 255, 1);
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.promo__main {
+  max-width: 640px;
+}
+
+.promo__title {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 116%;
+}
+
+.promo__text {
+  margin-top: 36px;
+  max-width: 310px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.promo__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.promo__button {
+  margin-top: 135px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  border: 1px solid white;
+  text-decoration: none;
+  text-align: center;
+  width: 129px;
+  height: 36px;
+  border-radius: 3px;
+  background-color: rgba(70, 93, 255, 1);
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  color: #fff;
+}
+
+.promo__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.promo__earth {
+  width: 310px;
+  height: 304px;
+}
+
+@media screen and (max-width: 900px) {
+  .promo {
+    padding: 214px 44px 76px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .promo__title {
+    margin: 48px auto 22px;
+    text-align: center;
+    font-size: 40px;
+    line-height: 125%;
+  }
+  .promo__text {
+    margin: 0 auto;
+    max-width: 260px;
+    text-align: center;
+  }
+  .promo__button {
+    margin: 92px auto 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .promo {
+    padding: 144px 10px 30px;
+
+  }
+  .promo__earth {
+    margin: 0 auto;
+    width: 210px;
+    height: 206px;
+  }
+  .promo__text {
+    margin: 24px auto 80px;
+  }
+  .promo__title {
+    margin: 44px auto 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 126.667%;
+    letter-spacing: -1.2px;
+  }
+  .promo__text {
+    text-align: center;
+    font-feature-settings: "clig" off, "liga" off;
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .promo__button {
+    margin: 0 auto;
+  }
+}

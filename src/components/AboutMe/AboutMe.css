@@ -1,0 +1,162 @@
+.about-me {
+  margin: 0 auto;
+  max-width: 1280px;
+  box-sizing: border-box;
+  padding: 110px 70px 0px;
+}
+
+.about-me__box {
+  margin: 0;
+  margin-top: 66px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.about-me__biography {
+  margin: 0;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.about-me__img {
+  border-radius: 10px;
+  width: 270px;
+  height: 327px;
+}
+
+.about-me__title {
+  margin: 0;
+  border-bottom: 1px solid #000;
+  padding-bottom: 23px;
+  color: #000;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+}
+
+.about-me__link {
+  margin: 0;
+  margin-top: 99px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.about-me__link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.about-me__name {
+  margin: 0;
+  margin-bottom: 18px;
+  padding: 0;
+  color: #000;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 116%;
+  letter-spacing: -2px;
+}
+
+.about-me__job {
+  margin: 0;
+  margin-bottom: 26px;
+  padding: 0;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 111.111%;
+}
+
+.about-me__text {
+  margin: 0;
+  padding: 0;
+  color: #000;
+  max-width: 600px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 157.143%;
+}
+
+@media screen  and (max-width: 800px) {
+  .about-me {
+    padding: 90px 50px 0px;
+  }
+
+  .about-me__img {
+    width: 255px;
+    height: 307px;
+  }
+
+  .about-me__text {
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 150%;
+  }
+
+  .about-me__img {
+    font-size: 12px;
+    line-height: 150%;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 100%;
+    letter-spacing: -1.6px;
+  }
+}
+
+@media screen  and (max-width: 550px) {
+  .about-me {
+    padding: 70px 14px 0px;
+  }
+
+  .about-me__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about-me__name {
+    margin: 0;
+    font-size: 30px;
+    letter-spacing: -1.2px;
+  }
+
+  .about-me__job {
+    margin: 20px 0;
+    font-size: 11px;
+    line-height: 145.455%;
+  }
+
+  .about-me__text {
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 11px;
+    line-height: 145.455%;
+  }
+
+  .about-me__box {
+    margin: 0;
+    margin-top: 66px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-me__img {
+    margin-bottom: 40px;
+    width: 292px;
+    height: 352px;
+  }
+
+  .about-me__link {
+    margin-top: 40px;
+  }
+  
+}

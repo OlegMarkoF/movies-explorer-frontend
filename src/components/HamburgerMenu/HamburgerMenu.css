@@ -1,0 +1,108 @@
+.hamburger {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.5s, opacity 0.3s linear;
+  background-color: rgba(0, 0, 0, 0.3);
+  justify-content: flex-end;
+}
+
+.hamburger_opened {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hamburger__box {
+  width: 520px;
+  padding-top: 159px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.hamburger__main {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.hamburger__link {
+  margin: 0 auto;
+  color: #000;
+  max-width: max-content;
+  text-decoration: none;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.hamburger__link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.hamburger__link_active {
+  border-bottom: 2px solid #000;
+}
+
+.hamburger__account {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 92px;
+  border: none;
+  width: 100px;
+  height: 30px;
+  background: #fff;
+  flex-shrink: 0;
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 114.286%;
+  cursor: pointer;
+}
+
+.hamburger__account:hover {
+  opacity: 0.8;
+}
+
+.hamburger__icon {
+  margin: 0;
+  padding: 0;
+  margin-left: 24.25px;
+  width: 11.5px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.hamburger__close-button {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 22.44px;
+  right: 22.44px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+}
+
+.hamburger__close:hover {
+  opacity: 0.7;
+}
+
+.hamburger__close {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}

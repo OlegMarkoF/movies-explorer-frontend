@@ -1,0 +1,126 @@
+.project {
+  margin: 0 auto;
+  padding: 110px 70px;
+  box-sizing: border-box;
+  max-width: 1280px;
+}
+
+.project__plan {
+  margin: 70px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 26px;
+}
+
+.project__subtitle {
+  margin: 0;
+  margin-bottom: 26px;
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.project__stages {
+  max-width: 550px;
+}
+
+.project__text {
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 142.857%;
+}
+
+.project__title {
+  margin: 0;
+  border-bottom: 1px solid #000;
+  padding-bottom: 23px;
+  color: #000;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+}
+
+.project__table {
+  margin: 110px 0 0;
+  display: grid;
+  grid-template-columns: 0.2fr 0.8fr;
+}
+
+.project__speciality {
+  margin: 14px auto 0;
+  max-width: 200px;
+  color: #a0a0a0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 121.429%;
+}
+
+.project__week {
+  margin: 0;
+  padding: 10px 0;
+  background: #2be080;
+  text-align: center;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.project__weeks {
+  margin: 0;
+  padding: 10px 0;
+  background: #f2f2f2;
+  color: #000;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 800px) {
+  .project {
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .project {
+    padding: 70px 18px;
+  }
+  .project__plan {
+    margin: 60px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .project__subtitle {
+    margin-bottom: 16px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  .project__title {
+    padding-bottom: 28px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  .project__text {
+    font-size: 11px;
+    line-height: 145.455%;
+  }
+  .project__table {
+    margin: 60px 0 0;
+    display: grid;
+    grid-template-columns: 0.35fr 0.65fr;
+  }
+  .project__week {
+    font-size: 11px;
+  }
+  .project__weeks {
+    font-size: 11px;
+  }
+  .project__speciality {
+    font-size: 11px;
+  }
+}

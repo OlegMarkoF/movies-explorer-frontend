@@ -1,0 +1,170 @@
+.register {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.register__form {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 396px;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.register__button-container {
+  margin: 0 auto;
+  width: 396px;
+}
+
+.register__link {
+  margin: 0;
+  margin-top: 71px;
+  width: 100%;
+  height: 45px;
+  border: none;
+  background: #ff6838;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.register__link_disabled {
+  margin: 0;
+  margin-top: 71px;
+  width: 100%;
+  height: 45px;
+  background: #a0a0a0;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.register__link:hover {
+  opacity: 0.8;
+}
+
+.register__input {
+  margin: 10px 0 20px;
+  padding: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 8px;
+  background: #f9f9f9;
+  color: #000;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.register__login-link {
+  margin: 0;
+  padding: 0;
+  margin-left: 6px;
+  color: #ff6838;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.register__login-link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.register__login-text {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #a0a0a0;
+}
+
+.error {
+  margin: 0;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  box-sizing: border-box;
+  position: absolute;
+  top: 60px;
+  left: 0;
+}
+
+.register__box-input {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.register__span {
+  display: block;
+}
+
+.register__signin {
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.register__welcome {
+  padding: 0;
+  margin: 40px 0;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  color: #000;
+}
+
+.register__label {
+  color: #a0a0a0;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (max-width: 500px) {
+  .register__form {
+    align-items: center;
+    margin: 0 auto;
+    max-width: 260px;
+  }
+
+  .register__label {
+    align-self: flex-start;
+  }
+
+  .register__button-container {
+    max-width: 260px;
+  }
+}
