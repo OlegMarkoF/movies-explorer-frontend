@@ -14,7 +14,6 @@ function MoviesCardList({
 }) {
   
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  // const [moviesCount, setMoviesCount] = useState(0);
   const [moreMoviesCount, setMoreMoviesCount] = useState(0);
   const [showMovies, setShowMovies] = useState(0);
   const location = useLocation();

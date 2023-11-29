@@ -11,17 +11,14 @@ function Movies({
   onCardDelete,
   onCardSave,
   showCards,
-  movies
+  movies,
 }) {
-  
-  
   const [moviesFound, setMoviesFound] = useState(undefined);
   const [searchResult, setSearchResult] = useState(
     localStorage.getItem("mySearch")
       ? JSON.parse(localStorage.getItem("myFound"))
       : []
   );
-
 
   useEffect(() => {
     showSearchResult();
@@ -50,7 +47,7 @@ function Movies({
           item.nameRU
             .toLowerCase()
             .includes(
-              JSON.parse(localStorage.getItem("mySearch"))
+              JSON.parse(localStorage.getItem("mySearch").toLowerCase())
             )
         )
       );
@@ -65,7 +62,7 @@ function Movies({
             item.nameRU
               .toLowerCase()
               .includes(
-                JSON.parse(localStorage.getItem("mySearch")).toLowerCase()
+                JSON.parse(localStorage.getItem("mySearch").toLowerCase())
               )
         );
         setSearchResult(searchResult.filter((item) => item.duration <= 40));
@@ -78,7 +75,7 @@ function Movies({
             item.nameRU
               .toLowerCase()
               .includes(
-                JSON.parse(localStorage.getItem("mySearch")).toLowerCase()
+                JSON.parse(localStorage.getItem("mySearch").toLowerCase())
               )
         );
         setSearchResult(searchResult);
@@ -92,21 +89,19 @@ function Movies({
     <>
       <main className="movie">
         <Header />
-        <div>
-          <SearchForm
-            isPreloaderActive={isPreloaderActive}
-            handleSearchButton={handleSearchButton}
-            showCards={showCards}
-          />
-          <MoviesCardList
-            movies={searchResult}
-            savedMovies={savedMovies}
-            onCardDelete={onCardDelete}
-            isPreloaderActive={isPreloaderActive}
-            onCardSave={onCardSave}
-            moviesFound={moviesFound}
-          />
-        </div>
+        <SearchForm
+          isPreloaderActive={isPreloaderActive}
+          handleSearchButton={handleSearchButton}
+          showCards={showCards}
+        />
+        <MoviesCardList
+          movies={searchResult}
+          savedMovies={savedMovies}
+          onCardDelete={onCardDelete}
+          isPreloaderActive={isPreloaderActive}
+          onCardSave={onCardSave}
+          moviesFound={moviesFound}
+        />
       </main>
       <Footer />
     </>

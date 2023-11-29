@@ -65,9 +65,9 @@
 }
 
 @media screen and (max-width: 800px) {
-  .movies__list {
+  /* .movies__list {
     padding: 0 30px;
-  }
+  } */
 }
 
 @media screen and (max-width: 400px) {
